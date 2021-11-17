@@ -22,9 +22,8 @@
                     d="M505.34 257.75c-138.74 0-251.22 112.48-251.22 251.24S366.6 760.22 505.34 760.22c138.77 0 251.25-112.48 251.25-251.23S644.1 257.75 505.34 257.75z m152.27 403.5c-40.66 40.68-94.74 63.08-152.28 63.08-57.52 0-111.59-22.4-152.25-63.08C312.42 620.59 290 566.5 290 508.99s22.42-111.6 63.09-152.26c40.66-40.68 94.74-63.08 152.25-63.08 57.54 0 111.61 22.4 152.28 63.08 40.67 40.66 63.06 94.75 63.06 152.26s-22.4 111.6-63.07 152.26z"
                     fill="#F6BB42" p-id="8880"></path>
             </svg>
-
         </div>
-        <div class="toggle-slider"></div>
+        <div class="toggle-slider" @click="toggle"></div>
         <div class="theme-dark">
             <svg t="1637120743889" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 p-id="7887" width="200" height="200">
@@ -32,45 +31,100 @@
                     d="M466.2784 386.048c-41.9328-115.2-35.0208-236.288 10.0864-340.5312A462.4896 462.4896 0 0 0 397.6704 66.56C158.5152 153.6 35.2256 418.048 122.2656 657.2032s351.488 362.4448 590.592 275.4048c123.9552-45.1072 216.7296-137.8816 265.3184-250.0608-215.8592 37.7856-434.3296-83.3536-511.8976-296.4992z"
                     fill="#FFB612" p-id="7888"></path>
             </svg>
-
         </div>
     </div>
 </template>
 
-<style vars>
-    #theme-toggle-wrap{
-        width: 110px;
+<script>
+    export default {
+        data() {
+            return {
+                right: 0,
+                themeColor: {
+                    navTextColor: '#338bff',
+                    themeHomeBgColor: '#fff',
+                    themeNavBgColor: '#F2F2F2'
+                }
+            }
+        },
+        methods: {
+            toggle() {
+                if (this.right == 0) {
+                    // dark
+                    this.right = '50px';
+                    this.themeColor.navTextColor = '#242526';
+                    this.themeColor.themeHomeBgColor = '#f2f2f2';
+                    this.themeColor.themeNavBgColor = '#fff';
+                    console.log(this.themeColor)
+
+                } else {
+                    // white
+                    this.right = 0;
+                    this.themeColor.navTextColor = '#338bff';
+                    this.themeColor.themeHomeBgColor = '#fff';
+                    this.themeColor.themeNavBgColor = '#F2F2F2';
+                    console.log(this.themeColor)
+                }
+            }
+        }
+    }
+</script>
+
+<style>
+    :root {
+        /* 白色系主题
+  导航栏字体颜色是 #338bff;
+  导航栏背景颜色是 #f2f2f2;
+  home背景颜色是 #fff;
+  */
+        /* 暗色系主题
+  导航栏背景颜色 #242526
+  导航栏字体颜色 #f5f6f7
+  home背景颜色 #18191a
+  */
+        --nav_text_color: v-bind(themeColor.navTextColor);
+        --theme_home_bg_color: v-bind(themeColor.themeHomeBgColor);
+        --theme_nav_bg_color: v-bind(themeColor.themeNavBgColor);
+    }
+
+    #theme-toggle-wrap {
+        width: 90px;
         height: 40px;
         display: flex;
         justify-content: space-around;
         align-items: center;
         position: relative;
         background-color: #4d4d4d;
-        border: 5px solid  #4d4d4d;
+        border: 5px solid #4d4d4d;
         border-radius: 50px;
     }
-    .theme-white{
+
+    .theme-white {
         position: absolute;
-        left:0;
+        left: 0;
     }
-    .theme-dark{
+
+    .theme-dark {
         position: absolute;
         right: 0;
     }
-    .toggle-slider{
+
+    .toggle-slider {
         width: 40px;
         height: 40px;
         position: absolute;
-        left: 0;
+        right: v-bind(right);
         z-index: 99;
         border-radius: 50%;
         background: #fafafa;
         transition: all .2s;
     }
-    .toggle-slider:hover{
+
+    .toggle-slider:hover {
         box-shadow: 0px 0px 20px #338bff;
     }
-    svg{
+
+    svg {
         width: 40px;
         height: 40px;
     }

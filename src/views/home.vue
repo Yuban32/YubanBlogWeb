@@ -27,7 +27,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: var(--theme_hemo_bg_color);
+        background-color: var(--theme_home_bg_color);
     }
 
 </style>
