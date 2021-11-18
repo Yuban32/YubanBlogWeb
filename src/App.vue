@@ -12,21 +12,7 @@
 </template>
 
 <style>
-:root{
-  /* 白色系主题
-  导航栏字体颜色是 #338bff;
-  导航栏背景颜色是 #f2f2f2;
-  home背景颜色是 #fff;
-  */
-  /* 暗色系主题
-  导航栏背景颜色 #242526
-  导航栏字体颜色 #f5f6f7
-  home背景颜色 #18191a
-  */
-    --nav_text_color:#338bff;
-    --theme_hemo_bg_color:#fff;
-    --theme_nav_bg_color:#F2F2F2;
-}
+
   *{
     font-family: Avenir, Helvetica, Arial, sans-serif;
     padding: 0;

@@ -40,30 +40,28 @@
         data() {
             return {
                 right: 0,
-                themeColor: {
-                    navTextColor: '#338bff',
-                    themeHomeBgColor: '#fff',
-                    themeNavBgColor: '#F2F2F2'
-                }
+                
             }
         },
         methods: {
             toggle() {
+                const root = document.documentElement;
                 if (this.right == 0) {
                     // dark
                     this.right = '50px';
-                    this.themeColor.navTextColor = '#242526';
-                    this.themeColor.themeHomeBgColor = '#f2f2f2';
-                    this.themeColor.themeNavBgColor = '#fff';
-                    console.log(this.themeColor)
+                    
+                     root.style.setProperty('--nav_text_color','#f5f6f7')
+                    root.style.setProperty('--theme_home_bg_color','#18191a')
+                    root.style.setProperty('--theme_nav_bg_color','#242526')
+                    root.style.setProperty('--global_text_color','#000')
 
                 } else {
                     // white
                     this.right = 0;
-                    this.themeColor.navTextColor = '#338bff';
-                    this.themeColor.themeHomeBgColor = '#fff';
-                    this.themeColor.themeNavBgColor = '#F2F2F2';
-                    console.log(this.themeColor)
+                   root.style.setProperty('--nav_text_color','#242526')
+                    root.style.setProperty('--theme_home_bg_color','#f2f2f2')
+                    root.style.setProperty('--theme_nav_bg_color','#fff')
+                    root.style.setProperty('--global_text_color','#fff')
                 }
             }
         }
@@ -71,22 +69,6 @@
 </script>
 
 <style>
-    :root {
-        /* 白色系主题
-  导航栏字体颜色是 #338bff;
-  导航栏背景颜色是 #f2f2f2;
-  home背景颜色是 #fff;
-  */
-        /* 暗色系主题
-  导航栏背景颜色 #242526
-  导航栏字体颜色 #f5f6f7
-  home背景颜色 #18191a
-  */
-        --nav_text_color: v-bind(themeColor.navTextColor);
-        --theme_home_bg_color: v-bind(themeColor.themeHomeBgColor);
-        --theme_nav_bg_color: v-bind(themeColor.themeNavBgColor);
-    }
-
     #theme-toggle-wrap {
         width: 90px;
         height: 40px;
@@ -94,7 +76,8 @@
         justify-content: space-around;
         align-items: center;
         position: relative;
-        background-color: #4d4d4d;
+        background-color: #181616;
+        /* background-color: v-bind(navTextColor); */
         border: 5px solid #4d4d4d;
         border-radius: 50px;
     }
