@@ -6,19 +6,27 @@
                 <p>欢迎来到我的博客</p>
                 <p>我会在此跟大家分享一些实用的教程和我在学习中遇到的一些问题</p>
             </div>
-        <ThemeToggle/>
         </div>
+        <router-link to="/article">文章</router-link>
+        
     </div>
 </template>
 
-<script setup>
-    import ThemeToggle from '../components/theme_toggle.vue';
+<script>
+    export default{
+        name:'home',
+        data(){
+            return{
 
+            }
+        },
+    }
 </script>
 
 <style>
     #home-wrap {
         width: 100%;
+        color: var(--global_text_color);
     }
 
     .home-first-page {

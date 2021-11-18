@@ -8,7 +8,7 @@
 
 <template>
   <Nav/>
-  <HomePage/>
+  <router-view></router-view>
 </template>
 
 <style>
@@ -17,8 +17,10 @@
     font-family: Avenir, Helvetica, Arial, sans-serif;
     padding: 0;
     margin: 0;
+    transition: color .3s;
+    transition: background-color 0.3s;
   }
   #app {
-
+    
   }
 </style>

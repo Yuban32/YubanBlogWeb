@@ -4,7 +4,7 @@
             <div class="pic-wrap">
                 <img src="../assets/images/nav/pic.jpg">
             </div>
-                <span class="pic-name">家威</span>
+            <span class="pic-name">家威</span>
         </div>
         <div class="nav-right">
             <ul>
@@ -19,52 +19,60 @@
                 <li>
                     关于我
                 </li>
+                <ThemeToggle />
+                <li></li>
             </ul>
         </div>
     </div>
 </template>
 
 <script setup>
-
+    import ThemeToggle from '../components/theme_toggle.vue';
 </script>
 
 <style>
-
-    #nav-wrap{
+    #nav-wrap {
         padding: 5px 20px;
         height: 50px;
         line-height: 50px;
         background-color: var(--theme_nav_bg_color);
         color: var(--nav_text_color);
-        
+
     }
-    .nav-left{
+
+    .nav-left {
         float: left;
         display: flex;
     }
-    .nav-right{
+
+    .nav-right {
         float: right;
     }
-    ul{
+
+    ul {
         display: flex;
     }
-    li{
+
+    li {
         float: left;
         padding: 0 20px;
         line-height: 50px;
         list-style: none;
     }
-    svg{
+
+    svg {
         height: 50px;
     }
-    .pic-wrap{
+
+    .pic-wrap {
         border-radius: 50%;
-        margin-right:20px;
+        margin-right: 20px;
         height: 50px;
         overflow: hidden;
 
     }
-    img{
+
+    img {
         height: 100%;
         /* padding: 0 10px; */
     }

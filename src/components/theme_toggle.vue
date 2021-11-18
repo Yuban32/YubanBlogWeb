@@ -39,38 +39,104 @@
     export default {
         data() {
             return {
-                right: 0,
-                
+                right: '0px',
+                theme:{
+                    navTextColor:'#f5f6f7',
+                    themeHomeBgColor:'#18191a',
+                    themeNavBgColor:'#242526',
+                    globalTextColor:'#f5f6f7',
+                    
+                },
+                state:'white',
+                theme1:{
+                    dark:{
+                        navTextColor:'#f5f6f7',
+                        themeHomeBgColor:'#18191a',
+                        themeNavBgColor:'#242526',
+                        globalTextColor:'#f5f6f7'
+                    },
+                    white:{
+                        navTextColor:'#338bff',
+                        themeHomeBgColor:'#f2f2f2',
+                        themeNavBgColor:'#fff',
+                        globalTextColor:'#000'
+                    }
+                }
             }
         },
         methods: {
             toggle() {
                 const root = document.documentElement;
-                if (this.right == 0) {
+                if (this.state=='drak') {
+                    console.log('drak');
                     // dark
+                    var dark = {
+                        navTextColor:'#f5f6f7',
+                        themeHomeBgColor:'#18191a',
+                        themeNavBgColor:'#242526',
+                        globalTextColor:'#f5f6f7',
+                    }
+                    this.state = 'white'
                     this.right = '50px';
-                    
-                     root.style.setProperty('--nav_text_color','#f5f6f7')
-                    root.style.setProperty('--theme_home_bg_color','#18191a')
-                    root.style.setProperty('--theme_nav_bg_color','#242526')
-                    root.style.setProperty('--global_text_color','#000')
+                    root.style.setProperty('--nav_text_color',dark.navTextColor)
+                    root.style.setProperty('--theme_home_bg_color',dark.themeHomeBgColor)
+                    root.style.setProperty('--theme_nav_bg_color',dark.themeNavBgColor)
+                    root.style.setProperty('--global_text_color',dark.globalTextColor)
+                    console.log(dark);
+                    localStorage.setItem('theme',JSON.stringify(dark))
+                    localStorage.setItem('sliderBarState','drak')
+                    localStorage.setItem('sliderBar',this.right)
+                } else if(this.state =='white'){
+                    console.log('white');
 
-                } else {
                     // white
-                    this.right = 0;
-                   root.style.setProperty('--nav_text_color','#242526')
-                    root.style.setProperty('--theme_home_bg_color','#f2f2f2')
-                    root.style.setProperty('--theme_nav_bg_color','#fff')
-                    root.style.setProperty('--global_text_color','#fff')
+                    var white = {
+                        navTextColor:'#338bff',
+                        themeHomeBgColor:'#f2f2f2',
+                        themeNavBgColor:'#fff',
+                        globalTextColor:'#000',
+                    }
+                    console.log(white);
+                    this.right = '0px';
+                    this.state = 'drak'
+                    root.style.setProperty('--nav_text_color',white.navTextColor)
+                    root.style.setProperty('--theme_home_bg_color',white.themeHomeBgColor)
+                    root.style.setProperty('--theme_nav_bg_color',white.themeNavBgColor)
+                    root.style.setProperty('--global_text_color',white.globalTextColor)
+                    localStorage.setItem('theme',JSON.stringify(white))
+                    localStorage.setItem('sliderBarState','white')
+                    localStorage.setItem('sliderBar',this.right)
                 }
             }
+        },
+        created(){
+            let that = this;
+            console.log(that.state);
+            const root = document.documentElement;
+            if(localStorage.getItem('theme')!=null){
+                let themes = JSON.parse(localStorage.getItem('theme'))
+                that.right = localStorage.getItem('sliderBar')
+                root.style.setProperty('--nav_text_color',themes.navTextColor)
+                root.style.setProperty('--theme_home_bg_color',themes.themeHomeBgColor)
+                root.style.setProperty('--theme_nav_bg_color',themes.themeNavBgColor)
+                root.style.setProperty('--global_text_color',themes.globalTextColor)
+                
+                console.log(themes,localStorage.getItem('sliderBar'));
+            }else{
+                localStorage.setItem('sliderBarState',that.state)
+                localStorage.setItem('theme',JSON.stringify(that.theme))
+                console.log(themes,localStorage.getItem('sliderBar'));
+
+            }
         }
+        
     }
 </script>
 
 <style>
     #theme-toggle-wrap {
         width: 90px;
+        min-width: 90px;
         height: 40px;
         display: flex;
         justify-content: space-around;
@@ -83,11 +149,13 @@
     }
 
     .theme-white {
+        height: 50px;
         position: absolute;
         left: 0;
     }
 
     .theme-dark {
+        height: 50px;
         position: absolute;
         right: 0;
     }
@@ -101,6 +169,7 @@
         border-radius: 50%;
         background: #fafafa;
         transition: all .2s;
+        cursor: pointer;
     }
 
     .toggle-slider:hover {
