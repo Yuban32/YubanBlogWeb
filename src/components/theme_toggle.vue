@@ -40,96 +40,91 @@
         data() {
             return {
                 right: '0px',
-                theme:{
-                    navTextColor:'#f5f6f7',
-                    themeHomeBgColor:'#18191a',
-                    themeNavBgColor:'#242526',
-                    globalTextColor:'#f5f6f7',
-                    
-                },
-                state:'white',
-                theme1:{
-                    dark:{
-                        navTextColor:'#f5f6f7',
-                        themeHomeBgColor:'#18191a',
-                        themeNavBgColor:'#242526',
-                        globalTextColor:'#f5f6f7'
-                    },
-                    white:{
-                        navTextColor:'#338bff',
-                        themeHomeBgColor:'#f2f2f2',
-                        themeNavBgColor:'#fff',
-                        globalTextColor:'#000'
-                    }
-                }
+
+                state: 'white',
+
             }
         },
         methods: {
             toggle() {
                 const root = document.documentElement;
-                if (this.state=='drak') {
+                if (this.state == 'drak') {
                     console.log('drak');
                     // dark
                     var dark = {
-                        navTextColor:'#f5f6f7',
-                        themeHomeBgColor:'#18191a',
-                        themeNavBgColor:'#242526',
-                        globalTextColor:'#f5f6f7',
+                        navTextColor: '#f5f6f7',
+                        themeHomeBgColor: '#18191a',
+                        themeNavBgColor: '#242526',
+                        globalTextColor: '#f5f6f7',
+                        globalArticleColor:'#d3d8d1'
                     }
                     this.state = 'white'
                     this.right = '50px';
-                    root.style.setProperty('--nav_text_color',dark.navTextColor)
-                    root.style.setProperty('--theme_home_bg_color',dark.themeHomeBgColor)
-                    root.style.setProperty('--theme_nav_bg_color',dark.themeNavBgColor)
-                    root.style.setProperty('--global_text_color',dark.globalTextColor)
+                    root.style.setProperty('--nav_text_color', dark.navTextColor)
+                    root.style.setProperty('--theme_home_bg_color', dark.themeHomeBgColor)
+                    root.style.setProperty('--theme_nav_bg_color', dark.themeNavBgColor)
+                    root.style.setProperty('--global_text_color', dark.globalTextColor)
+                    root.style.setProperty('--blobal_article_color', dark.globalArticleColor)
                     console.log(dark);
-                    localStorage.setItem('theme',JSON.stringify(dark))
-                    localStorage.setItem('sliderBarState','drak')
-                    localStorage.setItem('sliderBar',this.right)
-                } else if(this.state =='white'){
+                    localStorage.setItem('theme', JSON.stringify(dark))
+                    localStorage.setItem('sliderBarState', 'drak')
+                    localStorage.setItem('sliderBar', this.right)
+                } else if (this.state == 'white') {
                     console.log('white');
 
                     // white
                     var white = {
-                        navTextColor:'#338bff',
-                        themeHomeBgColor:'#f2f2f2',
-                        themeNavBgColor:'#fff',
-                        globalTextColor:'#000',
+                        navTextColor: '#338bff',
+                        themeHomeBgColor: '#f2f2f2',
+                        themeNavBgColor: '#fff',
+                        globalTextColor: '#000',
+                        globalArticleColor:'#222222'
                     }
                     console.log(white);
                     this.right = '0px';
                     this.state = 'drak'
-                    root.style.setProperty('--nav_text_color',white.navTextColor)
-                    root.style.setProperty('--theme_home_bg_color',white.themeHomeBgColor)
-                    root.style.setProperty('--theme_nav_bg_color',white.themeNavBgColor)
-                    root.style.setProperty('--global_text_color',white.globalTextColor)
-                    localStorage.setItem('theme',JSON.stringify(white))
-                    localStorage.setItem('sliderBarState','white')
-                    localStorage.setItem('sliderBar',this.right)
+                    root.style.setProperty('--nav_text_color', white.navTextColor)
+                    root.style.setProperty('--theme_home_bg_color', white.themeHomeBgColor)
+                    root.style.setProperty('--theme_nav_bg_color', white.themeNavBgColor)
+                    root.style.setProperty('--global_text_color', white.globalTextColor)
+                    root.style.setProperty('--blobal_article_color', white.globalArticleColor)
+                    localStorage.setItem('theme', JSON.stringify(white))
+                    localStorage.setItem('sliderBarState', 'white')
+                    localStorage.setItem('sliderBar', this.right)
                 }
             }
         },
-        created(){
+        created() {
             let that = this;
+            // 初始值
+            let theme = {
+                navTextColor: '#338bff',
+                themeHomeBgColor: '#f2f2f2',
+                themeNavBgColor: '#fff',
+                globalTextColor: '#000',
+                globalArticleColor:'#222222'
+            }
             console.log(that.state);
             const root = document.documentElement;
-            if(localStorage.getItem('theme')!=null){
+            if (localStorage.getItem('theme') != null) {
                 let themes = JSON.parse(localStorage.getItem('theme'))
                 that.right = localStorage.getItem('sliderBar')
-                root.style.setProperty('--nav_text_color',themes.navTextColor)
-                root.style.setProperty('--theme_home_bg_color',themes.themeHomeBgColor)
-                root.style.setProperty('--theme_nav_bg_color',themes.themeNavBgColor)
-                root.style.setProperty('--global_text_color',themes.globalTextColor)
-                
-                console.log(themes,localStorage.getItem('sliderBar'));
-            }else{
-                localStorage.setItem('sliderBarState',that.state)
-                localStorage.setItem('theme',JSON.stringify(that.theme))
-                console.log(themes,localStorage.getItem('sliderBar'));
+                root.style.setProperty('--nav_text_color', themes.navTextColor)
+                root.style.setProperty('--theme_home_bg_color', themes.themeHomeBgColor)
+                root.style.setProperty('--theme_nav_bg_color', themes.themeNavBgColor)
+                root.style.setProperty('--global_text_color', themes.globalTextColor)
+                root.style.setProperty('--blobal_article_color', themes.globalArticleColor)
+
+                // console.log(themes,localStorage.getItem('sliderBar'));
+            } else {
+                localStorage.setItem('sliderBarState', that.state)
+                localStorage.setItem('sliderBar', that.right)
+                localStorage.setItem('theme', JSON.stringify(theme))
+                // console.log(themes,localStorage.getItem('sliderBar'));
 
             }
         }
-        
+
     }
 </script>
 
