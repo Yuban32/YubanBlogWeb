@@ -19,8 +19,14 @@
     margin: 0;
     transition: color .3s;
     transition: background-color 0.3s;
+    list-style: none;
   }
   #app {
     
+  }
+  /* 版心部分 */
+  .container{
+    width: 75%;
+    margin: 0 auto;
   }
 </style>

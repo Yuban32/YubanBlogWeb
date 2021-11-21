@@ -48,8 +48,8 @@
         methods: {
             toggle() {
                 const root = document.documentElement;
-                if (this.state == 'drak') {
-                    console.log('drak');
+                if (this.state == 'white') {
+                    console.log('dark');
                     // dark
                     var dark = {
                         navTextColor: '#f5f6f7',
@@ -58,7 +58,7 @@
                         globalTextColor: '#f5f6f7',
                         globalArticleColor:'#d3d8d1'
                     }
-                    this.state = 'white'
+                    this.state = 'dark'
                     this.right = '50px';
                     root.style.setProperty('--nav_text_color', dark.navTextColor)
                     root.style.setProperty('--theme_home_bg_color', dark.themeHomeBgColor)
@@ -67,14 +67,14 @@
                     root.style.setProperty('--blobal_article_color', dark.globalArticleColor)
                     console.log(dark);
                     localStorage.setItem('theme', JSON.stringify(dark))
-                    localStorage.setItem('sliderBarState', 'drak')
+                    localStorage.setItem('sliderBarState', 'dark')
                     localStorage.setItem('sliderBar', this.right)
-                } else if (this.state == 'white') {
+                } else if (this.state == 'dark') {
                     console.log('white');
 
                     // white
                     var white = {
-                        navTextColor: '#338bff',
+                        navTextColor: '#3498DB',
                         themeHomeBgColor: '#f2f2f2',
                         themeNavBgColor: '#fff',
                         globalTextColor: '#000',
@@ -82,7 +82,7 @@
                     }
                     console.log(white);
                     this.right = '0px';
-                    this.state = 'drak'
+                    this.state = 'white'
                     root.style.setProperty('--nav_text_color', white.navTextColor)
                     root.style.setProperty('--theme_home_bg_color', white.themeHomeBgColor)
                     root.style.setProperty('--theme_nav_bg_color', white.themeNavBgColor)
@@ -98,7 +98,7 @@
             let that = this;
             // 初始值
             let theme = {
-                navTextColor: '#338bff',
+                navTextColor: '#3498DB',
                 themeHomeBgColor: '#f2f2f2',
                 themeNavBgColor: '#fff',
                 globalTextColor: '#000',
@@ -173,6 +173,6 @@
 
     svg {
         width: 40px;
-        height: 40px;
+        height: 50px;
     }
 </style>

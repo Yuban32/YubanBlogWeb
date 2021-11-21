@@ -4,7 +4,7 @@
             <div class="pic-wrap">
                 <img src="../assets/images/nav/pic.jpg">
             </div>
-            <span class="pic-name">家威</span>
+            <span class="pic-name">鱼板</span>
         </div>
         <div class="nav-right">
             <ul>
@@ -30,7 +30,7 @@
     import ThemeToggle from '../components/theme_toggle.vue';
 </script>
 
-<style>
+<style scoped>
     #nav-wrap {
         padding: 5px 20px;
         height: 50px;
@@ -57,7 +57,6 @@
         float: left;
         padding: 0 20px;
         line-height: 50px;
-        list-style: none;
     }
 
     svg {
