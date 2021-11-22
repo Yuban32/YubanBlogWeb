@@ -3,7 +3,7 @@
         <div class="container container-wrap">
             <div class="article-content-wrap">
                 <div class="article-title">
-                    <h1>Vue3+vite的主题切换功能</h1>
+                    <ArticleTitle :title="'Vue3+vite的主题切换功能'"/>
                 </div>
                 <article class="article-content">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae blanditiis, eligendi velit minima
@@ -15,7 +15,8 @@
                     officiis esse, animi obcaecati quia architecto possimus laborum, maiores aspernatur, atque
                     reprehenderit
                     dicta nostrum. Deleniti eaque quis illo cupiditate dolores inventore labore nesciunt sequi nisi!
-                    <pre v-highlightjs><code class="javascript">
+                    <pre
+                        v-highlightjs><code class="javascript">
                         const s = new Date().toString()
                         const s = new Date().toString()const s = new Date().toString()const s = new Date().toString()</code></pre>
                 </article>
@@ -37,27 +38,31 @@
     </div>
 </template>
 
+<script setup>
+    import ArticleTitle from '../components/ArticleTitle.vue';
+</script>
 <script>
+    export default {
+        data() {
+            return {
 
-export default{
-    data(){
-        return{
-            
+            }
         }
     }
-}
 </script>
 
 <style>
-    code{
+    code {
         border-radius: 5px;
     }
-    .article-subtitle-bg{
+
+    .article-subtitle-bg {
         position: relative;
         text-align: center;
         z-index: 1;
     }
-    .article-subtitle-bg::after{
+
+    .article-subtitle-bg::after {
         content: '';
         width: 95%;
         position: absolute;
@@ -69,10 +74,12 @@ export default{
         margin: 0 auto;
         border-top: 2px solid #3498DB;
     }
-    .article-subtitle-bg span{
-        background: var(--theme_home_bg_color); 
-        padding: 0 15px; 
+
+    .article-subtitle-bg span {
+        background: var(--theme_home_bg_color);
+        padding: 0 15px;
     }
+
     #article-wrap {
         width: 100%;
         height: 100vh;

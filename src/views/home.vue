@@ -8,10 +8,12 @@
             </div>
         </div>
         <router-link to="/article">文章</router-link>
-        
+        <ArticleCard />
     </div>
 </template>
-
+<script setup>
+    import ArticleCard from '../components/ArticleCard.vue';
+</script>
 <script>
     export default{
         name:'home',
@@ -35,7 +37,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: var(--theme_home_bg_color);
+        background-color: var(--theme_nav_bg_color);
     }
 
 </style>

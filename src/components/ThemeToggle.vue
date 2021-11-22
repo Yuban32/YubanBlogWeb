@@ -49,7 +49,6 @@
             toggle() {
                 const root = document.documentElement;
                 if (this.state == 'white') {
-                    console.log('dark');
                     // dark
                     var dark = {
                         navTextColor: '#f5f6f7',
@@ -65,13 +64,10 @@
                     root.style.setProperty('--theme_nav_bg_color', dark.themeNavBgColor)
                     root.style.setProperty('--global_text_color', dark.globalTextColor)
                     root.style.setProperty('--blobal_article_color', dark.globalArticleColor)
-                    console.log(dark);
                     localStorage.setItem('theme', JSON.stringify(dark))
                     localStorage.setItem('sliderBarState', 'dark')
                     localStorage.setItem('sliderBar', this.right)
                 } else if (this.state == 'dark') {
-                    console.log('white');
-
                     // white
                     var white = {
                         navTextColor: '#3498DB',
@@ -80,7 +76,6 @@
                         globalTextColor: '#000',
                         globalArticleColor:'#222222'
                     }
-                    console.log(white);
                     this.right = '0px';
                     this.state = 'white'
                     root.style.setProperty('--nav_text_color', white.navTextColor)
@@ -104,7 +99,6 @@
                 globalTextColor: '#000',
                 globalArticleColor:'#222222'
             }
-            console.log(that.state);
             const root = document.documentElement;
             if (localStorage.getItem('theme') != null) {
                 let themes = JSON.parse(localStorage.getItem('theme'))

@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-    import ThemeToggle from '../components/theme_toggle.vue';
+    import ThemeToggle from '../components/ThemeToggle.vue';
 </script>
 
 <style scoped>
