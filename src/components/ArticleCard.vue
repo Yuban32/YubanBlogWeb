@@ -2,62 +2,156 @@
     <div id="article-card-wrap">
         <div class="container">
             <div class="article-card-content-wrap">
-                <div class="article-cared-title">
-                    <ArticleTitle :title="'Vue3+vite的主题切换功能'" />
-                    <h5 class="date">2021-11-22</h5>
+                <div class="article-card-content-left">
+                    <img :src="articleCardObjce.imgSrc">
                 </div>
-                <div class="article-card-content">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore praesentium est voluptates, esse
-                    omnis molestias dicta labore aperiam accusantium iusto sequi iste corrupti, quaerat, harum nesciunt
-                    unde alias ipsum architecto?
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore praesentium est voluptates, esse
-                    omnis molestias dicta labore aperiam accusantium iusto sequi iste corrupti, quaerat, harum nesciunt
-                    unde alias ipsum architecto?
-                </div>
-                <div class="more-btn">
-                    阅读全文
+
+                <div class="article-card-content-right">
+                    <div class="article-cared-title">
+                        <ArticleTitle :title="articleCardObjce.articleTitle" />
+                        <h5 class="date">{{articleCardObjce.articleDate}}</h5>
+                    </div>
+                    <div class="article-card-content">
+                        <p>{{articleCardObjce.articleText.length>600?articleCardObjce.articleText.slice(0,600)+'....':articleCardObjce.articleText}}</p>
+                    </div>
+                    <div class="bottom">
+                        <div class="watch-number">
+                            <svg t="1637672271796" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="4587" width="200" height="200">
+                                <path
+                                    d="M511.9988 1023.9972C229.2216 1023.9972 0 794.778 0 511.9988 0 229.2216 229.2216 0 511.9988 0c282.7792 0 511.9988 229.2216 511.9988 511.9988C1023.9972 794.778 794.778 1023.9972 511.9988 1023.9972zM904.804 484.405c0 0-219.922-218.589-395.922-218.589-176.051 0-395.922 218.589-395.922 218.589-13.494 12.674-13.648 33.504 0 45.922 0 0 219.923 218.591 395.922 218.591s395.92-218.591 395.92-218.591c13.343-12.674 13.6-33.35 0.002-45.922l0 0zM510.524 683.39c-96.723 0-175.282-78.455-175.282-175.33 0-96.826 78.456-175.282 175.282-175.282 96.877 0 175.28 78.559 175.28 175.282 0.002 96.773-78.557 175.33-175.28 175.33zM508.472 394.763c-61.472 0-111.347 50.132-111.347 111.706 0 61.573 49.875 111.653 111.347 111.653 61.471 0 111.347-50.08 111.347-111.653 0-61.627-49.876-111.706-111.347-111.706l0 0z"
+                                    p-id="4588" fill="#3379f6"></path>
+                            </svg>
+                            <span>{{articleCardObjce.checkNum}}</span>
+                        </div>
+                        <Tag :tagText="articleCardObjce.tagTextArr"/>
+                        <div class="more-btn">
+                            阅读全文
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import ArticleTitle from './ArticleTitle.vue';
-
+    import ArticleTitle from './ArticleTitle.vue';
+    import Tag from './Tag.vue';
 </script>
-<style>
-    #article-card-wrap{
+<script>
+    export default {
+        data() {
+            return {
+                
+            }
+        },
+        props: {
+            articleCardObjce:Object
+        },
+        computed: {
+            // 计算传过来的文本超过指定数量的时候 超出的用省略号代替
+            // articleTexts(){
+            //     if(this.articleText.length>600){
+            //         return this.articleText.slice(0,600)+'......'
+            //     }
+            // }
+        }
+    }
+</script>
+<style scoped>
+    #article-card-wrap {
         /* 占位外边距 */
-        margin-bottom: 500px;
-        height: 400px;
-        /* border: 1px solid red; */
+        margin-bottom: 100px;
+        min-height: 400px;
         text-align: center;
     }
+
+    .date {
+        margin-bottom: 10px;
+        color: #3379f6;
+    }
+
     /* 卡片内容部分 */
-    .article-card-content-wrap{
+
+    .article-card-content-wrap {
         /* 为了不让子元素溢出 */
         box-sizing: border-box;
         height: 100%;
         padding: 50px;
-        border-radius: 10px;
-        /* border: 1px solid red; */
-        position:relative;
-        background-color:#fff;
+        border-radius: var(--global_border_radius);
+        display: flex;
+        position: relative;
+        background-color: #fff;
         box-shadow: var(--article_card_box_shadow);
     }
+
+    .article-card-content-left {
+        width: 300px;
+        overflow: hidden;
+        border-radius: var(--global_border_radius);
+    }
+
+    .article-card-content-left:hover img {
+        transform: scale(1.1);
+    }
+
+    .article-card-content-left img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: all .2s;
+        border-radius: var(--global_border_radius);
+    }
+
+    .article-card-content-right {
+        flex: 3;
+    }
+
+    .article-card-content {
+        display: flex;
+        padding-left: 50px;
+        line-height: 25px;
+        overflow: hidden;
+    }
+
+    .article-card-content p {
+        width: 100%;
+        height: 175px;
+        text-overflow: ellipsis;
+
+    }
+
     /* 阅读全文按钮 */
-    .more-btn{
+    .more-btn {
         width: 120px;
         height: 50px;
         line-height: 50px;
-        border-radius: 10px;
-        background-color:#3498DB;
+        border-radius: var(--global_border_radius);
+        background-color: #3379f6;
         box-shadow: 0px 0px 30px rgba(1, 81, 128, 0.35);
-        color:#fff;
+        color: #fff;
         font-weight: 900;
         cursor: pointer;
-        position: absolute;
+        /* position: absolute;
         right: 50px;
-        bottom: 50px;
+        bottom: 50px; */
+    }
+
+    .bottom {
+        display: flex;
+        padding-left: 50px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .watch-number {
+        display: flex;
+        align-items: center;
+        color: #3379f6;
+        font-size: 30px;
+    }
+
+    svg {
+        height: 25px;
     }
 </style>

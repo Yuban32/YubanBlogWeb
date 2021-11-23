@@ -13,5 +13,6 @@
 <style>
     #article-title-wrap{
         margin-bottom: 10px;
+        /* color: var(--nav_text_color); */
     }
 </style>

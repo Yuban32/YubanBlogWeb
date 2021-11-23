@@ -63,18 +63,18 @@
                     root.style.setProperty('--theme_home_bg_color', dark.themeHomeBgColor)
                     root.style.setProperty('--theme_nav_bg_color', dark.themeNavBgColor)
                     root.style.setProperty('--global_text_color', dark.globalTextColor)
-                    root.style.setProperty('--blobal_article_color', dark.globalArticleColor)
+                    root.style.setProperty('--global_article_color', dark.globalArticleColor)
                     localStorage.setItem('theme', JSON.stringify(dark))
                     localStorage.setItem('sliderBarState', 'dark')
                     localStorage.setItem('sliderBar', this.right)
                 } else if (this.state == 'dark') {
                     // white
                     var white = {
-                        navTextColor: '#3498DB',
+                        navTextColor: '#3379f6',
                         themeHomeBgColor: '#f2f2f2',
                         themeNavBgColor: '#fff',
                         globalTextColor: '#000',
-                        globalArticleColor:'#222222'
+                        globalArticleColor:'#7b787b'
                     }
                     this.right = '0px';
                     this.state = 'white'
@@ -82,7 +82,7 @@
                     root.style.setProperty('--theme_home_bg_color', white.themeHomeBgColor)
                     root.style.setProperty('--theme_nav_bg_color', white.themeNavBgColor)
                     root.style.setProperty('--global_text_color', white.globalTextColor)
-                    root.style.setProperty('--blobal_article_color', white.globalArticleColor)
+                    root.style.setProperty('--global_article_color', white.globalArticleColor)
                     localStorage.setItem('theme', JSON.stringify(white))
                     localStorage.setItem('sliderBarState', 'white')
                     localStorage.setItem('sliderBar', this.right)
@@ -93,7 +93,7 @@
             let that = this;
             // 初始值
             let theme = {
-                navTextColor: '#3498DB',
+                navTextColor: '#3379f6',
                 themeHomeBgColor: '#f2f2f2',
                 themeNavBgColor: '#fff',
                 globalTextColor: '#000',
@@ -107,7 +107,7 @@
                 root.style.setProperty('--theme_home_bg_color', themes.themeHomeBgColor)
                 root.style.setProperty('--theme_nav_bg_color', themes.themeNavBgColor)
                 root.style.setProperty('--global_text_color', themes.globalTextColor)
-                root.style.setProperty('--blobal_article_color', themes.globalArticleColor)
+                root.style.setProperty('--global_article_color', themes.globalArticleColor)
 
                 // console.log(themes,localStorage.getItem('sliderBar'));
             } else {
