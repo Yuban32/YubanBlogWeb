@@ -8,7 +8,7 @@
 
             </div>
         </div>
-        <router-link to="/article">文章</router-link>
+        <router-link to="/article/1">文章</router-link>
         <ArticleCard :articleCardObjce='articleData.Vue3ViteArticle'/>
         <ArticleCard :articleCardObjce='articleData.Vue3ViteArticle'/>
         <ArticleCard :articleCardObjce='articleData.Vue3ViteArticle'/>

@@ -3,22 +3,16 @@
         <div class="container container-wrap">
             <div class="article-content-wrap">
                 <div class="article-title">
-                    <ArticleTitle :title="'Vue3+vite的主题切换功能'"/>
+                    <ArticleTitle :title="'Vue3+vite的主题切换功能'" />
+                    <h5 class="date">{{articleDataBus.da.articleDate}}</h5>
+                    <Tag :tagText="articleDataBus.da.tagTextArr" />
                 </div>
                 <article class="article-content">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae blanditiis, eligendi velit minima
-                    autem
-                    <h2 class="article-subtitle-bg"><span>小标题</span></h2>
-                    nulla reprehenderit dignissimos, veritatis unde aut, aliquid eaque quia. Quae dolores iste ducimus
-                    optio
-                    quisquam itaque saepe ex impedit repudiandae numquam! Repellat quaerat at sapiente eveniet culpa
-                    officiis esse, animi obcaecati quia architecto possimus laborum, maiores aspernatur, atque
-                    reprehenderit
-                    dicta nostrum. Deleniti eaque quis illo cupiditate dolores inventore labore nesciunt sequi nisi!
+                    {{articleDataBus.da.describe}}
+                    <h2 class="article-subtitle-bg"><span>{{articleDataBus.da.subtitle?articleDataBus.da.subtitle:''}}</span></h2>
+                    
                     <pre
-                        v-highlightjs><code class="javascript">
-                        const s = new Date().toString()
-                        const s = new Date().toString()const s = new Date().toString()const s = new Date().toString()</code></pre>
+                        v-highlightjs><code class="javascript" v-html="articleDataBus.da.codeLine"></code></pre>
                 </article>
 
             </div>
@@ -40,20 +34,31 @@
 
 <script setup>
     import ArticleTitle from '../components/ArticleTitle.vue';
+    import Tag from '../components/Tag.vue';
+    import articleDataBus from '../utils/articleDataBus';
 </script>
 <script>
     export default {
         data() {
             return {
-
+                da:1
             }
+        },
+        mounted(){
+            console.log(this.$route.params);
         }
     }
 </script>
 
 <style>
+    .date {
+        margin-bottom: 10px;
+        color: #3379f6;
+    }
+
     code {
         border-radius: 5px;
+        text-align: left;
     }
 
     .article-subtitle-bg {
@@ -111,6 +116,8 @@
     }
 
     .article-content {
+        padding: 20px;
+        text-align: center;
         color: var(--blobal_article_color);
     }
 </style>

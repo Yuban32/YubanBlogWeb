@@ -43,6 +43,7 @@ export default {
         background-color: #3379f6;
         box-shadow: 0px 0px 30px rgba(1, 81, 128, 0.35);
         cursor: pointer;
+        white-space:nowrap;
     }
     svg{
         height: 25px;

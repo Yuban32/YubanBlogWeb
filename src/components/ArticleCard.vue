@@ -126,6 +126,7 @@
         width: 120px;
         height: 50px;
         line-height: 50px;
+        margin-left: 15px;
         border-radius: var(--global_border_radius);
         background-color: #3379f6;
         box-shadow: 0px 0px 30px rgba(1, 81, 128, 0.35);

@@ -6,6 +6,7 @@ import router from './router/index'
 import VueHighlightJS from 'vue3-highlightjs'
 import 'highlight.js/styles/atom-one-dark.css'
 
+const app = createApp(App)
 
 // 由于main.js只执行一次  所以此方法只能刷新后使用  不能做到试试切换
 // var sliderBarState = localStorage.getItem('sliderBarState');
@@ -22,7 +23,6 @@ import 'highlight.js/styles/atom-one-dark.css'
 // }
 // console.log(sliderBarState);
 
-const app = createApp(App)
 // 将Highlight挂载到app上
 app.use(VueHighlightJS)
 // 将Vue-router挂载到app上
