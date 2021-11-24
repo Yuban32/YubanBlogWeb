@@ -4,15 +4,15 @@
             <div class="article-content-wrap">
                 <div class="article-title">
                     <ArticleTitle :title="'Vue3+vite的主题切换功能'" />
-                    <h5 class="date">{{articleDataBus.da.articleDate}}</h5>
-                    <Tag :tagText="articleDataBus.da.tagTextArr" />
+                    <h5 class="date">{{articleDataBus.Vue3ViteArticle.articleDate}}</h5>
+                    <Tag :tagText="articleDataBus.Vue3ViteArticle.tagTextArr" />
                 </div>
                 <article class="article-content">
-                    {{articleDataBus.da.describe}}
-                    <h2 class="article-subtitle-bg"><span>{{articleDataBus.da.subtitle?articleDataBus.da.subtitle:''}}</span></h2>
+                    {{articleDataBus.Vue3ViteArticle.describe}}
+                    <h2 class="article-subtitle-bg"><span>{{articleDataBus.Vue3ViteArticle.subtitle?articleDataBus.Vue3ViteArticle.subtitle:''}}</span></h2>
                     
                     <pre
-                        v-highlightjs><code class="javascript" v-html="articleDataBus.da.codeLine"></code></pre>
+                        v-highlightjs><code class="javascript" v-html="articleDataBus.Vue3ViteArticle.codeLine"></code></pre>
                 </article>
 
             </div>
@@ -45,7 +45,12 @@
             }
         },
         mounted(){
-            console.log(this.$route.params);
+            let that = this
+            let id = this.$route.params.articleID
+            console.log(this.$route.params.articleID);
+            fetch('http://127.0.0.1:3031/Vue3ViteArticle').then(res=>res.json()).then(res=>{
+                console.log(res);
+            })
         }
     }
 </script>
