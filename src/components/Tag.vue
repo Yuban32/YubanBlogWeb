@@ -7,7 +7,7 @@
                 fill="#3379f6" p-id="5507"></path>
         </svg>
         <ul class="tag-text-wrap">
-            <li class="tag-text" v-for="(item,index) in tagText" :key="index">{{item}}</li>
+            <li class="tag-text hover-up" v-for="(item,index) in tagText" :key="index">{{item}}</li>
         </ul>
     </div>
 </template>

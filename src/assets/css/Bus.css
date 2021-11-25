@@ -2,3 +2,12 @@
     --article_title_mb:10px;
     --global_border_radius:10px;
 }
+
+/* 公共特效 */
+/* 鼠标悬停类 */
+.hover-up{
+    transition: all 0.3s;
+}
+.hover-up:hover{
+    transform: translateY(-10px);
+}

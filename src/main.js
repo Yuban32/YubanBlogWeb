@@ -32,5 +32,5 @@ app.mount('#app')
 // 全局引入主题配色样式文件
 import './assets/css/theme.css'
 
-// 引入全局样式变量
+// 引入全局样式
 import './assets/css/Bus.css'

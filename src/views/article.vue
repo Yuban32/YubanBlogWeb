@@ -3,14 +3,16 @@
         <div class="container container-wrap">
             <div class="article-content-wrap">
                 <div class="article-title">
-                    <ArticleTitle :title="'Vue3+vite的主题切换功能'" />
+                    <ArticleTitle :title="dataHandler.articleTitle" />
                     <h5 class="date">{{dataHandler.articleDate}}</h5>
                     <Tag :tagText="dataHandler.tagTextArr" />
                 </div>
                 <article class="article-content">
                     {{dataHandler.describe}}
+                    <img :src="dataHandler.imgSrc">
                     <h2 class="article-subtitle-bg">
-                        <span>{{dataHandler.subtitle?dataHandler.subtitle:''}}</span></h2>
+                        <span>{{dataHandler.subtitle?dataHandler.subtitle:''}}</span>
+                    </h2>
 
                     <pre v-highlightjs><code class="javascript" v-html="dataHandler.codeLine"></code></pre>
                 </article>
@@ -19,13 +21,7 @@
             <div class="article-list">
                 <h3>最新文章</h3>
                 <ul>
-                    <li>最新文章1</li>
-                    <li>最新文章1</li>
-                    <li>最新文章1</li>
-                    <li>最新文章1</li>
-                    <li>最新文章1</li>
-                    <li>最新文章1</li>
-                    <li>最新文章1</li>
+                    <li v-for="(item,index) in articleDataBus" :key="index">{{item.articleTitle}}</li>
                 </ul>
             </div>
         </div>
@@ -45,6 +41,8 @@
             }
         },
         created() {
+            // 通过路由传值方式,传入文章的ID,再和文章数据里的id进行对比,正确则加载相对应的数据
+            // 错误则跳转到404页面
             let id = this.$route.params.articleID
             for (let key in articleDataBus) {
                 if (articleDataBus[key].articleId == id) {
@@ -57,7 +55,13 @@
     }
 </script>
 
-<style>
+<style scoped>
+    img{
+
+        display: block;
+        width: 200px;
+        margin: 10px auto;
+    }
     .date {
         margin-bottom: 10px;
         color: #3379f6;
@@ -102,6 +106,7 @@
     }
 
     .container-wrap {
+        width: 100%;
         display: flex;
         border: 1px solid red;
     }

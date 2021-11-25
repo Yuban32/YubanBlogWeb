@@ -1,7 +1,7 @@
 <template>
     <div id="article-card-wrap">
         <div class="container">
-            <div class="article-card-content-wrap">
+            <div class="article-card-content-wrap hover-up">
                 <div class="article-card-content-left">
                     <img :src="articleCardObjce.imgSrc">
                 </div>
@@ -25,7 +25,7 @@
                             <span>{{articleCardObjce.checkNum}}</span>
                         </div>
                         <Tag :tagText="articleCardObjce.tagTextArr"/>
-                        <div class="more-btn">
+                        <div class="more-btn hover-up" @click="toArticlePage">
                             阅读全文
                         </div>
                     </div>
@@ -46,31 +46,24 @@
             }
         },
         methods:{
-            routerTo(){
-                this.$router
+            toArticlePage(){
+                // 路由拼接
+                this.$router.push(`/article/${this.articleCardObjce.articleId}`)
             }
         },
         props: {
             articleCardObjce:Object
-        },
-        computed: {
-            // 计算传过来的文本超过指定数量的时候 超出的用省略号代替
-            // articleTexts(){
-            //     if(this.articleText.length>600){
-            //         return this.articleText.slice(0,600)+'......'
-            //     }
-            // }
         }
     }
 </script>
 <style scoped>
     #article-card-wrap {
         /* 占位外边距 */
+        margin-top: 50px;
         margin-bottom: 100px;
         min-height: 400px;
         text-align: center;
     }
-
     .date {
         margin-bottom: 10px;
         color: #3379f6;
@@ -103,7 +96,7 @@
     .article-card-content-left img {
         height: 100%;
         width: 100%;
-        object-fit: cover;
+        /* object-fit: cover; */
         transition: all .2s;
         border-radius: var(--global_border_radius);
     }
@@ -142,7 +135,6 @@
         right: 50px;
         bottom: 50px; */
     }
-
     .bottom {
         display: flex;
         padding-left: 50px;
