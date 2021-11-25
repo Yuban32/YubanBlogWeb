@@ -8,11 +8,11 @@
 
             </div>
         </div>
-        <router-link to="/article/Vue3ViteArticle">文章</router-link>
-        <ArticleCard :articleCardObjce='articleData.Vue3ViteArticle'/>
-        <ArticleCard :articleCardObjce='articleData.Vue3ViteArticle'/>
-        <ArticleCard :articleCardObjce='articleData.Vue3ViteArticle'/>
-        <ArticleCard :articleCardObjce='articleData.Vue3ViteArticle'/>
+        <router-link to="/article/1">文章</router-link>
+        <router-link to="/article/2">文章2</router-link>
+        <div class="article-card-items">
+            <ArticleCard v-for="(item,index) in articleData" :key="index"  :articleCardObjce='item'/>
+        </div>
     </div>
 </template>
 <script setup>
@@ -25,7 +25,9 @@
         data() {
             return {
             }
-        },
+        },created(){
+            console.log(articleData);
+        }
     }
 </script>
 

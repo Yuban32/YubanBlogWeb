@@ -4,15 +4,15 @@
             <div class="article-content-wrap">
                 <div class="article-title">
                     <ArticleTitle :title="'Vue3+vite的主题切换功能'" />
-                    <h5 class="date">{{articleDataBus.Vue3ViteArticle.articleDate}}</h5>
-                    <Tag :tagText="articleDataBus.Vue3ViteArticle.tagTextArr" />
+                    <h5 class="date">{{dataHandler.articleDate}}</h5>
+                    <Tag :tagText="dataHandler.tagTextArr" />
                 </div>
                 <article class="article-content">
-                    {{articleDataBus.Vue3ViteArticle.describe}}
-                    <h2 class="article-subtitle-bg"><span>{{articleDataBus.Vue3ViteArticle.subtitle?articleDataBus.Vue3ViteArticle.subtitle:''}}</span></h2>
-                    
-                    <pre
-                        v-highlightjs><code class="javascript" v-html="articleDataBus.Vue3ViteArticle.codeLine"></code></pre>
+                    {{dataHandler.describe}}
+                    <h2 class="article-subtitle-bg">
+                        <span>{{dataHandler.subtitle?dataHandler.subtitle:''}}</span></h2>
+
+                    <pre v-highlightjs><code class="javascript" v-html="dataHandler.codeLine"></code></pre>
                 </article>
 
             </div>
@@ -41,16 +41,18 @@
     export default {
         data() {
             return {
-                da:1
+                dataHandler:[]
             }
         },
-        mounted(){
-            let that = this
+        created() {
             let id = this.$route.params.articleID
-            console.log(this.$route.params.articleID);
-            fetch('http://127.0.0.1:3031/Vue3ViteArticle').then(res=>res.json()).then(res=>{
-                console.log(res);
-            })
+            for (let key in articleDataBus) {
+                if (articleDataBus[key].articleId == id) {
+                    this.dataHandler.push(articleDataBus[key])
+                }
+            }
+            this.dataHandler = this.dataHandler[0];
+            console.log(this.dataHandler);
         }
     }
 </script>

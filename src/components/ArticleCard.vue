@@ -45,6 +45,11 @@
                 
             }
         },
+        methods:{
+            routerTo(){
+                this.$router
+            }
+        },
         props: {
             articleCardObjce:Object
         },
