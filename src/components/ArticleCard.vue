@@ -2,13 +2,14 @@
     <div id="article-card-wrap">
         <div class="container">
             <div class="article-card-content-wrap hover-up">
-                <div class="article-card-content-left">
+                <div class="content-wrap">
+                    <div class="article-card-content-left">
                     <img :src="articleCardObjce.imgSrc">
                 </div>
 
                 <div class="article-card-content-right">
                     <div class="article-cared-title">
-                        <ArticleTitle :title="articleCardObjce.articleTitle" />
+                        <ArticleTitle class="title" :title="articleCardObjce.articleTitle" />
                         <h5 class="date">{{articleCardObjce.articleDate}}</h5>
                     </div>
                     <div class="article-card-content">
@@ -24,11 +25,12 @@
                             </svg>
                             <span>{{articleCardObjce.checkNum}}</span>
                         </div>
-                        <Tag :tagText="articleCardObjce.tagTextArr"/>
+                        <Tag class="tag" :tagText="articleCardObjce.tagTextArr"/>
                         <div class="more-btn hover-up" @click="toArticlePage">
                             阅读全文
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -61,7 +63,7 @@
         /* 占位外边距 */
         margin-top: 50px;
         margin-bottom: 100px;
-        min-height: 400px;
+        /* min-height: 400px; */
         text-align: center;
     }
     .date {
@@ -74,15 +76,20 @@
     .article-card-content-wrap {
         /* 为了不让子元素溢出 */
         box-sizing: border-box;
+        overflow: hidden;
         height: 100%;
-        padding: 50px;
+        width: 100%;
+        /* padding: 50px; */
         border-radius: var(--global_border_radius);
         display: flex;
         position: relative;
         background-color: #fff;
         box-shadow: var(--article_card_box_shadow);
     }
-
+    .content-wrap{
+        display: flex;
+        padding: 1rem;
+    }
     .article-card-content-left {
         width: 300px;
         overflow: hidden;
@@ -106,8 +113,6 @@
     }
 
     .article-card-content {
-        display: flex;
-        padding-left: 50px;
         line-height: 25px;
         overflow: hidden;
     }
@@ -151,5 +156,36 @@
 
     svg {
         height: 25px;
+    }
+        /* 响应式 */
+    @media screen and (max-width:960px){
+        /* .article-card-content-wrap{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        } */
+        .content-wrap{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+    }
+    @media screen and (max-width:650px){
+        .bottom{
+            flex-direction: column;
+            padding: 0;
+        }
+        .watch-number{
+            font-size: 22px;
+            
+        }
+        .more-btn,.tag{
+            margin: 10px 0px;
+            width: 100%;
+        }
+        .title >>> h1{
+            font-size: 28px;
+        }
     }
 </style>

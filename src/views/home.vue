@@ -1,8 +1,8 @@
 <template>
     <div id="home-wrap">
         <div class="home-first-page" ref="homeWrap">
+            <scrollImagesVue class="scrollImagesVue" :setScrollImgSrc="swiperImgs"/>
             <div class="home-first-page-text">
-                <scrollImagesVue :setScrollImgSrc="swiperImgs"/>
                 <div>
                     <p>Hello！我是樊家威</p>
                 </div>
@@ -31,11 +31,11 @@
         data() {
             return {
                 swiperImgs:[
-                    "../assets/images/homePage/1.jpg",
-                    "../assets/images/homePage/2.jpg",
-                    "../assets/images/homePage/3.jpg",
-                    "../assets/images/homePage/4.jpg",
-                    "../assets/images/homePage/5.jpg",
+                    "homePage/1.jpg",
+                    "homePage/2.jpg",
+                    "homePage/3.jpg",
+                    "homePage/4.jpg",
+                    "homePage/5.jpg",
                 ]
             }
         },
@@ -51,7 +51,7 @@
 <style>
     #home-wrap {
         width: 100%;
-        color: var(--global_text_color);
+        /* overflow: hidden; */
         transition: all .3s;
     }
 
@@ -61,18 +61,55 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+        position: relative;
         background-color: var(--theme_nav_bg_color);
     }
-
+    .scrollImagesVue{
+        position: relative;
+    }
+    .scrollImagesVue::before{
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 9;
+        background-color: rgba(0, 0, 0, 0.541);
+    }
+    .home-first-page-text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 999;
+    }
     .home-first-page-text div {
         overflow: hidden;
     }
 
     .home-first-page-text div p {
+        color: #fff;
         font-size: 26px;
-        animation: Textblink linear .4s;
+        line-height: 40px;
+        font-family: '宋体';
+        letter-spacing: 2px;
     }
+    .home-first-page-text div:first-child p{
+        animation: Textblink linear .4s;
 
+    }
+    .home-first-page-text div:nth-child(2) p{
+        animation: Textblink linear .4s;
+        animation-delay:.2s;
+
+    }
+    .home-first-page-text div:nth-child(3) p{
+        animation: Textblink linear .3s;
+        animation-delay: .4s;
+
+    }
     @keyframes Textblink {
         0% {
             opacity: 0;
@@ -88,5 +125,8 @@
             opacity: 1;
             transform: translateY(0px);
         }
+    }
+    @media screen and(max-width:500px) {
+        
     }
 </style>

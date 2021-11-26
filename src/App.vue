@@ -11,6 +11,7 @@
 </template>
 
 <style>
+@import './assets/css/mediaQuery.css';
   body {
     background-color: var(--theme_home_bg_color);
   }
@@ -24,8 +25,6 @@
     list-style: none;
   }
 
-  #app {}
-
   .sticky {
     /* sticky定位 */
     position: sticky;
@@ -35,8 +34,8 @@
 
   /* 版心部分 */
   .container {
-    /* width: 75%; */
     max-width: 1200px;
+    padding: 0 1rem;
     height: 100%;
     margin: 0 auto;
   }

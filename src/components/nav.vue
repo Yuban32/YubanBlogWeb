@@ -37,7 +37,6 @@
         line-height: 50px;
         background-color: var(--theme_nav_bg_color);
         color: var(--nav_text_color);
-
     }
 
     .nav-left {

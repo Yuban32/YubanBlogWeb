@@ -1,0 +1,28 @@
+    /* 响应式 */
+    @media screen and (max-width:960px){
+        /* .article-card-content-wrap{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        } */
+        body >>> .content-wrap{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+    }
+    @media screen and (max-width:650px){
+       body >>> .bottom{
+            flex-direction: column;
+            padding: 0;
+        }
+        body >>> .watch-number{
+            font-size: 22px;
+            
+        }
+        body >>> .more-btn{
+            margin: 10px 0px;
+            width: 100%;
+        }
+    }
