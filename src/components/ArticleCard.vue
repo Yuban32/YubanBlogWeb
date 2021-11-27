@@ -1,6 +1,6 @@
 <template>
     <div id="article-card-wrap">
-        <div class="container">
+        
             <div class="article-card-content-wrap hover-up">
                 <div class="content-wrap">
                     <div class="article-card-content-left">
@@ -33,7 +33,7 @@
                 </div>
                 </div>
             </div>
-        </div>
+        
     </div>
 </template>
 <script setup>
@@ -63,7 +63,6 @@
         /* 占位外边距 */
         margin-top: 50px;
         margin-bottom: 100px;
-        /* min-height: 400px; */
         text-align: center;
     }
     .date {
@@ -83,8 +82,9 @@
         border-radius: var(--global_border_radius);
         display: flex;
         position: relative;
-        background-color: #fff;
+        background: var(--article_card_bg_color);
         box-shadow: var(--article_card_box_shadow);
+
     }
     .content-wrap{
         display: flex;
@@ -120,6 +120,7 @@
     .article-card-content p {
         width: 100%;
         height: 175px;
+        color: var(--global_article_color);
         text-overflow: ellipsis;
 
     }
@@ -184,7 +185,7 @@
             margin: 10px 0px;
             width: 100%;
         }
-        .title >>> h1{
+        .title :deep(h1){
             font-size: 28px;
         }
     }

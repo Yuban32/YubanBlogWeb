@@ -6,7 +6,7 @@
 
 <template>
   <Nav class="sticky" />
-  <router-view></router-view>
+  <router-view :key="$route.fullPath"></router-view>
   <Footer />
 </template>
 
@@ -29,7 +29,7 @@
     /* sticky定位 */
     position: sticky;
     top: 0;
-    z-index: 99;
+    z-index: 9999;
   }
 
   /* 版心部分 */

@@ -55,7 +55,9 @@
                         themeHomeBgColor: '#18191a',
                         themeNavBgColor: '#242526',
                         globalTextColor: '#f5f6f7',
-                        globalArticleColor:'#d3d8d1'
+                        globalArticleColor:'#d3d8d1',
+                        articleCardBoxShadow:'20px 20px 60px #141414,-20px -20px 60px #383a3a',
+                        articleCardBgColor:'linear-gradient(352deg, rgba(30,30,30,1) 0%, rgba(46,46,46,1) 45%, rgba(71,71,71,1) 100%)'
                     }
                     this.state = 'dark'
                     this.right = '50px';
@@ -64,6 +66,8 @@
                     root.style.setProperty('--theme_nav_bg_color', dark.themeNavBgColor)
                     root.style.setProperty('--global_text_color', dark.globalTextColor)
                     root.style.setProperty('--global_article_color', dark.globalArticleColor)
+                    root.style.setProperty('--article_card_box_shadow',dark.articleCardBoxShadow)
+                    root.style.setProperty('--article_card_bg_color',dark.articleCardBgColor)
                     localStorage.setItem('theme', JSON.stringify(dark))
                     localStorage.setItem('sliderBarState', 'dark')
                     localStorage.setItem('sliderBar', this.right)
@@ -74,7 +78,9 @@
                         themeHomeBgColor: '#f2f2f2',
                         themeNavBgColor: '#fff',
                         globalTextColor: '#000',
-                        globalArticleColor:'#7b787b'
+                        globalArticleColor:'#7b787b',
+                        articleCardBoxShadow:'20px 20px 60px #aebcd8,-20px -20px 60px #fff',
+                        articleCardBgColor:'#fff'
                     }
                     this.right = '0px';
                     this.state = 'white'
@@ -83,6 +89,8 @@
                     root.style.setProperty('--theme_nav_bg_color', white.themeNavBgColor)
                     root.style.setProperty('--global_text_color', white.globalTextColor)
                     root.style.setProperty('--global_article_color', white.globalArticleColor)
+                    root.style.setProperty('--article_card_box_shadow',white.articleCardBoxShadow)
+                    root.style.setProperty('--article_card_bg_color',white.articleCardBgColor)
                     localStorage.setItem('theme', JSON.stringify(white))
                     localStorage.setItem('sliderBarState', 'white')
                     localStorage.setItem('sliderBar', this.right)
@@ -97,7 +105,9 @@
                 themeHomeBgColor: '#f2f2f2',
                 themeNavBgColor: '#fff',
                 globalTextColor: '#000',
-                globalArticleColor:'#222222'
+                globalArticleColor:'#222222',
+                articleCardBoxShadow:'20px 20px 60px #aebcd8,-20px -20px 60px #fff',
+                articleCardBgColor:'#fff'
             }
             const root = document.documentElement;
             if (localStorage.getItem('theme') != null) {
@@ -108,6 +118,8 @@
                 root.style.setProperty('--theme_nav_bg_color', themes.themeNavBgColor)
                 root.style.setProperty('--global_text_color', themes.globalTextColor)
                 root.style.setProperty('--global_article_color', themes.globalArticleColor)
+                root.style.setProperty('--article_card_box_shadow',themes.articleCardBoxShadow)
+                root.style.setProperty('--article_card_bg_color',themes.articleCardBgColor)
 
                 // console.log(themes,localStorage.getItem('sliderBar'));
             } else {

@@ -9,7 +9,7 @@ export default {
         articleDate: '2021-11-23',
         checkNum: '114514',
         describe: '这个是一个基于Vue3的全局主题切换功能，利用CSS的变量功能来做为全局变量......',
-        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()const s = new Date().toString()',
+        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()<br/>const s = new Date().toString()',
         subtitle: ''
     },
     2: {
@@ -22,7 +22,7 @@ export default {
         articleDate: '2021-11-23',
         checkNum: '114514',
         describe: 'Vite 是 vue 的作者尤雨溪在开发 vue3.0 的时候开发的一个基于原生 ES-Module 的前端构建工具。',
-        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()const s = new Date().toString()',
+        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()<br/>const s = new Date().toString()',
         subtitle: ''
     },
     3: {
@@ -35,7 +35,7 @@ export default {
         articleDate: '2021-11-23',
         checkNum: '114514',
         describe: 'Vite 是 vue 的作者尤雨溪在开发 vue3.0 的时候开发的一个基于原生 ES-Module 的前端构建工具。',
-        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()const s = new Date().toString()',
+        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()<br/>const s = new Date().toString()',
         subtitle: ''
     },
     4: {
@@ -48,7 +48,7 @@ export default {
         articleDate: '2021-11-23',
         checkNum: '114514',
         describe: 'Vite 是 vue 的作者尤雨溪在开发 vue3.0 的时候开发的一个基于原生 ES-Module 的前端构建工具。',
-        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()const s = new Date().toString()',
+        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()<br/>const s = new Date().toString()',
         subtitle: ''
     },
     5: {
@@ -61,7 +61,7 @@ export default {
         articleDate: '2021-11-23',
         checkNum: '114514',
         describe: 'Vite 是 vue 的作者尤雨溪在开发 vue3.0 的时候开发的一个基于原生 ES-Module 的前端构建工具。',
-        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()const s = new Date().toString()',
+        codeLine: 'const s = new Date().toString()<br/>const s = new Date().toString()const s = new Date().toString()<br/>const s = new Date().toString()',
         subtitle: ''
     }
 }

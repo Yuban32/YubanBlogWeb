@@ -14,5 +14,6 @@ home背景颜色 #18191a
     --theme_nav_bg_color:#fff;
     --global_text_color:#000;
     --global_article_color:'#222222';
-    --article_card_box_shadow:20px 20px 60px #ced1d6,-20px -20px 60px #fff;
+    --article_card_box_shadow:20px 20px 60px #aebcd8,-20px -20px 60px #fff;
+    --article_card_bg_color:#fff;
 }

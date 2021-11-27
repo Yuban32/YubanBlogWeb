@@ -15,4 +15,7 @@
         margin-bottom: 10px;
         /* color: var(--nav_text_color); */
     }
+    h1{
+        color: var(--global_text_color);
+    }
 </style>

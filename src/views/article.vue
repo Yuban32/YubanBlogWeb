@@ -1,9 +1,9 @@
 <template>
-    <div id="article-wrap">
+    <div id="article-wrap" ref="article_wrap">
         <div class="container container-wrap">
             <div class="article-content-wrap">
                 <div class="article-title">
-                    <ArticleTitle :title="dataHandler.articleTitle" />
+                    <ArticleTitle :title="dataHandler.articleTitle!=undefined?dataHandler.articleTitle:isNoData=ture" />
                     <h5 class="date">{{dataHandler.articleDate}}</h5>
                     <Tag :tagText="dataHandler.tagTextArr" />
                 </div>
@@ -18,10 +18,13 @@
                 </article>
 
             </div>
+            
             <div class="article-list">
                 <h3>最新文章</h3>
                 <ul>
-                    <li v-for="(item,index) in articleDataBus" :key="index">{{item.articleTitle}}</li>
+                    <li @click="toNewArticle(item.articleId)" v-for="(item,index) in articleDataBus" 
+                    :key="index" 
+                    :style="{'color':item.articleId==id?'#3379f6':''}">{{item.articleTitle}}</li>
                 </ul>
             </div>
         </div>
@@ -37,12 +40,17 @@
     export default {
         data() {
             return {
-                dataHandler:[]
+                dataHandler:[],
+                id:Number,
+                isNoData:false
             }
-        },
-        created() {
-            // 通过路由传值方式,传入文章的ID,再和文章数据里的id进行对比,正确则加载相对应的数据
-            // 错误则跳转到404页面
+        },methods: {
+            toNewArticle(articleID){
+                this.$router.push(`/article/${articleID}`)
+            },
+            getData(){
+                // 通过路由传值方式,传入文章的ID,再和文章数据里的id进行对比,正确则加载相对应的数据
+            this.id = Number(this.$route.params.articleID)
             let id = this.$route.params.articleID
             for (let key in articleDataBus) {
                 if (articleDataBus[key].articleId == id) {
@@ -50,12 +58,19 @@
                 }
             }
             this.dataHandler = this.dataHandler[0];
-            console.log(this.dataHandler);
+            }
+        },
+        created(){
+            // 初始化页面
+            this.getData()
         }
     }
 </script>
 
 <style scoped>
+    article{
+        color: var(--global_text_color);
+    }
     img{
 
         display: block;
@@ -71,7 +86,6 @@
         border-radius: 5px;
         text-align: left;
     }
-
     .article-subtitle-bg {
         position: relative;
         text-align: center;
@@ -99,37 +113,54 @@
     #article-wrap {
         width: 100%;
         height: 100vh;
+        padding-top: 50px;
         background-color: var(--theme_home_bg_color);
         display: flex;
         flex-direction: column;
         align-items: center;
+        overflow: hidden;
     }
 
     .container-wrap {
         width: 100%;
         display: flex;
-        border: 1px solid red;
     }
 
     .article-title {
         text-align: center;
-        color: var(--global_text_color);
 
     }
 
     .article-list {
+        text-align: center;
+        color: var(--global_text_color);
         display: block;
         flex: 1;
     }
-
+    li{
+       margin-top: 20px;
+       transition: color .3s;
+       cursor: pointer;
+    }
+    li:hover{
+        color: #6733f6;
+    }
     .article-content-wrap {
-        flex: 6;
+        flex: 3;
 
     }
 
     .article-content {
         padding: 20px;
         text-align: center;
-        color: var(--blobal_article_color);
+    }
+    /* 响应式 */
+    @media screen and (max-width: 1000px){
+        /* .container-wrap{
+            flex-direction: column;
+        } */
+        .article-list{
+            display: none;
+        }
     }
 </style>

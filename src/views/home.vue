@@ -15,7 +15,10 @@
 
             </div>
         </div>
-        <div class="article-card-items">
+        <div class="new-article">
+            <h1>最新文章</h1>
+        </div>
+        <div class="article-card-items container">
             <ArticleCard v-for="(item,index) in articleData" :key="index" :articleCardObjce='item' />
         </div>
     </div>
@@ -49,6 +52,31 @@
 </script>
 
 <style>
+.new-article{
+    width: 250px;
+    margin: 0 auto;
+    padding-top: 20px;
+    position: relative;
+    text-align: center;
+}
+.new-article::before{
+    content: 'New';
+    padding: 5px;
+    border-radius: var(--global_border_radius);
+    position: absolute;
+    right: 0;
+    color: #fff;
+    box-shadow: 0px 0px 30px rgba(1, 81, 128, 0.589);
+    background-color: #3379f6;
+}
+.new-article h1{
+    color: #005cfc;
+    letter-spacing: 10px;
+
+}
+    .article-card-items{
+        padding: 0 1%;
+    }
     #home-wrap {
         width: 100%;
         /* overflow: hidden; */
@@ -86,6 +114,7 @@
         z-index: 999;
     }
     .home-first-page-text div {
+        padding-top: 20px;
         overflow: hidden;
     }
 
@@ -97,16 +126,16 @@
         letter-spacing: 2px;
     }
     .home-first-page-text div:first-child p{
-        animation: Textblink linear .4s;
+        animation: Textblink ease-in-out .5s;
 
     }
     .home-first-page-text div:nth-child(2) p{
-        animation: Textblink linear .4s;
+        animation: Textblink ease-in-out .5s;
         animation-delay:.2s;
 
     }
     .home-first-page-text div:nth-child(3) p{
-        animation: Textblink linear .3s;
+        animation: Textblink ease-in-out .5s;
         animation-delay: .4s;
 
     }
@@ -118,7 +147,7 @@
 
         50% {
             opacity: .5;
-            transform: translateY(10px);
+            transform: translateY(-20px);
         }
 
         100% {
@@ -128,5 +157,13 @@
     }
     @media screen and(max-width:500px) {
         
+    }
+    @media screen and (max-width: 600px){
+        .home-first-page{
+            height: 100vh;
+        }
+        .home-first-page-text div p{
+            font-size: 20px;
+        }
     }
 </style>
