@@ -1,6 +1,7 @@
 :root{
     --article_title_mb:10px;
     --global_border_radius:10px;
+    --global_margin_top:10px;
 }
 
 /* 公共特效 */
@@ -10,4 +11,23 @@
 }
 .hover-up:hover{
     transform: translateY(-10px);
+}
+/* 进入页面特效 */
+.enter-animate{
+    animation: enter-scale-animation ease-in-out 1s;
+}
+
+@keyframes enter-scale-animation{
+    from{
+        transform: scale(2);
+    }to{
+        transform: scale(1);
+    }
+}
+@keyframes leave-scale-animation{
+    from{
+        transform: scale(1);
+    }to{
+        transform: scale(2);
+    }
 }

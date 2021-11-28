@@ -1,6 +1,6 @@
 <template>
     <div id="home-wrap">
-        <div class="home-first-page" ref="homeWrap">
+        <div class="home-first-page global-class" ref="homeWrap">
             <scrollImagesVue class="scrollImagesVue" :setScrollImgSrc="swiperImgs"/>
             <div class="home-first-page-text">
                 <div>
@@ -42,11 +42,11 @@
                 ]
             }
         },
+        methods:{
+
+        },
         created() {
             console.log(articleData);
-        },
-        mounted() {
-
         }
     }
 </script>
@@ -124,30 +124,31 @@
         line-height: 40px;
         font-family: '宋体';
         letter-spacing: 2px;
+
     }
     .home-first-page-text div:first-child p{
-        animation: Textblink ease-in-out .5s;
+        animation: Textblink ease-in-out 1s;
 
     }
     .home-first-page-text div:nth-child(2) p{
-        animation: Textblink ease-in-out .5s;
+        animation: Textblink ease-in-out 1s;
         animation-delay:.2s;
 
     }
     .home-first-page-text div:nth-child(3) p{
-        animation: Textblink ease-in-out .5s;
+        animation: Textblink ease-in-out 1s;
         animation-delay: .4s;
 
     }
     @keyframes Textblink {
         0% {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(100px);
         }
 
         50% {
             opacity: .5;
-            transform: translateY(-20px);
+            transform: translateY(-30px);
         }
 
         100% {

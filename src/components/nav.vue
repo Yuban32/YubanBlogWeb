@@ -1,5 +1,6 @@
 <template>
     <div id="nav-wrap">
+        <div class="bg"></div>
         <input type="checkbox" id="check">
         <label for="check">
             <div class="nav-btn">
@@ -35,45 +36,29 @@
 </script>
 
 <style scoped>
-    a{
-        text-decoration: none;
-        color: var(--nav_text_color);
-        transition: color .3s;
-    }
-    a:hover{
-        color: #6733f6;
-    }
     #check {
         display: none;
     }
 
-    #check:checked~.menu {
-        height: 0px;
-        padding: 0;
-        opacity: 0;
-        /* transition: all .5s; */
+    a {
+        text-decoration: none;
+        color: var(--nav_text_color);
+        transition: color .3s;
     }
 
-    #check:checked~label .nav-btn {
-        justify-content: space-around;
-        flex-direction: column;
-        z-index: 1;
+    a:hover {
+        color: #6733f6;
     }
 
-    #check:checked~label .nav-btn span {
-        position:static;
-    }
 
-    #check:checked~label .nav-btn span:first-child {
-        transform: rotate(0deg);
-    }
-
-    #check:checked~label .nav-btn span:last-child {
-        transform: rotate(0deg);
-    }
-
-    #check:checked~label .nav-btn span:nth-child(2) {
-        opacity: 1;
+    .bg {
+        width: 100%;
+        height: 60px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* z-index: 1; */
+        background-color: var(--theme_nav_bg_color);
     }
 
     #nav-wrap {
@@ -83,7 +68,7 @@
         position: sticky;
         top: 0px;
         z-index: 9999;
-        background-color: var(--theme_nav_bg_color);
+
     }
 
     .menu {
@@ -109,12 +94,14 @@
 
     li {
         float: left;
-        
+
         line-height: 50px;
     }
-    a{
+
+    a {
         padding: 0 20px;
     }
+
     svg {
         height: 50px;
     }
@@ -134,6 +121,39 @@
 
 
     @media screen and (max-width:600px) {
+        .bg {
+            height: 0px;
+        }
+
+        #check:checked~.menu {
+            height: 0px;
+            padding: 0;
+            opacity: 0;
+            /* transition: all .5s; */
+        }
+
+        #check:checked~label .nav-btn {
+            justify-content: space-around;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        #check:checked~label .nav-btn span {
+            position: static;
+        }
+
+        #check:checked~label .nav-btn span:first-child {
+            transform: rotate(0deg);
+        }
+
+        #check:checked~label .nav-btn span:last-child {
+            transform: rotate(0deg);
+        }
+
+        #check:checked~label .nav-btn span:nth-child(2) {
+            opacity: 1;
+        }
+
         #nav-wrap {
             width: 100%;
             padding: 0;
@@ -156,12 +176,14 @@
             /* transform: translateX(-5%); */
             padding: 0 20px;
         }
-        a{
+
+        a {
             text-align: center;
             margin: 0 auto;
             /* transform: translateX(-5%); */
             padding: 0 20px;
         }
+
         .nav-btn {
             width: 50px;
             height: 50px;

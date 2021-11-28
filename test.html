@@ -1,97 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>css视差滚动</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+
 <body>
-    
-        <div class="box">
-            <div class="flowImage fixed-bg bg1">
-                <p>
-                    这个西红柿死了吗<br>
-                    可是它的颜色<br>
-                    还像鲜花一样奔放
-                </p>
-            </div>
-            <div class="flowImage fixed-bg bg2">
-                <p>为了跳到天上<br>
-                   月亮先爬到树上。
-                </p>
-            </div>
-            <div class="flowImage fixed-bg bg3">
-                <p>
-                    晚上<br>
-                    我打着手电筒散步<br>
-                    累了就拿它当拐杖<br>
-                    我拄着一束光
-                </p>
-            </div>
-            <div class="flowImage fixed-bg bg4">
-                <p>
-                我是在摸一颗星星<br>
-                因为地球<br>
-                也是一颗星星
-            </p>
-            </div>
-            <div class="flowImage fixed-bg bg5">
-                <p>
-                    我在家等爸爸妈妈<br>
-                       我饿了<br>
-                    这时飞来一只金龟子<br>
-                    可能金龟子也饿了
-                </p>
-            </div>
-            <div class="flowImage fixed-bg bg6">
-                <p>
-                    每当见到加油站<br>
-                    我就在心里大声地喊<br>
-                    加油加油加油<br>
-                    也不知为了谁
-                </p>
-            </div>
-        </div>
-        <style>body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0
+    <div class="box">
+
+
+    </div>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        
+
         .box {
-            height: 100%;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .flowImage {
-            position: relative;
+            width: 500px;
             height: 500px;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            z-index: 1;
-           background-attachment: fixed;
+            background-color: aquamarine;
+            transition:all 2s;
+            animation: s linear 2s;
         }
-        
-        .flowImage>p {
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            color: #fff;
-            font-size: 30px;
-            transform: translate(-10%, -50%);
+
+        .box:hover {
+
         }
-        
-        .bg1 {
-            background-image: url(https://source.unsplash.com/300x300/?compute);
+
+        @keyframes s {
+            from {
+                transform: scale(1.5);
+            }
+
+            to {
+                transform: scale(1);
+            }
         }
-        
-        .bg2:nth-child(2) {
-        
-        
-        }
-        </style>
+    </style>
 </body>
+
 </html>

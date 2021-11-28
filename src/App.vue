@@ -4,17 +4,48 @@
   import Footer from './components/Footer.vue'
 </script>
 
-<template>
-  <Nav class="sticky" />
-  <router-view :key="$route.fullPath"></router-view>
-  <Footer />
-</template>
-
-<style>
-@import './assets/css/mediaQuery.css';
-  body {
-    background-color: var(--theme_home_bg_color);
+<script>
+  export default {
+    data() {
+      return {
+        navOpacity: 0
+      }
+    },
+    methods: {
+      handlerNavOpacity() {
+        // console.log(document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight);
+        let value = document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight >= 1 ?
+          1 : document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight;
+        this.navOpacity = value;      
+      }
+    },
+    mounted() {
+      window.addEventListener('scroll', this.handlerNavOpacity)
+      window.addEventListener('resize', this.handlerNavOpacity);
+    },
+    beforeUnmount() {
+      window.removeEventListener('scroll', this.handlerNavOpacity);
+      window.removeEventListener('resize', this.handlerNavOpacity);
+    }
   }
+</script>
+<template>
+  <div class="app">
+    <Nav class="sticky" />
+    <div id="router-view" ref="router_view">
+      <router-view :key="$route.fullPath"></router-view>
+    </div>
+    <Footer class="footer" />
+  </div>
+</template>
+<style scoped>
+  /* 给nav绑定透明度 */
+  .sticky :deep(.bg) {
+    opacity: v-bind(navOpacity);
+  }
+</style>
+<style>
+  @import './assets/css/mediaQuery.css';
 
   * {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -25,11 +56,9 @@
     list-style: none;
   }
 
-  .sticky {
-    /* sticky定位 */
-    position: sticky;
-    top: 0;
-    z-index: 9999;
+  body {
+    background-color: var(--theme_home_bg_color);
+    position: relative;
   }
 
   /* 版心部分 */
@@ -38,5 +67,18 @@
     padding: 0 1rem;
     height: 100%;
     margin: 0 auto;
+  }
+
+  #router-view {
+    position: relative;
+    top: -60px;
+  }
+
+  .sticky {
+    /* sticky定位 */
+    /* 给nav添加透明度效果 */
+    position: sticky;
+    top: 0;
+    z-index: 9999;
   }
 </style>

@@ -1,9 +1,16 @@
 <template>
     <footer>
-        <div>
-            <span>Copyright © {{dateTime}} 鱼板（樊家威）</span><span>Power by Vue.js Vue-Router Vite</span>
-        <hr>
-        <span>原创不易，转载请注明署名出处，本站部分图片和素材取自互联网，版权归作者所有。</span>
+        <div class="footer-wrap">
+            <div class="copyright-wrap">
+                <span>Copyright © {{dateTime}} 鱼板（樊家威）</span><span>Power by Vue.js Vue-Router Vite</span>
+            </div>
+            <hr>
+            <div class="license-wrap">
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议"
+                        style="border-width:0"
+                        src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>本作品采用<a rel="license"
+                    href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+            </div>
         </div>
     </footer>
 </template>
@@ -17,22 +24,47 @@
         color: #fff;
         background-color: #2b2b2b;
     }
-    div{
+
+    .footer-wrap {
         width: 98%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    hr {
+        max-width: 560px;
+        width: 60%;
+        margin: 5px 0;
+    }
+
+    .copyright-wrap {
+        height: 110px;
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    hr {
-        max-width: 560px;
-        width: 60%;
-        margin: 20px 0;
-    }
-    span{
+
+    .copyright-wrap span {
         padding-left: 20px;
-        padding-top: 10px;
+        padding-top: 5px;
+    }
+
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .license-wrap {
+        flex: 1;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 

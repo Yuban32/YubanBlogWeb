@@ -1,5 +1,5 @@
 <template>
-    <div id="article-wrap" ref="article_wrap">
+    <div id="article-wrap">
         <div class="container container-wrap">
             <div class="article-content-wrap">
                 <div class="article-title">
@@ -18,13 +18,12 @@
                 </article>
 
             </div>
-            
+
             <div class="article-list">
                 <h3>最新文章</h3>
                 <ul>
-                    <li @click="toNewArticle(item.articleId)" v-for="(item,index) in articleDataBus" 
-                    :key="index" 
-                    :style="{'color':item.articleId==id?'#3379f6':''}">{{item.articleTitle}}</li>
+                    <li @click="toNewArticle(item.articleId)" v-for="(item,index) in articleDataBus" :key="index"
+                        :style="{'color':item.articleId==id?'#3379f6':''}">{{item.articleTitle}}</li>
                 </ul>
             </div>
         </div>
@@ -40,43 +39,49 @@
     export default {
         data() {
             return {
-                dataHandler:[],
-                id:Number,
-                isNoData:false
-            }
-        },methods: {
-            toNewArticle(articleID){
-                this.$router.push(`/article/${articleID}`)
-            },
-            getData(){
-                // 通过路由传值方式,传入文章的ID,再和文章数据里的id进行对比,正确则加载相对应的数据
-            this.id = Number(this.$route.params.articleID)
-            let id = this.$route.params.articleID
-            for (let key in articleDataBus) {
-                if (articleDataBus[key].articleId == id) {
-                    this.dataHandler.push(articleDataBus[key])
-                }
-            }
-            this.dataHandler = this.dataHandler[0];
+                dataHandler: [],
+                id: Number,
+                isNoData: false
             }
         },
-        created(){
+        methods: {
+            toNewArticle(articleID) {
+                this.$router.push(`/article/${articleID}`)
+            },
+            getData() {
+                // 通过路由传值方式,传入文章的ID,再和文章数据里的id进行对比,正确则加载相对应的数据
+                this.id = Number(this.$route.params.articleID)
+                let id = this.$route.params.articleID
+                for (let key in articleDataBus) {
+                    if (articleDataBus[key].articleId == id) {
+                        this.dataHandler.push(articleDataBus[key])
+                    }
+                }
+                this.dataHandler = this.dataHandler[0];
+            }
+        },
+        created() {
             // 初始化页面
             this.getData()
-        }
+        },
+        mounted() {
+
+        },
     }
 </script>
 
 <style scoped>
-    article{
+    article {
         color: var(--global_text_color);
     }
-    img{
+
+    img {
 
         display: block;
         width: 200px;
         margin: 10px auto;
     }
+
     .date {
         margin-bottom: 10px;
         color: #3379f6;
@@ -86,6 +91,7 @@
         border-radius: 5px;
         text-align: left;
     }
+
     .article-subtitle-bg {
         position: relative;
         text-align: center;
@@ -137,14 +143,17 @@
         display: block;
         flex: 1;
     }
-    li{
-       margin-top: 20px;
-       transition: color .3s;
-       cursor: pointer;
+
+    li {
+        margin-top: 20px;
+        transition: color .3s;
+        cursor: pointer;
     }
-    li:hover{
+
+    li:hover {
         color: #6733f6;
     }
+
     .article-content-wrap {
         flex: 3;
 
@@ -154,12 +163,14 @@
         padding: 20px;
         text-align: center;
     }
+
     /* 响应式 */
-    @media screen and (max-width: 1000px){
+    @media screen and (max-width: 1000px) {
+
         /* .container-wrap{
             flex-direction: column;
         } */
-        .article-list{
+        .article-list {
             display: none;
         }
     }

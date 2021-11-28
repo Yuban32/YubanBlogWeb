@@ -6,7 +6,7 @@
         leave-active-class="animated lightSpeedOut" 
         @mouseenter="enter" @mouseleave="leave"
         -->
-        <transition-group tag="ul" name="image">
+        <transition-group tag="ul" name="image" class="enter-animate">
             <li v-for="(setScrollImgSrc,ind) in setScrollImgSrc" :key="ind" v-show="ind === mark">
                 <img :src="getImageUrl(setScrollImgSrc)">
             </li>
@@ -68,14 +68,17 @@
     .image-leave-to {
         opacity: 0;
     }
-
     .image-enter-to,
-    .image-leave {
+    .image-leave-from {
         opacity: 1;
 
-
     }
-
+    .image-leave-active{
+        animation: leave-scale-animation ease-in-out 2s;
+    }
+    .image-enter-active{
+        animation: enter-scale-animation ease-in-out 2s;
+    }
     .image-enter-active,
     .image-leave-active {
         transition: all 2s;
@@ -88,6 +91,7 @@
         position: relative;
         width: 100%;
         height: 100%;
+        overflow: hidden;
     }
 
 

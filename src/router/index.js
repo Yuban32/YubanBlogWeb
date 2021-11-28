@@ -29,7 +29,12 @@ const router = createRouter({
             path:'/404',
             component:NotFound
         }
-    ]
+    ],
+})
+router.beforeEach((to,from,next)=>{
+    document.documentElement.scrollTop=0
+    next()
+    
 })
 
 export default router
