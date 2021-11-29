@@ -13,7 +13,8 @@
                         <h5 class="date">{{articleCardObjce.articleDate}}</h5>
                     </div>
                     <div class="article-card-content">
-                        <p>{{articleCardObjce.articleText.length>600?articleCardObjce.articleText.slice(0,600)+'....':articleCardObjce.articleText}}</p>
+                        <!-- <p>{{articleCardObjce.articleText.length>600?articleCardObjce.articleText.slice(0,600)+'....':articleCardObjce.articleText}}</p> -->
+                        <p>{{articleCardObjce.describe}}</p>
                     </div>
                     <div class="bottom">
                         <div class="watch-number">
@@ -87,6 +88,7 @@
 
     }
     .content-wrap{
+        width: 100%;
         display: flex;
         padding:16px;
     }

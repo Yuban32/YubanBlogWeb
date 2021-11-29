@@ -15,9 +15,17 @@
       handlerNavOpacity() {
         // console.log(document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight);
         try{
-          let value = document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight >= 1 ?
-          1 : document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight;
-        this.navOpacity = value;      
+          let element = document.querySelector('.global-class');
+          if(element==null){
+            this.navOpacity = 1
+            return
+            console.log(null);
+          }else{
+            let value = document.documentElement.scrollTop / element.offsetHeight >= 1 ?
+            1 : document.documentElement.scrollTop / element.offsetHeight;
+          this.navOpacity = value;      
+
+          }
         }catch(error){
           // console.warn('元素不存在,但不影响运行');
         }
@@ -85,5 +93,10 @@
     position: sticky;
     top: 0;
     z-index: 9999;
+  }
+  @media screen and (max-width:570px){
+    .container{
+      padding: 0 2px;
+    }
   }
 </style>

@@ -8,18 +8,29 @@
                     <Tag :tagText="dataHandler.tagTextArr" />
                 </div>
                 <article class="article-content">
-                    {{dataHandler.describe}}
+                    <p>{{dataHandler.describe}}</p>
                     <img :src="dataHandler.imgSrc">
-                    <h2 class="article-subtitle-bg">
-                        <span>{{dataHandler.subtitle?dataHandler.subtitle:''}}</span>
+                    <h2 v-if="dataHandler.subtitle.html" class="article-subtitle-bg">
+                        <span>{{dataHandler.subtitle.html}}</span>
                     </h2>
-                    <!-- {{dataHandler.articleText}}  v-html="dataHandler.codeLine" -->
-                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code class="javascript" v-html="item"></code></pre>
-                    <article v-html="dataHandler.articleText"></article>
+                    <article class="html" v-html="dataHandler.articleText[0].html"></article>
+                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code v-if="item.html" class="html" v-html="item.html"></code ></pre >
+                    <h2 v-if="dataHandler.subtitle.css" class="article-subtitle-bg">
+                        <span>{{dataHandler.subtitle.css}}</span>
+                    </h2>
+                    <article class="css" v-html="dataHandler.articleText[0].css"></article>
+                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code v-if="item.css" class="css" v-html="item.css"></code></pre>
+                    <h2 v-if="dataHandler.subtitle.js" class="article-subtitle-bg">
+                        <span>{{dataHandler.subtitle.js}}</span>
+                    </h2>
+                    <article class="js" v-html="dataHandler.articleText[0].js"></article >
+                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code v-if="item.js" class="javascript" v-html="item.js"></code ></pre>
+                    <h2 v-if="dataHandler.subtitle.end" class="article-subtitle-bg">
+                        <span>{{dataHandler.subtitle.end}}</span>
+                    </h2>
+                    <article class="end" v-html="dataHandler.articleText[0].end"></article>
                 </article>
-
             </div>
-
             <div class="article-list">
                 <h3>最新文章</h3>
                 <ul>
@@ -64,6 +75,7 @@
         created() {
             // 初始化页面
             this.getData()
+            
         },
         mounted() {
 
@@ -119,8 +131,7 @@
 
     #article-wrap {
         width: 100%;
-        height: 100vh;
-        padding-top: 50px;
+        padding-top: 60px;
         background-color: var(--theme_home_bg_color);
         display: flex;
         flex-direction: column;
@@ -161,7 +172,7 @@
     }
 
     .article-content {
-        padding: 20px;
+        padding-top: 50px;
         text-align: left;
     }
 
