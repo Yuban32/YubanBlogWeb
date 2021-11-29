@@ -20,8 +20,8 @@
             <div class="nav-right">
                 <ul>
                     <router-link tag="li" to="/">首页</router-link>
-                    <router-link tag="li" to="/articlelist">文章</router-link>
                     <router-link tag="li" to="/about">关于我</router-link>
+                    <li><a href="javascript:void(0)">Music</a></li>
                     <li>
                         <ThemeToggle />
                     </li>

@@ -14,9 +14,13 @@
     methods: {
       handlerNavOpacity() {
         // console.log(document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight);
-        let value = document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight >= 1 ?
+        try{
+          let value = document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight >= 1 ?
           1 : document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight;
         this.navOpacity = value;      
+        }catch(error){
+          // console.warn('元素不存在,但不影响运行');
+        }
       }
     },
     mounted() {
