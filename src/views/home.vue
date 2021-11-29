@@ -81,7 +81,6 @@
     }
     #home-wrap {
         width: 100%;
-        /* overflow: hidden; */
         transition: all .3s;
     }
 

@@ -13,8 +13,9 @@
                     <h2 class="article-subtitle-bg">
                         <span>{{dataHandler.subtitle?dataHandler.subtitle:''}}</span>
                     </h2>
-
-                    <pre v-highlightjs><code class="javascript" v-html="dataHandler.codeLine"></code></pre>
+                    <!-- {{dataHandler.articleText}}  v-html="dataHandler.codeLine" -->
+                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code class="javascript" v-html="item"></code></pre>
+                    <article v-html="dataHandler.articleText"></article>
                 </article>
 
             </div>
@@ -161,7 +162,7 @@
 
     .article-content {
         padding: 20px;
-        text-align: center;
+        text-align: left;
     }
 
     /* 响应式 */

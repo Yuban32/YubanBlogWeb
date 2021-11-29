@@ -130,6 +130,7 @@
 
     .profile {
         width: 100%;
+        padding-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -213,7 +214,7 @@
         align-items: center;
         /* 文字 */
         color: #fff;
-        font-size: 100px;
+        font-size: 80px;
         font-family: 'Trade Gothic W01';
         letter-spacing: 10px;
         font-weight: 700;

@@ -71,6 +71,7 @@
     padding: 0 16px;
     height: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
   }
 
   #router-view {

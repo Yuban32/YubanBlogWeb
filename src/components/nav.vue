@@ -178,7 +178,7 @@
 
         a {
             text-align: center;
-            font-size: 16px;
+            font-size: 20px;
             margin: 0 auto;
             /* transform: translateX(-5%); */
             padding: 0 20px;
@@ -228,7 +228,7 @@
         }
 
         .menu {
-            height: 400px;
+            height: 300px;
             padding: 50px 0 0 0;
             background-color: var(--theme_nav_bg_color);
             color: var(--nav_text_color);
@@ -247,7 +247,7 @@
         .nav-right {
             width: 100%;
             margin-top: 20px;
-            height: 50%;
+            height: 30%;
             float: none;
         }
 
