@@ -1,8 +1,7 @@
 export default {
     1: {
         articleId: 1,
-        articleText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus non aspernatur laborum numquam, veritatis iste, harum impedit itaque, sit aperiam molestiae aut voluptatum dolor ad animi ex. Accusantium, animi eos.Lorem ipsum dolor sit amet, consectetur adipisicing elit. ' +
-            'Necessitatibus non aspernatur laborum numquam, veritatis iste, harum impedit itaque, sit aperiam molestiae aut voluptatum dolor ad animi ex. Accusantium, animi eos.Necessitatibus non aspernatur laborum numquam, veritatis iste, harum impedit itaque, sit aperiam molestiae aut voluptatum dolor ad animi ex. Accusantium, animi eos.Necessitatibus non aspernatur laborum numquam, veritatis iste, harum impedit itaque, sit aperiam molestiae aut voluptatum dolor ad animi ex. Accusantium, animi eos.Necessitatibus non aspernatur laborum numquam, veritatis iste, harum impedit itaque, sit aperiam molestiae aut voluptatum dolor ad animi ex. Accusantium, animi eos.',
+        articleText: '这个是一个基于Vue3的全局主题切换功能，利用CSS的变量功能来做为全局变量,利用CSS3的全局变量来做的',
         articleTitle: 'Vue3+vite的主题切换功能',
         imgSrc: ['https://yubanblog-1254028239.cos.ap-guangzhou.myqcloud.com/article/vue_logo.svg'],
         tagTextArr: ['前端', 'Vue', 'JS'],

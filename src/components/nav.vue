@@ -21,7 +21,6 @@
                 <ul>
                     <router-link tag="li" to="/">首页</router-link>
                     <router-link tag="li" to="/about">关于我</router-link>
-                    <li><a href="javascript:void(0)">Music</a></li>
                     <li>
                         <ThemeToggle />
                     </li>
@@ -179,6 +178,7 @@
 
         a {
             text-align: center;
+            font-size: 16px;
             margin: 0 auto;
             /* transform: translateX(-5%); */
             padding: 0 20px;

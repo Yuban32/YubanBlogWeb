@@ -31,3 +31,12 @@
         transform: scale(2);
     }
 }
+.global-class{
+    height: calc(100vh + 60px);
+}
+
+/* 字体 */
+@font-face {
+    font-family: 'Centrale Sans Bold';
+    src: url('https://yubanblog-1254028239.cos.ap-guangzhou.myqcloud.com/yubanblog/font/Centrale%20Sans%20Extra%20Light.otf');
+}

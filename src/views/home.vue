@@ -3,16 +3,18 @@
         <div class="home-first-page global-class" ref="homeWrap">
             <scrollImagesVue class="scrollImagesVue" :setScrollImgSrc="swiperImgs"/>
             <div class="home-first-page-text">
-                <div>
+                <!-- <div>
                     <p>Hello！我是樊家威</p>
                 </div>
                 <div>
                     <p>欢迎来到我的博客</p>
-                </div>
-                <div>
+                </div> -->
+                <!-- <div>
                     <p>我会在此跟大家分享一些实用的教程和我在学习中遇到的一些问题</p>
+                </div> -->
+                <div>
+                    <p>WELCOME TO MY BLOG...</p>
                 </div>
-
             </div>
         </div>
         <div class="new-article">
@@ -43,10 +45,10 @@
             }
         },
         methods:{
-
+            
         },
         created() {
-            console.log(articleData);
+
         }
     }
 </script>
@@ -116,15 +118,18 @@
     .home-first-page-text div {
         padding-top: 20px;
         overflow: hidden;
+        text-align: center;
     }
-
+    .home-first-page-text :first-child p{
+        font-size: 30px;
+    }
     .home-first-page-text div p {
         color: #fff;
-        font-size: 26px;
+        font-size: 20px;
         line-height: 40px;
-        font-family: '宋体';
+        font-family: 'Centrale Sans Bold';
         letter-spacing: 2px;
-
+        font-weight: 800;
     }
     .home-first-page-text div:first-child p{
         animation: Textblink ease-in-out 1s;

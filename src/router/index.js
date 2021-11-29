@@ -8,7 +8,6 @@ const Article = () => import('../views/article.vue')
 const AritcleList = () => import('../views/articleList.vue')
 const About = () => import('../views/about.vue')
 const NotFound = () => import('../views/404.vue')
-const Music = () => import('../components/Music.vue')
 const router = createRouter({
     history: createWebHistory(),
     routes: [{
@@ -30,10 +29,6 @@ const router = createRouter({
             path:'/404',
             component:NotFound
         },
-        {
-            path:'/music',
-            component:Music
-        }
         
     ],
 })

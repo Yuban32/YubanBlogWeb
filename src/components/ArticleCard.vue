@@ -88,7 +88,7 @@
     }
     .content-wrap{
         display: flex;
-        padding: 1rem;
+        padding:16px;
     }
     .article-card-content-left {
         width: 300px;
