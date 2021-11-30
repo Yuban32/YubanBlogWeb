@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from './router/index'
 // 引入Highlight 代码高亮
 import VueHighlightJS from 'vue3-highlightjs'
-import 'highlight.js/styles/atom-one-dark.css'
+import 'vue3-highlightjs/styles/atom-one-dark.css'
 
 const app = createApp(App)
 
