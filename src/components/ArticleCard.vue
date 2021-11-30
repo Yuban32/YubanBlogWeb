@@ -1,9 +1,9 @@
 <template>
     <div id="article-card-wrap">
-        
-            <div class="article-card-content-wrap hover-up">
-                <div class="content-wrap">
-                    <div class="article-card-content-left">
+
+        <div class="article-card-content-wrap hover-up">
+            <div class="content-wrap">
+                <div class="article-card-content-left">
                     <img :src="articleCardObjce.imgSrc">
                 </div>
 
@@ -26,15 +26,15 @@
                             </svg>
                             <span>{{articleCardObjce.checkNum}}</span>
                         </div>
-                        <Tag class="tag" :tagText="articleCardObjce.tagTextArr"/>
+                        <Tag class="tag" :tagText="articleCardObjce.tagTextArr" />
                         <div class="more-btn hover-up" @click="toArticlePage">
                             阅读全文
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
-        
+        </div>
+
     </div>
 </template>
 <script setup>
@@ -45,17 +45,25 @@
     export default {
         data() {
             return {
-                
+
             }
         },
-        methods:{
-            toArticlePage(){
+        methods: {
+            toArticlePage() {
                 // 路由拼接
-                this.$router.push(`/article/${this.articleCardObjce.articleId}`)
+                // this.$router.push(`/article/${this.articleCardObjce.articleId}`)
+                this.$router.push({
+                    path: `/article`,
+                    query: {
+                        articleId: this.articleCardObjce.articleId
+                    }
+                })
+
+                // {path:'/sign_in_already_detail',query:{para:  para }}
             }
         },
         props: {
-            articleCardObjce:Object
+            articleCardObjce: Object
         }
     }
 </script>
@@ -66,6 +74,7 @@
         margin-bottom: 100px;
         text-align: center;
     }
+
     .date {
         margin-bottom: 10px;
         color: #3379f6;
@@ -87,11 +96,13 @@
         box-shadow: var(--article_card_box_shadow);
 
     }
-    .content-wrap{
+
+    .content-wrap {
         width: 100%;
         display: flex;
-        padding:16px;
+        padding: 16px;
     }
+
     .article-card-content-left {
         width: 300px;
         overflow: hidden;
@@ -143,6 +154,7 @@
         right: 50px;
         bottom: 50px; */
     }
+
     .bottom {
         display: flex;
         padding-left: 50px;
@@ -160,34 +172,41 @@
     svg {
         height: 25px;
     }
-        /* 响应式 */
-    @media screen and (max-width:960px){
+
+    /* 响应式 */
+    @media screen and (max-width:960px) {
+
         /* .article-card-content-wrap{
             flex-direction: column;
             justify-content: center;
             align-items: center;
         } */
-        .content-wrap{
+        .content-wrap {
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        
+
     }
-    @media screen and (max-width:650px){
-        .bottom{
+
+    @media screen and (max-width:650px) {
+        .bottom {
             flex-direction: column;
             padding: 0;
         }
-        .watch-number{
+
+        .watch-number {
             font-size: 22px;
-            
+
         }
-        .more-btn,.tag{
+
+        .more-btn,
+        .tag {
             margin: 10px 0px;
             width: 100%;
         }
-        .title :deep(h1){
+
+        .title :deep(h1) {
             font-size: 28px;
         }
     }

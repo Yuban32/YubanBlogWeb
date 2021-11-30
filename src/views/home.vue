@@ -48,7 +48,7 @@
             
         },
         created() {
-
+            document.title = '鱼板的博客 - 跟你分享最新的知识'
         }
     }
 </script>

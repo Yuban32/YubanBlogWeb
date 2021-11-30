@@ -63,6 +63,7 @@
         mounted() {
             window.addEventListener('scroll', this.handlerPageOpacity)
             window.addEventListener('resize', this.handlerPageOpacity)
+            document.title = '关于 - 鱼板的博客 - 跟你分享最新的知识'
 
         },
         beforeUnmount() {

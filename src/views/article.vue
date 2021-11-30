@@ -66,12 +66,26 @@
         },
         methods: {
             toNewArticle(articleID) {
-                this.$router.push(`/article/${articleID}`)
+                this.$router.push({
+                    path: `/article`,
+                    query: {
+                        articleId: articleID
+                    }
+                })
             },
             getData() {
                 // 通过路由传值方式,传入文章的ID,再和文章数据里的id进行对比,正确则加载相对应的数据
-                this.id = Number(this.$route.params.articleID)
-                let id = this.$route.params.articleID
+                this.id = Number(this.$route.query.articleId)
+                let id = 1
+                id = this.$route.query.articleId
+                localStorage.setItem('articleID',id)
+                if(localStorage.getItem('articleID')==null){
+                    localStorage.setItem('article',id)
+                }else{
+                    this.id = localStorage.getItem('articleID')
+                    id = localStorage.getItem('articleID')
+                }
+
                 for (let key in articleDataBus) {
                     if (articleDataBus[key].articleId == id) {
                         this.dataHandler.push(articleDataBus[key])
@@ -81,16 +95,21 @@
             }
         },
         created() {
+
             // 初始化页面
             this.getData()
-        },
-        mounted() {
-            console.log(this.dataHandler.codeLine);
+            document.title = `${this.dataHandler.articleTitle} - 鱼板的博客 - 跟你分享最新的知识`
         },
     }
 </script>
 
 <style scoped>
+article :deep(a){
+    color: #3379f6;
+}
+article :deep(h3){
+    color: #3379f6;
+}
 .describe{
     text-align: center;
     margin-bottom: 20px;
@@ -108,7 +127,7 @@ pre{
     img {
 
         display: block;
-        width: 200px;
+        width: 500px;
         margin: 10px auto;
     }
 
@@ -121,6 +140,8 @@ pre{
         border-radius: 5px;
         text-align: left;
         letter-spacing: 1px;
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     .article-subtitle-bg {
@@ -144,12 +165,13 @@ pre{
 
     .article-subtitle-bg span {
         background: var(--theme_home_bg_color);
+        color: #3379f6;
         padding: 0 15px;
     }
 
     #article-wrap {
         width: 100%;
-        padding-top: 60px;
+        padding-top: 80px;
         background-color: var(--theme_home_bg_color);
         display: flex;
         flex-direction: column;
