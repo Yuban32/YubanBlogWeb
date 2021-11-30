@@ -92,7 +92,7 @@ export default {
         codeLine: [{
             html: `&lt;!-- HTML --&gt;
 &lt;router-view :key="$route.fullPath"/&gt;`,
-            css: ``,
+            css:``,
             js: ``
         }],
         subtitle: {
@@ -397,57 +397,61 @@ function insertionSort(array){
     },
     7: {
         articleId: 7,
+        articleTitle: 'Vite引入Vue-touter4',
+        describe: 'Vite引入Vue-touter4',
         articleText: [{
             html: ``,
             css: ``,
             js: `
-            <p>1、for循环</p>
-            <p>2、forEach循环</p>
-            <p>3、reduce</p>
-            <p>4、eval</p>
+            <p>1、安装Vue-touter</p>
+            <p>2、首先新建一个router文件夹，然后再文件夹里新建一个index.js文件</p>
+            <p>3、在main.js注册index.js文件</p>
             `,
-            end: ``
+            end:`<a target="_blank" href="https://next.router.vuejs.org/zh/introduction.html">本文参考Vue-router官方文档</a>`
         }],
-        articleTitle: 'JavaScript数组求和的常用方法',
         imgSrc: ['https://yubanblog-1254028239.cos.ap-guangzhou.myqcloud.com/article/vue_logo.svg'],
-        tagTextArr: ['前端', 'JS'],
+        tagTextArr: ['前端','vue', 'JS'],
         articleDate: '2021-11-23',
         checkNum: '114514',
-        describe: 'JS数组求和的常用方法。',
         codeLine: [{
             html: ``,
             css: ``,
-            js: `//JS
-//for循环
-function sum(arr) {
-    var temp = 0;
-    for (var i = 0;i < arr.length;i++) {
-      temp += arr[i];
-    }
-    return temp;
-}
+            js: [`//JS
+//安装vue-router
+npm install vue-router@next
+            `,`
+//index.js文件
+import {            
+    createRouter
+    createWebHistory
+} from 'vue-router'     //导入vue-router
 
-//forEach循环
-function sum(arr){
-    var temp = 0
-    arr.forEach(val=>{
-        temp += val;
-    })
-    return temp;
-}
-
-//reduce
-function sum(arr) {
-    return arr.reduce((acr, cur)=>{
-      return acr + cur;
-    });
-}
-
-//eval
-function sum(arr) {
-    return eval( arr.join("+"));
-}
-            `
+//new 转换成工厂函数
+//
+const Home = () => import('../views/home.vue')
+const About = () => import('../views/aoubt.vue)
+const router = createRouter({
+    history:createWebHistory(),
+    routes:[
+        {
+            path:'/',
+            component:Home
+        },
+        {
+            path:'/about',
+            component:About
+        }
+    ]
+})
+// 暴露router
+export default router
+`,`
+//main.js文件
+//导入index.js文件
+import router from './router/index'
+//将导入进来的index.js挂载到vue上
+app.use(router)
+`]
         }],
         subtitle: {
             html: ``,
@@ -458,6 +462,8 @@ function sum(arr) {
     },
     8: {
         articleId: 8,
+        articleTitle: 'JavaScript数组求和的常用方法',
+        describe: 'JS数组求和的常用方法。',
         articleText: [{
             html: ``,
             css: ``,
@@ -469,12 +475,10 @@ function sum(arr) {
             `,
             end: ``
         }],
-        articleTitle: 'JavaScript数组求和的常用方法',
         imgSrc: ['https://yubanblog-1254028239.cos.ap-guangzhou.myqcloud.com/article/vue_logo.svg'],
         tagTextArr: ['前端', 'JS'],
         articleDate: '2021-11-23',
         checkNum: '114514',
-        describe: 'JS数组求和的常用方法。',
         codeLine: [{
             html: ``,
             css: ``,

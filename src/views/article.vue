@@ -8,23 +8,31 @@
                     <Tag :tagText="dataHandler.tagTextArr" />
                 </div>
                 <article class="article-content">
-                    <p>{{dataHandler.describe}}</p>
+                    <p class="describe">{{dataHandler.describe}}</p>
                     <img :src="dataHandler.imgSrc">
                     <h2 v-if="dataHandler.subtitle.html" class="article-subtitle-bg">
                         <span>{{dataHandler.subtitle.html}}</span>
                     </h2>
                     <article class="html" v-html="dataHandler.articleText[0].html"></article>
-                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code v-if="item.html" class="html" v-html="item.html"></code ></pre >
+                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine"
+                        :key="index"><code v-if="item.html" class="html" v-html="item.html"></code ></pre>
                     <h2 v-if="dataHandler.subtitle.css" class="article-subtitle-bg">
                         <span>{{dataHandler.subtitle.css}}</span>
                     </h2>
                     <article class="css" v-html="dataHandler.articleText[0].css"></article>
-                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code v-if="item.css" class="css" v-html="item.css"></code></pre>
+                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine"
+                        :key="index"><code v-if="item.css" class="css" v-html="item.css"></code></pre>
                     <h2 v-if="dataHandler.subtitle.js" class="article-subtitle-bg">
                         <span>{{dataHandler.subtitle.js}}</span>
                     </h2>
-                    <article class="js" v-html="dataHandler.articleText[0].js"></article >
-                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code v-if="item.js" class="javascript" v-html="item.js"></code ></pre>
+                    <article class="js" v-html="dataHandler.articleText[0].js"></article>
+                    <!-- <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code v-if="item.js" class="javascript" v-html="item.js"></code ></pre> -->
+                    <!-- v-for里的是三目运算 用Array.isArray()判断数据是不是数组 是的话就循环他 不是就换另外一个来循环 -->
+                    <!-- v-html里也是同理 -->
+                    <pre v-highlightjs v-for="(item , index ) in 
+                    Array.isArray(dataHandler.codeLine[0].js)?dataHandler.codeLine[0].js:dataHandler.codeLine"
+                        :key="index"><code v-if="item" class="javascript" 
+                    v-html="Array.isArray(dataHandler.codeLine[0].js)?item:item.js"></code ></pre>
                     <h2 v-if="dataHandler.subtitle.end" class="article-subtitle-bg">
                         <span>{{dataHandler.subtitle.end}}</span>
                     </h2>
@@ -75,15 +83,24 @@
         created() {
             // 初始化页面
             this.getData()
-            
         },
         mounted() {
-
+            console.log(this.dataHandler.codeLine);
         },
     }
 </script>
 
 <style scoped>
+.describe{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.end{
+    text-align: center;
+}
+pre{
+    margin-top: 20px;
+}
     article {
         color: var(--global_text_color);
     }
@@ -103,6 +120,7 @@
     code {
         border-radius: 5px;
         text-align: left;
+        letter-spacing: 1px;
     }
 
     .article-subtitle-bg {
