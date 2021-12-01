@@ -28,6 +28,7 @@
                             下定决心抽空来完成这个博客的一个最重要的原因应该是21年11月中旬，学校举办了一个网页设计大赛，
                             心想着又能参加比赛，又能通过项目来提升自身的编程能力，又能完成自己的小目标，可谓是一举三得。</p>
                         <p>本站基于是<strong>Vue3、Vue-Router、Vitepress</strong>技术栈，100%纯手工打造。</p>
+                        <p>本站已开源 项目地址 <a target="_blank" href="https://github.com/mashiro10032/my_blog/">https://github.com/mashiro10032/my_blog/</a></p>
                         <div class="title-2"><h2>关于版权</h2></div>
                         <p>部分文章和素材来自于网络整理再创作，并附有原文链接，若无特殊说明则为原创文章。
                             一些图片来自于<a href="https://picsum.photos/">https://picsum.photos/</a> 等正版免授权图像素材库。

@@ -127,7 +127,7 @@ pre{
     img {
 
         display: block;
-        width: 500px;
+        width: 50%;
         margin: 10px auto;
     }
 
@@ -207,6 +207,7 @@ pre{
     }
 
     .article-content-wrap {
+        width: 100%;
         flex: 3;
 
     }
@@ -225,5 +226,10 @@ pre{
         .article-list {
             display: none;
         }
+    }
+    @media screen and ( max-width:650px ){
+        code {
+        font-size: 8px;
+    }
     }
 </style>
