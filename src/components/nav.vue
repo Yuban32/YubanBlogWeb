@@ -21,6 +21,7 @@
                 <ul>
                     <router-link tag="li" to="/">首页</router-link>
                     <router-link tag="li" to="/about">关于我</router-link>
+                    <router-link tag="li" to="/login">登录</router-link>
                     <li>
                         <ThemeToggle />
                     </li>
