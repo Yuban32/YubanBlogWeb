@@ -2,33 +2,43 @@
   import Nav from './components/nav.vue'
   import HomePage from './views/home.vue'
   import Footer from './components/Footer.vue'
+  import Toast from './components/Toast.vue';
 </script>
 
 <script>
   export default {
     data() {
       return {
-        navOpacity: 0
+        navOpacity: 0,
+        toastMsg:{
+          msg:'密码错误',
+          ative:true
+        }
       }
     },
     methods: {
       handlerNavOpacity() {
         // console.log(document.documentElement.scrollTop / document.querySelector('.global-class').offsetHeight);
-        try{
+        try {
           let element = document.querySelector('.global-class');
-          if(element==null){
+          if (element == null) {
             this.navOpacity = 1
             return
             console.log(null);
-          }else{
+          } else {
             let value = document.documentElement.scrollTop / element.offsetHeight >= 1 ?
-            1 : document.documentElement.scrollTop / element.offsetHeight;
-          this.navOpacity = value;      
+              1 : document.documentElement.scrollTop / element.offsetHeight;
+            this.navOpacity = value;
 
           }
-        }catch(error){
+        } catch (error) {
           // console.warn('元素不存在,但不影响运行');
         }
+      }
+    },
+    watch:{
+      '$store.state.error':(newVal,olaVal)=>{
+        console.log(newVal,oldVal);
       }
     },
     mounted() {
@@ -43,6 +53,7 @@
 </script>
 <template>
   <div class="app">
+    <Toast :msg="toastMsg" />
     <Nav class="sticky" />
     <div id="router-view" ref="router_view">
       <router-view :key="$route.fullPath"></router-view>
@@ -94,8 +105,9 @@
     top: 0;
     z-index: 9999;
   }
-  @media screen and (max-width:570px){
-    .container{
+
+  @media screen and (max-width:570px) {
+    .container {
       padding: 0 10px;
     }
   }

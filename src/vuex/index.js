@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state:{
         token:'',
-        userInfo:''
+        userInfo:'',
+        error:''
     },
     mutations:{
         // set
@@ -23,6 +24,9 @@ export default new Vuex.Store({
             state.userInfo = {};
             localStorage.setItem('token','');
             sessionStorage.setItem('userInfo',JSON.stringify(''));
+        },
+        SET_ERROR:(state,msg)=>{
+            state.error = msg;
         }
     },
     getters:{
