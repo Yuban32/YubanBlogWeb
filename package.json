@@ -4,11 +4,14 @@
   "scripts": {
     "dev": "vite --open --host",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview --open --host"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^2.3.12",
     "animate.css": "^4.1.1",
-    "vue": "^3.2.16",
+    "axios": "^0.24.0",
+    "vue": "^3.2.25",
+    "vue-axios": "^3.4.0",
     "vue-router": "^4.0.12",
     "vue3-highlightjs": "^1.0.5",
     "vuex": "^4.0.2"

@@ -7,6 +7,8 @@ const Home = () => import('../views/home.vue')
 const Article = () => import('../views/article.vue')
 const About = () => import('../views/about.vue')
 const Login = () => import('../views/login.vue')
+const BlogEdit = () => import('../views/blogEdit.vue')
+const ConsoleView = () => import('../views/console.vue')
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [{
@@ -14,9 +16,9 @@ const router = createRouter({
             component:Home
         },
         {
-            path: '/article',
+            path: '/article/:articleId',
             component:Article,
-            props:route =>({query:route.articleId})
+            // props:route =>({params:route.articleId}),
         },
         {
         path:'/about',
@@ -25,6 +27,18 @@ const router = createRouter({
         {
             path:'/login',
             component:Login
+        },
+        {
+            path:'/console/add',
+            component:BlogEdit
+        },
+        {
+            path:'/article/:id/edit',
+            component:BlogEdit
+        },
+        {
+            path:'/console',
+            component:ConsoleView
         }
         
     ],

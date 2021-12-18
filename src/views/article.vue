@@ -75,9 +75,27 @@
             },
             getData() {
                 // 通过路由传值方式,传入文章的ID,再和文章数据里的id进行对比,正确则加载相对应的数据
-                this.id = Number(this.$route.query.articleId)
+                console.log(this.$route);
+                // this.id = Number(this.$route.query.articleId)
+                // let id = 1
+                // id = this.$route.query.articleId
+                // localStorage.setItem('articleID',id)
+                // if(localStorage.getItem('articleID')==null){
+                //     localStorage.setItem('article',id)
+                // }else{
+                //     this.id = localStorage.getItem('articleID')
+                //     id = localStorage.getItem('articleID')
+                // }
+
+                // for (let key in articleDataBus) {
+                //     if (articleDataBus[key].articleId == id) {
+                //         this.dataHandler.push(articleDataBus[key])
+                //     }
+                // }
+                // this.dataHandler = this.dataHandler[0];
+                this.id = Number(this.$route.params.articleId)
                 let id = 1
-                id = this.$route.query.articleId
+                id = this.$route.params.articleId
                 localStorage.setItem('articleID',id)
                 if(localStorage.getItem('articleID')==null){
                     localStorage.setItem('article',id)

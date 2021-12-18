@@ -1,55 +1,76 @@
+
 <template>
-    <div id="toast-wrap" v-show="msg.ative">
-        <transition-group tag="div" name="toast" key="1">
-            {{msg.msg}}
-        账号密码错误
-        </transition-group>
+    <div class="toast-wrap" :class="show?'show':''">
+        {{msg}}
     </div>
 </template>
-<style>
-    #toast-wrap {
-        width: 200px;
-        /* height: 100px; */
-        padding: 10px;
-        position: absolute;
-        top: 0;
+
+<script>
+export default {
+    data(){
+        return{
+            show:false,
+            msg:'',
+        }
+    },methods:{
+        showToast(msg,duration){
+            let timer = null;
+            duration = duration*1000;
+            this.msg = msg;
+            this.show=true;
+            if(timer){
+                console.log(timer)
+
+                clearTimeout(timer);
+            }
+            timer = setTimeout(()=>{
+                this.show=false
+                this.msg = ''
+            
+            },duration);
+        }
+    },
+    created(){
+        
+    }
+}
+</script>
+
+<style scoped>
+    .toast-wrap{
+        visibility: hidden;
+        position: fixed;
+        z-index: 999;
         left: 50%;
-        transform: translateX(-50%);
+        top: 10%;
+        transform: translate(-50%,-20%);
         text-align: center;
-        font-weight: 600;
-        letter-spacing: 2px;
-        border-radius: var(--global_border_radius);
-        color: red;
-        background: var(--article_card_bg_color);
-        box-shadow: var(--article_card_box_shadow);
-
+        font-size: 18px;
+        padding: 20px;
+        border-radius: 15px;
+        border: 1px solid rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0.418);
     }
-    .toast-enter-from,
-    .toast-leave-to {
-        opacity: 0;
+    .show{
+        visibility: visible;
+        animation: fadein 0.5s,fadeout 0.5s 2.5s;
     }
-    .toast-enter-to,
-    .toast-leave-from {
-        opacity: 1;
-
+    @keyframes fadein{
+        from{
+            top: 0;
+            opacity: 0;
+        }to{
+            top: 10%;
+            opacity: 1;
+        }
     }
-    .toast-enter-active,
-    .toast-leave-active {
-        transition: all 1s;
+    @keyframes fadeout{
+        from{
+            top: 10%;
+            opacity: 1;
+        }to{
+            top: 0;
+            opacity: 0;
+        }
     }
 </style>
-<script>
-    export default {
-        name: "toast",
-        props: {
-            'msg': {
-            default: {
-                msg: '',
-                ative: false
-
-            },
-
-        }
-        }
-    }
-</script>

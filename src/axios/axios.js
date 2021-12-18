@@ -1,23 +1,32 @@
-import Vue from 'vue';
+
 import axios from 'axios';
-import VueAxios from 'vue-axios';
-
-let config = {
-    withCredentials:true,
+import apiList from '../api/apiList';
+const instance = axios.create({
     timeout:60*1000,
-    baseURL:'http://localhost:8081'
-}
-
-const _axios = axios.create(config);
-_axios.interceptors.request.use(
+    baseURL:'http://localhost:8081/'
+});
+instance.interceptors.request.use(
+    // 前置拦截器
     function(request){
+        // 判断当前请求地址是Login的时候设置请求头为json
+        // if(request.url == apiList.LOGIN){
+        // }
+        switch(request.url){
+            case apiList.LOGIN:
+                request.headers['Content-Type'] = 'application/json';
+                break;
+            case apiList.BLOG_EDIT:
+                request.headers['Authorization'] = sessionStorage.getItem('token');
+
+        }
         return request;
     },
     function(error){
         return Promise.reject(error)
     }
 );
-_axios.interceptors.response.use(
+instance.interceptors.response.use(
+    // 后置拦截器
     function(response){
         let res = response.data;
         if(res.code === 200){
@@ -27,3 +36,4 @@ _axios.interceptors.response.use(
         }
     }
 )
+export default instance;

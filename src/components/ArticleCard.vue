@@ -52,12 +52,13 @@
             toArticlePage() {
                 // 路由拼接
                 // this.$router.push(`/article/${this.articleCardObjce.articleId}`)
-                this.$router.push({
-                    path: `/article`,
-                    query: {
-                        articleId: this.articleCardObjce.articleId
-                    }
-                })
+                // this.$router.push({
+                //     path: `/article`,
+                //     query: {
+                //         articleId: this.articleCardObjce.articleId
+                //     }
+                // })
+                this.$router.push(`/article/${this.articleCardObjce.articleId}`)
 
                 // {path:'/sign_in_already_detail',query:{para:  para }}
             }

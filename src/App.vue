@@ -2,7 +2,6 @@
   import Nav from './components/nav.vue'
   import HomePage from './views/home.vue'
   import Footer from './components/Footer.vue'
-  import Toast from './components/Toast.vue';
 </script>
 
 <script>
@@ -10,10 +9,6 @@
     data() {
       return {
         navOpacity: 0,
-        toastMsg:{
-          msg:'密码错误',
-          ative:true
-        }
       }
     },
     methods: {
@@ -36,11 +31,6 @@
         }
       }
     },
-    watch:{
-      '$store.state.error':(newVal,olaVal)=>{
-        console.log(newVal,oldVal);
-      }
-    },
     mounted() {
       window.addEventListener('scroll', this.handlerNavOpacity)
       window.addEventListener('resize', this.handlerNavOpacity);
@@ -53,7 +43,6 @@
 </script>
 <template>
   <div class="app">
-    <Toast :msg="toastMsg" />
     <Nav class="sticky" />
     <div id="router-view" ref="router_view">
       <router-view :key="$route.fullPath"></router-view>

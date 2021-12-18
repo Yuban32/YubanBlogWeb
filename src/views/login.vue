@@ -1,85 +1,115 @@
 <template>
     <div id="login-wrap">
+        <Toast ref="toast" />
         <div class="login">
             <h1>后台登录</h1>
             <div class="login-info">
-                <input type="text" id="username" placeholder="请输入账号"
-                v-model="username"
-                >
-                <input type="password" id="password" placeholder="请输入密码"
-                v-model="password"
-                >
+                <input type="text" id="username" placeholder="请输入账号" v-model="username">
+                <input type="password" id="password" placeholder="请输入密码" v-model="password">
                 <button type="submit" id="login-button" @click="submit">Login</button>
+                <button @click="test">测试按钮</button>
             </div>
         </div>
     </div>
 </template>
 <script>
-    export default{
-        name:'login',
-        data(){
-            return{
-                username:'',
-                password:'',
-                msg:{}
-            }
+    import Toast from "../components/Toast.vue";
+    import apiList from '../api/apiList'
+    export default {
+        name: "login",
+        data() {
+            return {
+                username: "",
+                password: "",
+                msg: {}
+            };
         },
-        methods:{
-            removeSpaces(str){
+        methods: {
+            test() {
+                console.log(apiList);
+            },
+            removeSpaces(str) {
                 // 去除空格
-                var strs = str.replace(/[^\S\n\r\t]/g,"");
+                var strs = str.replace(/[^\S\n\r\t]/g, "");
                 return strs;
             },
-            removeChinese(str){
-                var strs = str.replace(/[\u4e00-\u9fa5]/g,'');
+            removeChinese(str) {
+                var strs = str.replace(/[\u4e00-\u9fa5]/g, "");
                 return strs;
             },
-            submit(){
+            submit() {
+                // 判断中文  /[\u4e00-\u9fa5]/g; 不知道为什么VSOCDE把这串自动转义了
                 var path = /[\u4e00-\u9fa5]/g;
-                if(path.test(this.username)){
-                    this.msg ={
-                        msg:'账号密码不能有中文！',
-                        ative:true
-                    }
-                    this.$store.commit('SET_ERROR',this.msg);   
+                // 序列化
+                var raw = JSON.stringify({
+                    "username": this.username,
+                    "password": this.password
+                });
+                if(this.username==''){
+                    this.$refs.toast.showToast("账号不能为空", 3);
+                    return
                 }
+                if (path.test(this.username)) {
+                    this.$refs.toast.showToast("账号密码不能有中文！", 3);
+                }
+                this.$axios.post(apiList.LOGIN, raw).then(res => {
+                    const jwt = res.headers['authorization'];
+                    const userInfo = res.data.data;
+                    this.$store.commit('SET_TOKEN', jwt);
+                    this.$store.commit('SET_USERINFO', userInfo);
+                    console.log(res);
+                    this.$refs.toast.showToast('登录成功，3秒后跳转', 3);
+                    setTimeout(() => {
+                        this.$router.push('/console');
+                    }, 3000);
+                }).catch(err => {
+                    this.$refs.toast.showToast(err.msg, 3);
+                })
             }
         },
-        watch:{
-            username(newVal){
+        watch: {
+            username(newVal) {
                 this.username = this.removeSpaces(newVal);
             },
-            password(newVal){
+            password(newVal) {
                 this.password = this.removeSpaces(newVal);
-            }
+            },
+
+        },
+        components: {
+            Toast
         }
     }
 </script>
 <style scoped>
-button:hover{
+    button:hover {
 
-    background-color: #005eff;
-}
-button:active{
-    opacity: 0.2;
-}
-button{
-    appearance: none;
-    outline: 0;
-    background-color: #3379f6;
-    border: 0;
-    padding: 10px 15px;
-    color: #fff;
-    border-radius: var(--global_border_radius);
-    width: 282px;
-    cursor: pointer;
-    font-size: 18px;
-    transition-duration: 0.25s;
-}
-input:focus{
+        background-color: #005eff;
+    }
+
+    button:active {
+        opacity: 0.2;
+    }
+
+    button {
+        appearance: none;
+        outline: 0;
+        background-color: #3379f6;
+        border: 0;
+        padding: 10px 15px;
+        color: #fff;
+        border-radius: var(--global_border_radius);
+        width: 282px;
+        cursor: pointer;
+        font-size: 18px;
+        transition-duration: 0.25s;
+    }
+
+    input:focus {
         width: 300px;
-    color: var(--nav_text_color);
-}
+        color: var(--nav_text_color);
+    }
+
     input {
         appearance: none;
         outline: 0;
@@ -98,16 +128,18 @@ input:focus{
         transition: all .25s;
         border-radius: var(--global_border_radius);
     }
-    input:hover{
-            background-color: rgba(255, 255, 255, 0.4);
+
+    input:hover {
+        background-color: rgba(255, 255, 255, 0.4);
     }
+
     #login-wrap {
         margin-top: 60px;
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        position:relative;
+        position: relative;
         /* background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%); */
 
     }
@@ -126,7 +158,7 @@ input:focus{
         border-radius: var(--global_border_radius);
         background: var(--article_card_bg_color);
         box-shadow: var(--article_card_box_shadow);
-        
+
     }
 
     .login h1 {
