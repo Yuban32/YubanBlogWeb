@@ -3,48 +3,20 @@
         <div class="container container-wrap">
             <div class="article-content-wrap">
                 <div class="article-title">
-                    <ArticleTitle :title="dataHandler.articleTitle!=undefined?dataHandler.articleTitle:isNoData=ture" />
-                    <h5 class="date">{{dataHandler.articleDate}}</h5>
-                    <Tag :tagText="dataHandler.tagTextArr" />
+                    <ArticleTitle :title="articleData.title" />
+                    <h5 class="date">{{articleData.created}}</h5>
+                    <!-- <Tag :tagText="dataHandler.tagTextArr" /> -->
                 </div>
-                <article class="article-content">
-                    <p class="describe">{{dataHandler.describe}}</p>
-                    <img :src="dataHandler.imgSrc">
-                    <h2 v-if="dataHandler.subtitle.html" class="article-subtitle-bg">
-                        <span>{{dataHandler.subtitle.html}}</span>
-                    </h2>
-                    <article class="html" v-html="dataHandler.articleText[0].html"></article>
-                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine"
-                        :key="index"><code v-if="item.html" class="html" v-html="item.html"></code ></pre>
-                    <h2 v-if="dataHandler.subtitle.css" class="article-subtitle-bg">
-                        <span>{{dataHandler.subtitle.css}}</span>
-                    </h2>
-                    <article class="css" v-html="dataHandler.articleText[0].css"></article>
-                    <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine"
-                        :key="index"><code v-if="item.css" class="css" v-html="item.css"></code></pre>
-                    <h2 v-if="dataHandler.subtitle.js" class="article-subtitle-bg">
-                        <span>{{dataHandler.subtitle.js}}</span>
-                    </h2>
-                    <article class="js" v-html="dataHandler.articleText[0].js"></article>
-                    <!-- <pre v-highlightjs v-for="(item , index ) in dataHandler.codeLine" :key="index"><code v-if="item.js" class="javascript" v-html="item.js"></code ></pre> -->
-                    <!-- v-for里的是三目运算 用Array.isArray()判断数据是不是数组 是的话就循环他 不是就换另外一个来循环 -->
-                    <!-- v-html里也是同理 -->
-                    <pre v-highlightjs v-for="(item , index ) in 
-                    Array.isArray(dataHandler.codeLine[0].js)?dataHandler.codeLine[0].js:dataHandler.codeLine"
-                        :key="index"><code v-if="item" class="javascript" 
-                    v-html="Array.isArray(dataHandler.codeLine[0].js)?item:item.js"></code ></pre>
-                    <h2 v-if="dataHandler.subtitle.end" class="article-subtitle-bg">
-                        <span>{{dataHandler.subtitle.end}}</span>
-                    </h2>
-                    <article class="end" v-html="dataHandler.articleText[0].end"></article>
+                <article class="markdown-body" v-html="articleData.content">
+
                 </article>
             </div>
             <div class="article-list">
                 <h3>最新文章</h3>
-                <ul>
+                <!-- <ul>
                     <li @click="toNewArticle(item.articleId)" v-for="(item,index) in articleDataBus" :key="index"
                         :style="{'color':item.articleId==id?'#3379f6':''}">{{item.articleTitle}}</li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>
@@ -56,60 +28,48 @@
     import articleDataBus from '../utils/articleDataBus';
 </script>
 <script>
+import 'github-markdown-css'
+import apiList from '../api/apiList';
+import MarkdownIt from 'markdown-it'
     export default {
         data() {
             return {
                 dataHandler: [],
                 id: Number,
-                isNoData: false
+                isNoData: false,
+                articleData:{
+                    id:'',
+                    title:'',
+                    content:'',
+                    created:''
+                }
             }
         },
         methods: {
             toNewArticle(articleID) {
-                this.$router.push({
-                    path: `/article`,
-                    query: {
-                        articleId: articleID
-                    }
-                })
+                this.$router.push(`/article/${articleID}`)
             },
-            getData() {
-                // 通过路由传值方式,传入文章的ID,再和文章数据里的id进行对比,正确则加载相对应的数据
-                console.log(this.$route);
-                // this.id = Number(this.$route.query.articleId)
-                // let id = 1
-                // id = this.$route.query.articleId
-                // localStorage.setItem('articleID',id)
-                // if(localStorage.getItem('articleID')==null){
-                //     localStorage.setItem('article',id)
-                // }else{
-                //     this.id = localStorage.getItem('articleID')
-                //     id = localStorage.getItem('articleID')
-                // }
-
-                // for (let key in articleDataBus) {
-                //     if (articleDataBus[key].articleId == id) {
-                //         this.dataHandler.push(articleDataBus[key])
-                //     }
-                // }
-                // this.dataHandler = this.dataHandler[0];
-                this.id = Number(this.$route.params.articleId)
-                let id = 1
-                id = this.$route.params.articleId
-                localStorage.setItem('articleID',id)
-                if(localStorage.getItem('articleID')==null){
-                    localStorage.setItem('article',id)
-                }else{
-                    this.id = localStorage.getItem('articleID')
-                    id = localStorage.getItem('articleID')
+            getData(){
+                const articleId = this.$route.params.articleId;
+                console.log(articleId);
+                if(articleId==undefined){
+                    return
                 }
+                this.$axios.get(`${apiList.BLOG}/${articleId}`).then(res=>{
+                    let data = res.data.data;
+                    this.articleData.id = data.id;
+                    this.articleData.title = data.title;
+                    this.articleData.created = data.created;
 
-                for (let key in articleDataBus) {
-                    if (articleDataBus[key].articleId == id) {
-                        this.dataHandler.push(articleDataBus[key])
-                    }
-                }
-                this.dataHandler = this.dataHandler[0];
+                    // var MarkdownIt = require('markdown-it');
+                    var md = new MarkdownIt()
+                    var result = md.render(data.content);
+                    this.articleData.content = result;
+                    
+                    console.log(data);
+                }).catch(err=>{
+                    console.dir(err);
+                })
             }
         },
         created() {

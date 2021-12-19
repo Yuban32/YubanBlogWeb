@@ -10,6 +10,8 @@
     "@kangc/v-md-editor": "^2.3.12",
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
+    "github-markdown-css": "^5.1.0",
+    "markdown-it": "^12.3.0",
     "vue": "^3.2.25",
     "vue-axios": "^3.4.0",
     "vue-router": "^4.0.12",
