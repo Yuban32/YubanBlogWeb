@@ -116,23 +116,6 @@
         align-items: center;
     }
 
-    .primary {
-        background-color: #3379f6;
-    }
-
-    .primary:hover {
-        background-color: #005eff;
-    }
-
-    .warning {
-        background: #e6a23c;
-    }
-
-    .warning:hover {
-        background: #dd8603;
-
-    }
-
     .comfirm-btn button:active {
         opacity: 0.2;
     }

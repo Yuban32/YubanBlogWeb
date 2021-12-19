@@ -76,7 +76,7 @@
                     } else {
                         console.log(this.artileContent.id);
                         this.$axios.post(apiList.BLOG_EDIT, {
-                            
+                            id:this.artileContent.id,
                             title: this.artileContent.title,
                             description: this.artileContent.description,
                             content: this.artileContent.content
