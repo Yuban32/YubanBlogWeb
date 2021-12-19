@@ -38,11 +38,11 @@
         data() {
             return {
                 artileContent: {
-                    id:'',
+                    id: '',
                     title: '',
                     description: '',
                     content: 'null',
-                    created:''
+                    created: ''
                 },
                 pageTitle: '文章发表页',
                 errorMsg: '错误',
@@ -50,7 +50,7 @@
             }
         },
         methods: {
-            init(id,title,description,content,created){
+            init(id, title, description, content, created) {
                 this.artileContent.id = id;
                 this.artileContent.title = title;
                 this.artileContent.description = description;
@@ -63,7 +63,7 @@
             comfirmBtn(val) {
                 console.log(this.artileContent);
                 if (val == 0) {
-                    this.init('','','');
+                    this.init('', '', '');
                 } else if (val == 1) {
                     return
                 } else if (val == 2) {
@@ -74,17 +74,18 @@
                         this.$refs.toast.showToast('标题、摘要、正文不能为空', 3);
                         return
                     } else {
-                        this.$axios.post(apiList.BLOG_EDIT,{
-                                id:this.artileContent.id,
-                                title:this.artileContent.title,
-                                description:this.artileContent.description,
-                                content:this.artileContent.content
-                        }).then(res=>{
+                        console.log(this.artileContent.id);
+                        this.$axios.post(apiList.BLOG_EDIT, {
+                            
+                            title: this.artileContent.title,
+                            description: this.artileContent.description,
+                            content: this.artileContent.content
+                        }).then(res => {
                             console.log(res);
-                            this.$refs.toast.showToast(res.data.msg,3)
-                        }).catch(err=>{
+                            this.$refs.toast.showToast(res.data.msg, 3)
+                        }).catch(err => {
                             console.dir(err);
-                            this.$refs.toast.showToast(err.response.data.message,3);
+                            this.$refs.toast.showToast(err.response.data.message, 3);
                         })
                     }
                 }
@@ -100,21 +101,20 @@
             //     return newVal;
             // }
         },
-        created(){
+        created() {
             try {
                 const articleId = this.$route.params.id
-                if(articleId==undefined){
-                    return
+                if (articleId) {
+                    console.log(articleId);
+                    this.$axios.get(apiList.BLOG + '/' + articleId).then(res => {
+                        console.log(res);
+                        let data = res.data.data
+                        this.init(data.id, data.title, data.description, data.content, data.created)
+                    }).catch(err => {
+                        console.dir(err);
+                        this.$refs.toast.showToast(err.response.data.msg, 3);
+                    })
                 }
-                console.log(articleId);
-                this.$axios.get(apiList.BLOG+'/'+articleId).then(res=>{
-                    console.log(res);
-                    let data = res.data.data
-                    this.init(data.id,data.title,data.description,data.content,data.created)
-                }).catch(err=>{
-                    console.dir(err);
-                    this.$refs.toast.showToast(err.response.data.msg,3);
-                })
             } catch (error) {
                 console.log(error);
             }

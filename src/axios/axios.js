@@ -3,7 +3,7 @@ import axios from 'axios';
 import apiList from '../api/apiList';
 const instance = axios.create({
     timeout:60*1000,
-    baseURL:'http://localhost:8081/'
+    baseURL:'http://86u.yuban32.com:8081/'
 });
 instance.interceptors.request.use(
     // 前置拦截器
