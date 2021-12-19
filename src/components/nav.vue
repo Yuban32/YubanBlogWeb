@@ -157,7 +157,7 @@
         }
 
         #check:checked~.menu {
-            height: 300px;
+            height: 370px;
             padding: 50px 0 0 0;
             opacity: 1;
             /* transition: all .5s; */

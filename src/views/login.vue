@@ -7,7 +7,7 @@
                 <input type="text" id="username" placeholder="请输入账号" v-model="username">
                 <input type="password" id="password" placeholder="请输入密码" v-model="password">
                 <button type="submit" id="login-button" @click="submit">Login</button>
-                <button @click="test">测试按钮</button>
+                <!-- <button @click="test">测试按钮</button> -->
             </div>
         </div>
     </div>
@@ -63,7 +63,8 @@
                         this.$router.push('/console');
                     }, 3000);
                 }).catch(err => {
-                    this.$refs.toast.showToast(err.msg, 3);
+                    // console.dir(err);
+                    this.$refs.toast.showToast(err, 3);
                 })
             }
         },

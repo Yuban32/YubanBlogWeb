@@ -16,6 +16,6 @@
         /* color: var(--nav_text_color); */
     }
     h1{
-        color: var(--global_text_color);
+        color: var(--nav_text_color);
     }
 </style>

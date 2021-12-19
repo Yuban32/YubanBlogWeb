@@ -16,11 +16,6 @@ const router = createRouter({
             component:Home
         },
         {
-            path: '/article/:articleId',
-            component:Article,
-            // props:route =>({params:route.articleId}),
-        },
-        {
         path:'/about',
         component:About
         },
@@ -31,6 +26,11 @@ const router = createRouter({
         {
             path:'/console/add',
             component:BlogEdit
+        },
+        {
+            path: '/article/:articleId',
+            component:Article,
+            // props:route =>({params:route.articleId}),
         },
         {
             path:'/article/:id/edit',

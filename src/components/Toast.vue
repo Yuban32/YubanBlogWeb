@@ -1,7 +1,9 @@
 
 <template>
-    <div class="toast-wrap" :class="show?'show':''">
-        {{msg}}
+    <div class="toast-wrap">
+        <transition name="toast">
+        <div class="toast" v-if="show">{{msg}}</div>
+        </transition>
     </div>
 </template>
 
@@ -37,24 +39,31 @@ export default {
 </script>
 
 <style scoped>
-    .toast-wrap{
-        visibility: hidden;
+    .toast{
         position: fixed;
+        padding: 20px;
         z-index: 999;
         left: 50%;
         top: 10%;
         transform: translate(-50%,-20%);
         text-align: center;
         font-size: 18px;
-        padding: 20px;
         border-radius: 15px;
         border: 1px solid rgb(255, 255, 255);
-        background-color: rgba(255, 255, 255, 0.418);
+        background-color: rgb(255, 255, 255);
+        /* color: red; */
     }
-    .show{
-        visibility: visible;
-        animation: fadein 0.5s,fadeout 0.5s 2.5s;
-    }
+.toast-enter-active,
+.toast-leave-active {
+  transition: all 0.5s ease;
+}
+.toast-enter-active{
+    animation: fadein 0.5s;
+}
+.toast-leave-active{
+    animation: fadein 0.5s reverse;
+}
+
     @keyframes fadein{
         from{
             top: 0;
@@ -62,15 +71,6 @@ export default {
         }to{
             top: 10%;
             opacity: 1;
-        }
-    }
-    @keyframes fadeout{
-        from{
-            top: 10%;
-            opacity: 1;
-        }to{
-            top: 0;
-            opacity: 0;
         }
     }
 </style>
