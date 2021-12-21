@@ -4,20 +4,21 @@
         <div class="article-card-content-wrap hover-up">
             <div class="content-wrap">
                 <div class="article-card-content-left">
-                    <img :src="articleCardObjce.imgSrc">
+                    <!-- 先判断传过来的图片地址存不存在 不存在则启用默认图片地址 -->
+                    <img :src="articleCardObjce.image==null?'https://picsum.photos/330/330':articleCardObjce.image">
                 </div>
 
                 <div class="article-card-content-right">
                     <div class="article-cared-title">
-                        <ArticleTitle class="title" :title="articleCardObjce.articleTitle" />
-                        <h5 class="date">{{articleCardObjce.articleDate}}</h5>
+                        <ArticleTitle class="title" :title="articleCardObjce.title" />
+                        <h5 class="date">{{articleCardObjce.created}}</h5>
                     </div>
                     <div class="article-card-content">
                         <!-- <p>{{articleCardObjce.articleText.length>600?articleCardObjce.articleText.slice(0,600)+'....':articleCardObjce.articleText}}</p> -->
-                        <p>{{articleCardObjce.describe}}</p>
+                        <p>{{articleCardObjce.description}}</p>
                     </div>
                     <div class="bottom">
-                        <div class="watch-number">
+                        <!-- <div class="watch-number">
                             <svg t="1637672271796" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" p-id="4587" width="200" height="200">
                                 <path
@@ -25,8 +26,8 @@
                                     p-id="4588" fill="#3379f6"></path>
                             </svg>
                             <span>{{articleCardObjce.checkNum}}</span>
-                        </div>
-                        <Tag class="tag" :tagText="articleCardObjce.tagTextArr" />
+                        </div> -->
+                        <Tag class="tag" :tagText="tag" />
                         <div class="more-btn hover-up" @click="toArticlePage">
                             阅读全文
                         </div>
@@ -43,28 +44,28 @@
 </script>
 <script>
     export default {
+        
         data() {
             return {
-
+                tag: []
             }
         },
         methods: {
             toArticlePage() {
                 // 路由拼接
-                // this.$router.push(`/article/${this.articleCardObjce.articleId}`)
-                // this.$router.push({
-                //     path: `/article`,
-                //     query: {
-                //         articleId: this.articleCardObjce.articleId
-                //     }
-                // })
-                this.$router.push(`/article/${this.articleCardObjce.articleId}`)
+                this.$router.push(`/article/${this.articleCardObjce.id}`)
+            },
 
-                // {path:'/sign_in_already_detail',query:{para:  para }}
-            }
         },
         props: {
             articleCardObjce: Object
+        },
+        created() {
+            if (this.articleCardObjce.tag == null) {
+                this.tag = [];
+            } else {
+                this.tag = this.articleCardObjce.tag.split(',');
+            }
         }
     }
 </script>
@@ -151,16 +152,17 @@
         color: #fff;
         font-weight: 900;
         cursor: pointer;
-        /* position: absolute;
+        position: absolute;
         right: 50px;
-        bottom: 50px; */
+        bottom: 0px;
     }
 
     .bottom {
         display: flex;
         padding-left: 50px;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
+        position: relative;
     }
 
     .watch-number {
@@ -187,6 +189,9 @@
             justify-content: center;
             align-items: center;
         }
+        .more-btn{
+            position:static;
+        }
 
     }
 
@@ -200,7 +205,9 @@
             font-size: 22px;
 
         }
-
+        .more-btn{
+            position:static;
+        }
         .more-btn,
         .tag {
             margin: 10px 0px;

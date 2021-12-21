@@ -71,6 +71,7 @@
                     localStorage.setItem('theme', JSON.stringify(dark))
                     localStorage.setItem('sliderBarState', 'dark')
                     localStorage.setItem('sliderBar', this.right)
+                    this.$store.commit('SET_THEME_STATE',localStorage.getItem('sliderBarState'));
                 } else if (this.state == 'dark') {
                     // white
                     var white = {
@@ -94,6 +95,8 @@
                     localStorage.setItem('theme', JSON.stringify(white))
                     localStorage.setItem('sliderBarState', 'white')
                     localStorage.setItem('sliderBar', this.right)
+                    this.$store.commit('SET_THEME_STATE',localStorage.getItem('sliderBarState'));
+
                 }
             }
         },

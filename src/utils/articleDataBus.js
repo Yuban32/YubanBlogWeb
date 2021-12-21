@@ -278,7 +278,7 @@ function unique(arr) {
             end: ``
         }],
         articleTitle: 'JavaScript数组求和的常用方法',
-        imgSrc: ['https://source.unsplash.com/1200x900/epic'],
+        imgSrc: [''],
         tagTextArr: ['前端', 'JS'],
         articleDate: '2021-11-23',
         checkNum: '114514',

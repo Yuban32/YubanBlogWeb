@@ -22,13 +22,17 @@
         </div>
         <div class="article-card-items container">
             <ArticleCard v-for="(item,index) in articleData" :key="index" :articleCardObjce='item' />
+            <!-- <div v-for="item in articleData" :key="item.id"> -->
+                <!-- {{item}} -->
+            <!-- </div> -->
         </div>
     </div>
 </template>
 <script setup>
     import ArticleCard from '../components/ArticleCard.vue';
-    import articleData from '../utils/articleDataBus';
+    // import articleData from '../utils/articleDataBus';
     import scrollImagesVue from '../components/scrollImages.vue';
+    import apiList from '../api/apiList';
 </script>
 <script>
     export default {
@@ -41,14 +45,25 @@
                     "homePage/3.jpg",
                     "homePage/4.jpg",
                     "homePage/5.jpg",
-                ]
+                ],
+                articleData:{}
             }
         },
         methods:{
-            
+            getArticleData(){
+                this.$axios.get(apiList.BLOGS).then(res=>{
+                    // console.log(res);
+                    let data = res.data.data.records;
+                    this.articleData = data;
+                })
+            }
         },
         created() {
             document.title = '鱼板的博客 - 跟你分享最新的知识'
+            console.log(this.$route);
+            this.$store.commit('SET_TOKEN',sessionStorage.getItem('token'))
+            console.log(this.$store.getters.getToken);
+            this.getArticleData();
         }
     }
 </script>

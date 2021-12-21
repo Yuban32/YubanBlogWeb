@@ -7,7 +7,6 @@
                 <input type="text" id="username" placeholder="请输入账号" v-model="username">
                 <input type="password" id="password" placeholder="请输入密码" v-model="password">
                 <button type="submit" id="login-button" @click="submit">Login</button>
-                <!-- <button @click="test">测试按钮</button> -->
             </div>
         </div>
     </div>
@@ -25,9 +24,6 @@
             };
         },
         methods: {
-            test() {
-                console.log(apiList);
-            },
             removeSpaces(str) {
                 // 去除空格
                 var strs = str.replace(/[^\S\n\r\t]/g, "");
@@ -39,6 +35,7 @@
             },
             submit() {
                 // 判断中文  /[\u4e00-\u9fa5]/g; 不知道为什么VSOCDE把这串自动转义了
+                
                 var path = /[\u4e00-\u9fa5]/g;
                 // 序列化
                 var raw = JSON.stringify({
@@ -57,10 +54,12 @@
                     const userInfo = res.data.data;
                     this.$store.commit('SET_TOKEN', jwt);
                     this.$store.commit('SET_USERINFO', userInfo);
-                    console.log(res);
                     this.$refs.toast.showToast('登录成功，3秒后跳转', 3);
                     setTimeout(() => {
-                        this.$router.push('/console');
+                        this.$router.push({
+                            path:'/',
+                            name:'home'
+                        });
                     }, 3000);
                 }).catch(err => {
                     // console.dir(err);
@@ -79,6 +78,8 @@
         },
         components: {
             Toast
+        },created(){
+            console.log(this);
         }
     }
 </script>

@@ -7,13 +7,14 @@ const Home = () => import('../views/home.vue')
 const Article = () => import('../views/article.vue')
 const About = () => import('../views/about.vue')
 const Login = () => import('../views/login.vue')
-const BlogEdit = () => import('../views/blogEdit.vue')
+const BlogEdit = () => import('../views/articleEdit.vue')
 const ConsoleView = () => import('../views/console.vue')
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [{
             path: '/',
-            component:Home
+            component:Home,
+            name:'home'
         },
         {
         path:'/about',
@@ -25,7 +26,10 @@ const router = createRouter({
         },
         {
             path:'/console/add',
-            component:BlogEdit
+            component:BlogEdit,
+            meta:{
+                requireAuth:true
+            }
         },
         {
             path: '/article/:articleId',
@@ -35,18 +39,44 @@ const router = createRouter({
         {
             path:'/article/:articleId/edit',
             component:BlogEdit,
-            name:'ArticleEdit'
+            name:'ArticleEdit',
+            meta:{
+                requireAuth:true
+            }
         },
         {
             path:'/console',
-            component:ConsoleView
+            component:ConsoleView,
+            meta:{
+                requireAuth:true
+            }
         }
         
     ],
 })
 router.beforeEach((to,from,next)=>{
-    document.documentElement.scrollTop=0
-    next()
+    // 每次跳转到新的页面都会重置Y轴的滚动条位置
+    document.documentElement.scrollTop=0;
+
+    // 路由权限配置
+        // 判断目标路由是否有requireAuth 有的话就进行权限判断
+        if(to.matched.some(record => record.meta.requireAuth)){
+            // 先获取token
+            const token = sessionStorage.getItem('token');
+            
+            if(token){
+                if(to.path === '/login'){
+
+                }else{
+                    next();
+                }
+            }else{
+                next({path:'/login'});
+            }
+        }else{
+            next();
+        }
+
     
 })
 

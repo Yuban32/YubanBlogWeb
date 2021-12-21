@@ -19,9 +19,15 @@
             </div>
             <div class="nav-right">
                 <ul>
-                    <router-link tag="li" to="/">首页</router-link>
-                    <router-link tag="li" to="/about">关于我</router-link>
-                    <router-link tag="li" to="/login">登录</router-link>
+                    <li>
+                        <router-link to="/">首页</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/about">关于我</router-link>
+                    </li>
+                    <li>
+                        <a style="cursor: pointer;" @click="admin">后台</a>
+                    </li>
                     <li>
                         <ThemeToggle />
                     </li>
@@ -32,7 +38,32 @@
 </template>
 
 <script setup>
+    import {
+        mapGetters, mapState
+    } from 'vuex';
+    import apiList from '../api/apiList';
     import ThemeToggle from '../components/ThemeToggle.vue';
+    import Comfirm from './Comfirm.vue';
+    import Toast from './Toast.vue';
+</script>
+<script>
+
+    export default {
+        name: 'navigator',
+        data() {
+            return {
+            }
+        },
+        methods: {
+            
+            admin(){
+                let token = this.$store.getters.getToken
+                if(token){
+                    this.$router.push('/console');
+                }
+            }
+        }
+    }
 </script>
 
 <style scoped>
@@ -145,7 +176,7 @@
         li {
             text-align: center;
             margin: 0 auto;
-            
+
             padding: 0 20px;
         }
 
@@ -157,8 +188,8 @@
         }
 
         #check:checked~.menu {
-            height: 370px;
-            padding: 50px 0 0 0;
+            height: 350px;
+            padding: 50px 0 50px 0;
             opacity: 1;
             /* transition: all .5s; */
         }

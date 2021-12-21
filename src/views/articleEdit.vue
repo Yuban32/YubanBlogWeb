@@ -5,15 +5,19 @@
         <div class="container blog-edit">
             <ArticleTitle class="article-title" :title="pageTitle" />
             <div class="title">
-                <span>标题：</span>
-                <input type="text" v-model="artileContent.title" id="title=input">
+                <!-- <span>标题：</span> -->
+                <input type="text" v-model="artileContent.title" id="title=input" placeholder="请输入文章标题">
             </div>
             <div class="description">
-                <span>摘要：</span>
-                <input type="text" v-model="artileContent.description" id="description-input">
+                <!-- <span>摘要：</span> -->
+                <input type="text" v-model="artileContent.description" id="description-input" placeholder="请输入文章摘要">
+            </div>
+            <div class="banner-img">
+                <!-- <span>预览图：</span> -->
+                <input type="text" v-model="artileContent.image" id="banner-input" placeholder="请输入预览图片地址以http://开头">
             </div>
             <div class="content">
-                <span>内容：</span>
+                <!-- <span>内容：</span> -->
                 <v-md-editor class="content-md" v-model="artileContent.content" height="400px"></v-md-editor>
             </div>
             <div class="button-wrap">
@@ -33,6 +37,7 @@
 </script>
 <script>
     import apiList from '../api/apiList';
+import { mapGetters } from 'vuex';
     export default {
         name: 'blogEdit',
         data() {
@@ -41,11 +46,13 @@
                     id: '',
                     title: '',
                     description: '',
-                    content: 'null',
-                    created: ''
+                    content: '',
+                    created: '',
+                    image: ''
                 },
                 pageTitle: '文章发表页',
                 errorMsg: '错误',
+                themeClass: '',
                 // comfirmBtn:null
             }
         },
@@ -61,7 +68,7 @@
                 this.$refs.comfirm.showToast('错误错误', true);
             },
             comfirmBtn(val) {
-                console.log(this.artileContent);
+                console.log();
                 if (val == 0) {
                     this.init('', '', '');
                 } else if (val == 1) {
@@ -69,41 +76,68 @@
                 } else if (val == 2) {
                     let titleLength = this.artileContent.title.length
                     console.log(this.artileContent.title.length);
-                    if (this.artileContent.title == '' || this.artileContent.description == '' || this.artileContent
-                        .content == '') {
-                        this.$refs.toast.showToast('标题、摘要、正文不能为空', 3);
-                        return
-                    } else {
-                        console.log(this.artileContent.id);
-                        this.$axios.post(apiList.BLOG_EDIT, {
-                            id:this.artileContent.id,
-                            title: this.artileContent.title,
-                            description: this.artileContent.description,
-                            content: this.artileContent.content
-                        }).then(res => {
-                            console.log(res);
-                            this.$refs.toast.showToast(res.data.msg, 3)
-                        }).catch(err => {
-                            console.dir(err);
-                            this.$refs.toast.showToast(err.response.data.message, 3);
-                        })
-                    }
+
+                    console.log(this.artileContent.id);
+                    this.$axios.post(apiList.BLOG_EDIT, {
+                        id: this.artileContent.id,
+                        title: this.artileContent.title,
+                        description: this.artileContent.description,
+                        content: this.artileContent.content
+                    }).then(res => {
+                        console.log(res);
+                        this.$refs.toast.showToast(res.data.msg, 3)
+                    }).catch(err => {
+                        console.dir(err);
+                        this.$refs.toast.showToast(err.response.data.message, 3);
+                    })
+
                 }
                 // return val;
             },
             submit() {
+                var path = /[\u4e00-\u9fa5]/g;
+                if (this.artileContent.title == '' || this.artileContent.description == '' || this.artileContent
+                    .content == '') {
+                    this.$refs.toast.showToast('标题、摘要、正文不能为空', 3);
+                    return
+                }
+                if (path.test(this.artileContent.image)) {
+                    this.$refs.toast.showToast('预览图片框不能有中文', 3);
+                    return
+                }
+                console.log(path.test(this.artileContent.image));
                 this.$refs.comfirm.showToast('确认要提交吗？', true, 'submit');
-            }
+            },
+            getThemeStateFn(state) {
+                if (state == 'dark') {
+                    // 未完成的主题切换方案
+                    this.themeClass = 'markdown-body'
+                } else if (state == 'white') {
+                    this.themeClass = 'vuepress-markdown-body';
+                }
+            },
+        },
+        computed:{
+            ...mapGetters(['getThemeState'])
         },
         watch: {
-            // comfirmBtn(newVal,oldVal){
-            //     console.log(newVal,oldVal);
-            //     return newVal;
+            // getThemeState(newVal) {
+            //     this.getThemeStateFn(newVal)
             // }
+            getThemeState: {
+                deep:true,
+                immediate:true,
+                handler(val){
+                this.getThemeStateFn(val)
+
+                }
+            }
         },
         created() {
+            this.getThemeStateFn(localStorage.getItem('sliderBarState'));
             try {
-                const articleId = this.$route.params.id
+                const articleId = this.$route.params.articleId
+                console.log(articleId);
                 if (articleId) {
                     console.log(articleId);
                     this.$axios.get(apiList.BLOG + '/' + articleId).then(res => {
@@ -154,46 +188,23 @@
         color: var(--global_text_color);
     }
 
-    .primary {
-        background-color: #3379f6;
-    }
-
-    .primary:hover {
-        background-color: #005eff;
-    }
-
-    .warning {
-        background: #e6a23c;
-    }
-
-    .warning:hover {
-        background: #dd8603;
-
-    }
-
-    button:active {
-        opacity: 0.2;
-    }
-
-    button {
-        width: 282px;
-        padding: 10px 15px;
-        appearance: none;
-        outline: 0;
-        border: 0;
-        color: #fff;
-        border-radius: var(--global_border_radius);
-        cursor: pointer;
-        font-size: 18px;
-        transition-duration: 0.25s;
-    }
-
     input:focus {
         /* width: 300px; */
         outline: #3379f6 2px solid;
         color: var(--nav_text_color);
     }
-
+    input::-webkit-input-placeholder{
+        color: var(--global_text_color);
+    }
+    input::-moz-input-placeholder{
+        color: var(--global_text_color);
+    }
+    input::-o-input-placeholder{
+        color: var(--global_text_color);
+    }
+    input::-ms-input-placeholder{
+        color: var(--global_text_color);
+    }
     input {
         width: 100%;
         padding: 10px 15px;
@@ -219,7 +230,7 @@
     }
 
     .description,
-    .title {
+    .title .banner-img {
         line-height: 50px;
     }
 
@@ -232,12 +243,21 @@
     .blog-edit .title,
     .blog-edit .content,
     .blog-edit .button-wrap,
-    .blog-edit .article-title {
+    .blog-edit .article-title,
+    .blog-edit .banner-img {
         width: 100%;
         display: flex;
         justify-content: center;
         margin-top: 30px;
         position: relative;
+    }
+
+    .blog-edit .banner-img input {
+        /* width: 95%; */
+    }
+
+    .blog-edit .banner-img span {
+        width: 66px;
     }
 
     .blog-edit>div>span {
@@ -256,7 +276,8 @@
         .blog-edit .title,
         .blog-edit .content,
         .blog-edit .submit,
-        .blog-edit .article-title {
+        .blog-edit .article-title,
+        .blog-edit .banner-img {
             flex-direction: column;
             align-items: center;
             margin-top: 0;
@@ -264,6 +285,10 @@
 
         .v-md-editor {
             margin-top: 20px;
+        }
+
+        .blog-edit .banner-img input {
+            width: 100%;
         }
     }
 </style>

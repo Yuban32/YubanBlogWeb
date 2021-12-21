@@ -31,9 +31,6 @@ export default {
             
             },duration);
         }
-    },
-    created(){
-        
     }
 }
 </script>

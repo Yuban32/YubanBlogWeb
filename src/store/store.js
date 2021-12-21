@@ -5,7 +5,8 @@ const store = createStore({
     state:{
         token:'',
         userInfo:JSON.parse(sessionStorage.getItem('userInfo')),
-        error:''
+        error:'',
+        themeState:''
     },
     mutations:{
         // set
@@ -25,6 +26,9 @@ const store = createStore({
         },
         SET_ERROR:(state,msg)=>{
             state.error = msg;
+        },
+        SET_THEME_STATE:(state,themeState)=>{
+            state.themeState = themeState
         }
     },
     getters:{
@@ -32,10 +36,13 @@ const store = createStore({
             return state.userInfo;
         },
         getToken:state=>{
-            return state.token;
+            return state.token == ''?sessionStorage.getItem('token'):state.token;
         },
         getError:state =>{
             return state.error;
+        },
+        getThemeState:state=>{
+            return state.themeState == ''?localStorage.getItem('sliderBarState'):state.themeState;
         }
     },
     actions:{

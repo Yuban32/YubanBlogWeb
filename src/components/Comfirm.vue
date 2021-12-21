@@ -32,6 +32,9 @@
         },
         methods: {
             comfirmBtn(boolean) {
+                // 0 = 确认
+                // 1 = 取消
+                // 2 = 确认提交
                 if (boolean == 0) {
                     // 确认
                     if (this.state == 'submit') {
@@ -89,8 +92,9 @@
         text-align: center;
         background: var(--theme_nav_bg_color);
         border-radius: var(--global_border_radius);
-        box-shadow: var(--article_card_box_shadow);
+        /* box-shadow: var(--article_card_box_shadow); */
         /* visibility: hidden; */
+        border: 1px solid rgb(129, 129, 129);
         position: fixed;
         z-index: 999;
         left: 50%;
