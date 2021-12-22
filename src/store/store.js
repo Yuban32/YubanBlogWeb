@@ -36,13 +36,13 @@ const store = createStore({
             return state.userInfo;
         },
         getToken:state=>{
-            return state.token == ''?sessionStorage.getItem('token'):state.token;
+            return sessionStorage.getItem('token');
         },
         getError:state =>{
             return state.error;
         },
         getThemeState:state=>{
-            return state.themeState == ''?localStorage.getItem('sliderBarState'):state.themeState;
+            return localStorage.getItem('sliderBarState');
         }
     },
     actions:{

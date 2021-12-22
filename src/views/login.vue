@@ -57,8 +57,7 @@
                     this.$refs.toast.showToast('登录成功，3秒后跳转', 3);
                     setTimeout(() => {
                         this.$router.push({
-                            path:'/',
-                            name:'home'
+                            path:'/console'
                         });
                     }, 3000);
                 }).catch(err => {

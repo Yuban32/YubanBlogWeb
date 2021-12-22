@@ -23,6 +23,7 @@
         font-size: 16px;
         color: #fff;
         background-color: #2b2b2b;
+        user-select: none;
     }
 
     .footer-wrap {
