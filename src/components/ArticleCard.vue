@@ -153,7 +153,7 @@
         font-weight: 900;
         cursor: pointer;
         position: absolute;
-        right: 50px;
+        right: 20px;
         bottom: 0px;
     }
 

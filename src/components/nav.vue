@@ -57,8 +57,9 @@
         methods: {
             
             admin(){
-                let token = this.$store.getters.getToken
-                if(token){
+                let token = sessionStorage.getItem('token');
+                console.log(token);
+                if(token != null ){
                     this.$router.push('/console');
                 }
             }

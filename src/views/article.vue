@@ -59,8 +59,8 @@
             }
         },
         methods: {
-            toNewArticle(articleID) {
-                this.$router.push(`/article/${articleID}`)
+            toNewArticle(articleId) {
+                this.$router.push(`/article/${articleId}`)
             },
             getStatic(val) {
                 return new URL('../../node_modules/markdown-it/')
@@ -104,7 +104,7 @@
                     this.articleData.content = result;
                     this.onwBlog = (data.userId === this.$store.getters.getUser.id);
                 }).catch(err => {
-                    console.dir(err);
+                    // console.dir(err);
                 })
             },
             getArticleList() {

@@ -21,23 +21,25 @@
                         <div class="img">
                             <img :src="item.image==null?'https://picsum.photos/330/330':item.image">
                         </div>
-                        <dir class="ct">{{item.content}}</dir>
+                        <div class="ct">{{item.content}}</div>
                     </div>
                     <div class="btn">
                         <router-link :to="{name:'ArticleEdit',params:{articleId:item.id}}">
                             <button class="primary">编辑</button>
                         </router-link>
-                        
+
                     </div>
                 </li>
             </ul>
         </div>
     </div>
 </template>
-<script></script>
-<script>
+<script setup>
+    import Toast from '../components/Toast.vue';
+    import Comfirm from '../components/Comfirm.vue';
     import apiList from '../api/apiList'
-
+</script>
+<script>
     export default {
         name: "consoleView",
         data() {
@@ -52,13 +54,15 @@
                     this.$axios.get(apiList.LOGOUT).then(res => {
                         this.$refs.toast.showToast(res.data.msg, 3);
                         this.$store.commit("REMOVE_INFO");
-                        this.token = "";
+                        this.token = null;
+                        this.$router.push('/')
                     }).catch(err => err);
                 } else if (val == 1) {
                     return;
                 }
             },
             logout() {
+                console.log(this.$refs);
                 this.$refs.comfirm.showToast("确认要退出登录吗？", true);
             }
         },

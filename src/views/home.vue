@@ -60,9 +60,9 @@
         },
         created() {
             document.title = '鱼板的博客 - 跟你分享最新的知识'
-            console.log(this.$route);
+            // console.log(this.$route);
             this.$store.commit('SET_TOKEN',sessionStorage.getItem('token'))
-            console.log(this.$store.getters.getToken);
+            // console.log(this.$store.getters.getToken);
             this.getArticleData();
         }
     }

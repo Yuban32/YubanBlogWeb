@@ -13,71 +13,73 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: [{
             path: '/',
-            component:Home,
-            name:'home'
+            component: Home,
+            name: 'home'
         },
         {
-        path:'/about',
-        component:About
+            path: '/about',
+            component: About
         },
         {
-            path:'/login',
-            component:Login
+            path: '/login',
+            component: Login
         },
         {
-            path:'/console/add',
-            component:BlogEdit,
-            meta:{
-                requireAuth:true
+            path: '/console/add',
+            component: BlogEdit,
+            meta: {
+                requireAuth: true
             }
         },
         {
             path: '/article/:articleId',
-            component:Article,
+            component: Article,
             // props:route =>({params:route.articleId}),
         },
         {
-            path:'/article/:articleId/edit',
-            component:BlogEdit,
-            name:'ArticleEdit',
-            meta:{
-                requireAuth:true
+            path: '/article/:articleId/edit',
+            component: BlogEdit,
+            name: 'ArticleEdit',
+            meta: {
+                requireAuth: true
             }
         },
         {
-            path:'/console',
-            component:ConsoleView,
-            meta:{
-                requireAuth:true
+            path: '/console',
+            component: ConsoleView,
+            meta: {
+                requireAuth: true
             }
         }
-        
+
     ],
 })
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
     // 每次跳转到新的页面都会重置Y轴的滚动条位置
-    document.documentElement.scrollTop=0;
+    document.documentElement.scrollTop = 0;
 
     // 路由权限配置
-        // 判断目标路由是否有requireAuth 有的话就进行权限判断
-        if(to.matched.some(record => record.meta.requireAuth)){
-            // 先获取token
-            const token = sessionStorage.getItem('token');
-            
-            if(token){
-                if(to.path === '/login'){
+    // 判断目标路由是否有requireAuth 有的话就进行权限判断
+    if (to.matched.some(record => record.meta.requireAuth)) {
+        // 先获取token
+        const token = sessionStorage.getItem('token');
+        // console.log(token == '');
+        if (token) {
+            if (to.path === '/login') {
 
-                }else{
-                    next();
-                }
-            }else{
-                next({path:'/login'});
+            } else {
+                next();
             }
-        }else{
-            next();
+        } else {
+            next({
+                path: '/login'
+            });
         }
+    } else {
+        next();
+    }
 
-    
+
 })
 
 export default router

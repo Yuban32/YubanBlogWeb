@@ -15,7 +15,13 @@ import VueMarkdownEditor from '@kangc/v-md-editor';
 import '@kangc/v-md-editor/lib/style/base-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
-
+import githubTheme from '@kangc/v-md-editor/lib/theme/github';
+import VMdPreview from '@kangc/v-md-editor/lib/preview.js';
+// highlightjs
+import hljs from 'highlight.js';
+VMdPreview.use(githubTheme, {
+  Hljs: hljs,
+});
 import Prism from 'prismjs';
 
 // 拓展markdown-it
@@ -33,6 +39,7 @@ app.use(VueHighlightJS)
 // 将Vue-router挂载到app上
 app.use(router)
 app.use(store)
+app.use(VMdPreview);
 app.config.globalProperties.$axios = axios
 app.mount('#app')
 
