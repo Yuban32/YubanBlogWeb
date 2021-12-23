@@ -14,19 +14,9 @@
                         <h5 class="date">{{articleCardObjce.created}}</h5>
                     </div>
                     <div class="article-card-content">
-                        <!-- <p>{{articleCardObjce.articleText.length>600?articleCardObjce.articleText.slice(0,600)+'....':articleCardObjce.articleText}}</p> -->
                         <p>{{articleCardObjce.description}}</p>
                     </div>
                     <div class="bottom">
-                        <!-- <div class="watch-number">
-                            <svg t="1637672271796" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" p-id="4587" width="200" height="200">
-                                <path
-                                    d="M511.9988 1023.9972C229.2216 1023.9972 0 794.778 0 511.9988 0 229.2216 229.2216 0 511.9988 0c282.7792 0 511.9988 229.2216 511.9988 511.9988C1023.9972 794.778 794.778 1023.9972 511.9988 1023.9972zM904.804 484.405c0 0-219.922-218.589-395.922-218.589-176.051 0-395.922 218.589-395.922 218.589-13.494 12.674-13.648 33.504 0 45.922 0 0 219.923 218.591 395.922 218.591s395.92-218.591 395.92-218.591c13.343-12.674 13.6-33.35 0.002-45.922l0 0zM510.524 683.39c-96.723 0-175.282-78.455-175.282-175.33 0-96.826 78.456-175.282 175.282-175.282 96.877 0 175.28 78.559 175.28 175.282 0.002 96.773-78.557 175.33-175.28 175.33zM508.472 394.763c-61.472 0-111.347 50.132-111.347 111.706 0 61.573 49.875 111.653 111.347 111.653 61.471 0 111.347-50.08 111.347-111.653 0-61.627-49.876-111.706-111.347-111.706l0 0z"
-                                    p-id="4588" fill="#3379f6"></path>
-                            </svg>
-                            <span>{{articleCardObjce.checkNum}}</span>
-                        </div> -->
                         <Tag class="tag" :tagText="tag" />
                         <div class="more-btn hover-up" @click="toArticlePage">
                             阅读全文

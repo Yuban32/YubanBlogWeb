@@ -51,7 +51,6 @@
                 }
             },
             showToast(msg, show, state) {
-                console.log('showToast', show);
                 this.msg = msg;
                 this.show = show;
                 this.state = state

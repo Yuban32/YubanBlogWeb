@@ -53,18 +53,15 @@
                 this.$refs.comfirm.showToast('错误错误', true);
             },
             comfirmBtn(val) {
-                console.log();
                 if (val == 0) {
                     this.init('', '', '');
                 } else if (val == 1) {
                     return
                 } else if (val == 2) {
-                    console.log(this.aboutContent.id);
                     this.$axios.post(apiList.ABOUT_EDIT, {
                         id: this.aboutContent.id,
                         content: this.aboutContent.content,
                     }).then(res => {
-                        console.log(res);
                         this.$refs.toast.showToast(res.data.msg, 3)
                         this.$router.push('/about/')
                     }).catch(err => {
@@ -109,7 +106,6 @@
             try {
                 this.$axios.get(apiList.ABOUT).then(res => {
                     let data = res.data.data[0]
-                    console.log(data);
                     this.init(data.id,data.content,data.created)
                 }).catch(err => {
                     console.dir(err);

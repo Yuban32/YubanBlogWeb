@@ -82,10 +82,6 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-    // if(from.matched[0].path == )
-    // if(from.matched[0].path == '/article/:articleId/edit'){
-    //     console.log(2312);
-    // }
 })
 
 export default router

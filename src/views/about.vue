@@ -67,7 +67,6 @@ import { mapGetters } from 'vuex';
             },
             getAboutData(){
                 this.$axios.get(apiList.ABOUT).then(res=>{
-                    // console.log(res);
                     let data = res.data.data[0]
                     var md = new MarkdownIt({
                         html: true,
@@ -125,6 +124,10 @@ import { mapGetters } from 'vuex';
 
 <style scoped>
     /* about-content */
+    #markdown-by{
+        margin-top: var(--global_margin_top);
+        border-radius: var(--global_border_radius);
+    }
     .markdown-body{
         padding: 2rem;
     }
@@ -193,10 +196,12 @@ import { mapGetters } from 'vuex';
 
     .profile-name {
         margin-top: var(--global_margin_top);
+
     }
 
     .profile-name h1 {
         font-family: '宋体';
+        color: var(--nav_text_color);
     }
 
     .profile-tags {}
@@ -226,7 +231,7 @@ import { mapGetters } from 'vuex';
     }
 
     .profile-tags ul li:nth-child(2) {
-        background-color: #151340;
+        background-color: #23803f;
     }
 
     .profile-tags ul li:nth-child(3) {

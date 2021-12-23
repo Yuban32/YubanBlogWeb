@@ -24,7 +24,6 @@
           if (element == null) {
             this.navOpacity = 1
             return
-            console.log(null);
           } else {
             let value = document.documentElement.scrollTop / element.offsetHeight >= 1 ?
               1 : document.documentElement.scrollTop / element.offsetHeight;

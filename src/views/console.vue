@@ -99,7 +99,6 @@
                     this.$axios.post(apiList.BLOG_DELETE, {
                         id: this.deletedId
                     }).then(res => {
-                        console.log(res);
 
                         for (let key in this.articleData) {
                             if (this.articleData[key].id == this.deletedId) {
@@ -152,7 +151,6 @@
                 this.getArticleData(val)
             },
             articleData(val) {
-                console.log(val.length);
                 if (val.length == 0) {
                     this.isEmpty = '已经没有数据啦~';
                     this.isEmptyShow = false;

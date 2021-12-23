@@ -21,8 +21,6 @@ export default {
             this.msg = msg;
             this.show=true;
             if(timer){
-                console.log(timer)
-
                 clearTimeout(timer);
             }
             timer = setTimeout(()=>{

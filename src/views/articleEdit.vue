@@ -72,16 +72,11 @@ import { mapGetters } from 'vuex';
                 this.$refs.comfirm.showToast('确定要重置吗？', true);
             },
             comfirmBtn(val) {
-                console.log();
                 if (val == 0) {
                     this.init('', '', '');
                 } else if (val == 1) {
                     return
                 } else if (val == 2) {
-                    let titleLength = this.artileContent.title.length
-                    console.log(this.artileContent.title.length);
-
-                    console.log(this.artileContent.id);
                     this.$axios.post(apiList.BLOG_EDIT, {
                         id: this.artileContent.id,
                         title: this.artileContent.title,
@@ -90,7 +85,6 @@ import { mapGetters } from 'vuex';
                         image:this.artileContent.image,
                         tag:this.artileContent.tag
                     }).then(res => {
-                        console.log(res);
                         this.$refs.toast.showToast(res.data.msg, 3)
                         if(this.artileContent.id==''){
                             this.$router.push('/console')
@@ -117,7 +111,6 @@ import { mapGetters } from 'vuex';
                     this.$refs.toast.showToast('预览图片框不能有中文', 3);
                     return
                 }
-                console.log(path.test(this.artileContent.image));
                 this.$refs.comfirm.showToast('确认要提交吗？', true, 'submit');
             },
             getThemeStateFn(state) {
@@ -155,7 +148,6 @@ import { mapGetters } from 'vuex';
                         let data = res.data.data
                         this.init(data.id, data.title, data.description, data.content, data.created,data.image)
                     }).catch(err => {
-                        console.dir(err);
                         this.$refs.toast.showToast(err.response.data.msg, 3);
                     })
                 }
