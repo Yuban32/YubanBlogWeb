@@ -77,6 +77,9 @@
         },
         components: {
             Toast
+        },
+        created(){
+            document.title = '登录 - 鱼板的博客 - 跟你分享最新的知识'
         }
     }
 </script>
