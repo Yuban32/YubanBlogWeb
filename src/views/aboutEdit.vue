@@ -1,8 +1,8 @@
 <template>
-    <div id="blog-edit-wrap">
+    <div id="about-edit-wrap">
         <Comfirm @comfirm-btn="comfirmBtn" ref="comfirm" />
         <Toast ref="toast" />
-        <div class="container blog-edit">
+        <div class="container about-edit">
             <ArticleTitle class="article-title" :title="pageTitle" />
             <div class="content">
                 <!-- <span>内容：</span> -->
@@ -120,20 +120,20 @@
 </script>
 
 <style scoped>
-    #blog-edit-wrap {
+    #about-edit-wrap {
         width: 100%;
         margin-top: 60px;
         padding-top: 20px;
     }
 
-    #blog-edit-wrap .blog-edit .button-wrap {
+    #about-edit-wrap .about-edit .button-wrap {
         width: 100%;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
     }
 
-    .blog-edit .article-title {
+    .about-edit .article-title {
         margin-top: 40px;
     }
 
@@ -201,17 +201,17 @@
         line-height: 50px;
     }
 
-    .blog-edit {
+    .about-edit {
         max-width: 1000px;
-
+        min-height: 90vh;
     }
 
-    .blog-edit .description,
-    .blog-edit .title,
-    .blog-edit .content,
-    .blog-edit .button-wrap,
-    .blog-edit .article-title,
-    .blog-edit .banner-img {
+    .about-edit .description,
+    .about-edit .title,
+    .about-edit .content,
+    .about-edit .button-wrap,
+    .about-edit .article-title,
+    .about-edit .banner-img {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -219,32 +219,32 @@
         position: relative;
     }
 
-    .blog-edit .banner-img input {
+    .about-edit .banner-img input {
         /* width: 95%; */
     }
 
-    .blog-edit .banner-img span {
+    .about-edit .banner-img span {
         width: 66px;
     }
 
-    .blog-edit>div>span {
+    .about-edit>div>span {
         display: inline-block;
         width: 60px;
         color: var(--nav_text_color);
     }
 
     @media screen and (max-width:600px) {
-        #blog-edit-wrap {
+        #about-edit-wrap {
             margin-top: 150px;
             min-height: calc(100vh - 370px);
         }
 
-        .blog-edit .description,
-        .blog-edit .title,
-        .blog-edit .content,
-        .blog-edit .submit,
-        .blog-edit .article-title,
-        .blog-edit .banner-img {
+        .about-edit .description,
+        .about-edit .title,
+        .about-edit .content,
+        .about-edit .submit,
+        .about-edit .article-title,
+        .about-edit .banner-img {
             flex-direction: column;
             align-items: center;
             margin-top: 0;
@@ -254,7 +254,7 @@
             margin-top: 20px;
         }
 
-        .blog-edit .banner-img input {
+        .about-edit .banner-img input {
             width: 100%;
         }
     }

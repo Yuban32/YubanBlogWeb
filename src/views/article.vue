@@ -4,9 +4,9 @@
             <ArticleTitle class="V-title" :title="articleData.title" />
             <h5 class="date">{{articleData.created}}</h5>
             <Tag v-if="articleData.tag!=null?true:false" :tagText="articleData.tag" />
-            <div class="edit-btn" v-if="onwBlog">
+            <div class="edit-btn" v-if="onwArticle">
 
-                <router-link :to="{name:'ArticleEdit',params:{id:this.articleData.id}}"><button
+                <router-link :to="{name:'ArticleEdit',params:{id:articleData.id}}"><button
                         class="primary">编辑</button></router-link>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <h3>最新文章</h3>
                 <ul>
                     <li @click="toNewArticle(item.id)" v-for="(item,index) in articleList" :key="index"
-                        :style="{'color':item.id==this.$route.params.articleId?'#3379f6':''}">{{item.title}}</li>
+                        :style="{'color':item.id==ativeId?'#3379f6':''}">{{item.title}}</li>
                 </ul>
             </div>
         </div>
@@ -55,7 +55,8 @@
                     tag: null
                 },
                 themeClass: '',
-                onwBlog: false,
+                onwArticle: false,
+                ativeId:null
             }
         },
         methods: {
@@ -67,6 +68,7 @@
             },
             getData() {
                 const articleId = this.$route.params.articleId;
+                this.ativeId = articleId;
                 if (articleId == undefined) {
                     return
                 }
@@ -102,7 +104,7 @@
                     });
                     var result = md.render(data.content);
                     this.articleData.content = result;
-                    this.onwBlog = (data.userId === this.$store.getters.getUser.id);
+                    this.onwArticle = (data.userId === this.$store.getters.getUser.id);
                 }).catch(err => {
                     // console.dir(err);
                 })

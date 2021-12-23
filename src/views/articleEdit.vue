@@ -56,6 +56,7 @@ import { mapGetters } from 'vuex';
                 errorMsg: '错误',
                 themeClass: '',
                 // comfirmBtn:null
+                nowId:null
             }
         },
         methods: {
@@ -72,6 +73,7 @@ import { mapGetters } from 'vuex';
                 this.$refs.comfirm.showToast('确定要重置吗？', true);
             },
             comfirmBtn(val) {
+                let _this = this;
                 if (val == 0) {
                     this.init('', '', '');
                 } else if (val == 1) {
@@ -86,10 +88,10 @@ import { mapGetters } from 'vuex';
                         tag:this.artileContent.tag
                     }).then(res => {
                         this.$refs.toast.showToast(res.data.msg, 3)
-                        if(this.artileContent.id==''){
+                        if(_this.artileContent.id==''){
                             this.$router.push('/console')
                         }else{
-                            this.$router.push('/article/'+this.artileContent.id)
+                            this.$router.push('/article/'+_this.nowId)
                         }
                     }).catch(err => {
                         console.dir(err);
@@ -145,7 +147,8 @@ import { mapGetters } from 'vuex';
                 if (articleId) {
                     this.$axios.get(apiList.BLOG + '/' + articleId).then(res => {
                         this.pageTitle = '文章编辑页'
-                        let data = res.data.data
+                        let data = res.data.data;
+                        this.nowId = data.id;
                         this.init(data.id, data.title, data.description, data.content, data.created,data.image)
                     }).catch(err => {
                         this.$refs.toast.showToast(err.response.data.msg, 3);
@@ -168,6 +171,7 @@ import { mapGetters } from 'vuex';
 
     #blog-edit-wrap .blog-edit .button-wrap {
         width: 100%;
+        
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -238,7 +242,7 @@ import { mapGetters } from 'vuex';
 
     .blog-edit {
         max-width: 1000px;
-
+        min-height: 90vh;
     }
 
     .blog-edit .description,

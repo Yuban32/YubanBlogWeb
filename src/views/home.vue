@@ -3,15 +3,6 @@
         <div class="home-first-page global-class" ref="homeWrap">
             <scrollImagesVue class="scrollImagesVue" :setScrollImgSrc="swiperImgs" />
             <div class="home-first-page-text">
-                <!-- <div>
-                    <p>Hello！我是樊家威</p>
-                </div>
-                <div>
-                    <p>欢迎来到我的博客</p>
-                </div> -->
-                <!-- <div>
-                    <p>我会在此跟大家分享一些实用的教程和我在学习中遇到的一些问题</p>
-                </div> -->
                 <div>
                     <p>WELCOME TO MY BLOG...</p>
                 </div>
@@ -20,11 +11,9 @@
         <div class="new-article">
             <h1>最新文章</h1>
         </div>
-        <div class="article-card-items container">
+        {{isEmtpy}}
+        <div class="article-card-items container" v-if="isEmptyShow">
             <ArticleCard v-for="(item,index) in articleData" :key="index" :articleCardObjce='item' />
-            <!-- <div v-for="item in articleData" :key="item.id"> -->
-            <!-- {{item}} -->
-            <!-- </div> -->
             <div class="page-btn">
                 <div class="prev" @click="subNum">
                     <svg t="1640175737779" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -67,6 +56,8 @@
                 currentPage: 1,
                 pages: 0,
                 pageSize: 5,
+                isEmtpy:'',
+                isEmptyShow:true
             }
         },
         methods: {
@@ -99,6 +90,12 @@
         watch: {
             currentPage(val) {
                 this.getArticleData(val)
+            },
+            articleData(val) {
+                if (val.length == 0) {
+                    this.isEmpty = '已经没有数据啦~';
+                    this.isEmptyShow = false;
+                }
             }
         },
         created() {
