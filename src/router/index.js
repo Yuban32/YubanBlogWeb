@@ -62,20 +62,18 @@ router.beforeEach((to, from, next) => {
     // 判断目标路由是否有requireAuth 有的话就进行权限判断
     if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
         const token = sessionStorage.getItem("token")
-        // console.log("------------" + token)
         if (token) { // 判断当前的token是否存在 ； 登录存入的token
-          if (to.path === '/login') {
-          } else {
-            next()
-          }
+            if (to.path === '/login') {} else {
+                next()
+            }
         } else {
-          next({
-            path: '/login'
-          })
+            next({
+                path: '/login'
+            })
         }
-      } else {
+    } else {
         next()
-      }
+    }
 })
 
 export default router

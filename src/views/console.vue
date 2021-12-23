@@ -1,6 +1,7 @@
 <template>
     <div id="console-wrap">
-        <Comfirm @comfirm-btn="comfirmBtns" ref="comfirm" />
+        <!-- <Comfirm @comfirm-btn="comfirmBtns" ref="comfirm" /> -->
+        
         <Toast ref="toast" />
         <div class="container console">
             <div class="left-menu">
@@ -85,7 +86,7 @@
             },
             logout() {
                 console.log(this.$refs);
-                this.$refs.comfirm.showToast("确认要退出登录吗？", true);
+                // this.$refs.comfirm.showToast("确认要退出登录吗？", true);
             },
             async getArticleData(currentPage) {
                 await this.$axios.get(apiList.BLOGS + '?currentPage=' + currentPage).then(res => {
@@ -113,7 +114,8 @@
 
             },
             del(){
-                this.$refs.comfirm.showToast('确认要删除文章吗？',true)
+                // this.$refs.comfirm.showToast('确认要删除文章吗？',true)
+                console.log(this);
             }
         },
         watch: {

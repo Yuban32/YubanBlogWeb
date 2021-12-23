@@ -77,8 +77,6 @@
         },
         components: {
             Toast
-        },created(){
-            console.log(this);
         }
     }
 </script>

@@ -26,7 +26,7 @@
                         <router-link to="/about">关于我</router-link>
                     </li>
                     <li>
-                        <a style="cursor: pointer;" @click="admin">后台</a>
+                        <router-link to="/console">后台</router-link>
                     </li>
                     <li>
                         <ThemeToggle />
@@ -56,14 +56,7 @@
         },
         methods: {
             
-            admin(){
-                let token = this.$store.getters.getToken;
-                
-                console.log(token);
-                if(token != null ){
-                    this.$router.push('/console');
-                }
-            }
+            
         }
     }
 </script>
