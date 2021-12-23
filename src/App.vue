@@ -6,6 +6,11 @@
 
 <script>
   export default {
+    provide(){
+      return{
+        color:"red"
+      }
+    },
     data() {
       return {
         navOpacity: 0,

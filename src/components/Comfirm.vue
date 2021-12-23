@@ -31,7 +31,7 @@
 
         },
         methods: {
-            comfirmBtn(boolean) {
+            comfirmBtn(boolean,state) {
                 // 0 = 确认
                 // 1 = 取消
                 // 2 = 确认提交

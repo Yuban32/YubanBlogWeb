@@ -29,16 +29,12 @@ import Prism from 'prismjs';
 VueMarkdownEditor.use(vuepressTheme, {
   Prism,
 });
-
-// 引入Dialog组件
-import Dialog from './components/dialog'
-
 const app = createApp(App)
 
 // 将Highlight挂载到app上
 app.use(VueMarkdownEditor)
 app.use(VueHighlightJS)
-app.use(Dialog)
+// app.use(Dialog)
 // 将Vue-router挂载到app上
 app.use(router)
 app.use(store)

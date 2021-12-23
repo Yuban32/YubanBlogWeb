@@ -1,7 +1,7 @@
 <template>
     <div id="comfirm-wrap">
         <transition name="comfirm">
-            <div id="comfirm" v-if="show">
+            <div id="comfirm" v-if="true">
                 <div class="comfirm-title">
                     提示
                 </div>
@@ -19,16 +19,18 @@
 
 <script>
     export default {
-        name: "YuDialog",
+        name: "yu-dialog",
         data() {
             return {
                 msg: '',
-                show: false,
+                
                 state: ''
             }
         },
         props: {
-
+            show:{
+                default:false
+            }
         },
         methods: {
             comfirmBtn(boolean) {
@@ -51,10 +53,10 @@
                 }
             },
             showToast(msg, show, state) {
-                console.log('showToast', show);
                 this.msg = msg;
                 this.show = show;
                 this.state = state
+                console.log(this.show);
             },
             handlerClose() {
                 this.$emit('close')
@@ -64,6 +66,11 @@
             },
             handlerCancle() {
                 this.$emit('cancle')
+            }
+        },
+        watch:{
+            show(val,old){
+                console.log(val,old);
             }
         },
         created() {

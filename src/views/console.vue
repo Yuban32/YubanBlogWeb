@@ -1,7 +1,6 @@
 <template>
     <div id="console-wrap">
-        <!-- <Comfirm @comfirm-btn="comfirmBtns" ref="comfirm" /> -->
-        
+        <Comfirm @comfirm-btn="comfirmBtns" ref="comfirm" />
         <Toast ref="toast" />
         <div class="container console">
             <div class="left-menu">
@@ -29,7 +28,7 @@
                             <router-link :to="{name:'ArticleEdit',params:{articleId:item.id}}">
                                 <button class="primary">编辑</button>
                             </router-link>
-                                <button class="warning" @click="del">删除</button>
+                                <button class="warning" @click="del(item.id)">删除</button>
                         </div>
                     </li>
                 </ul>
@@ -68,6 +67,7 @@
                 currentPage: 1,
                 pages: 0,
                 pageSize: 5,
+                deletedId:null
             };
         },
         methods: {
@@ -82,11 +82,16 @@
                     }).catch(err => err);
                 } else if (val == 1) {
                     return;
+                }else if(val == 2){
+                    this.$axios.post(`/blog/delete/${this.deletedId}`).then(res=>{
+                        console.log(res);
+                    }).catch(err=>{
+                        console.dir(err);
+                    })
                 }
             },
             logout() {
-                console.log(this.$refs);
-                // this.$refs.comfirm.showToast("确认要退出登录吗？", true);
+                this.$refs.comfirm.showToast("确认要退出登录吗？", true);
             },
             async getArticleData(currentPage) {
                 await this.$axios.get(apiList.BLOGS + '?currentPage=' + currentPage).then(res => {
@@ -113,9 +118,11 @@
                 this.addPageNum()
 
             },
-            del(){
-                // this.$refs.comfirm.showToast('确认要删除文章吗？',true)
-                console.log(this);
+            del(id){
+                this.deletedId = id;
+                this.$refs.comfirm.showToast('确认要删除文章吗？',true,'submit')
+
+                
             }
         },
         watch: {
