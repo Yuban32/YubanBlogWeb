@@ -114,6 +114,7 @@
             } catch (error) {
                 console.log(error);
             }
+            document.title = '关于编辑 - 鱼板的博客 - 跟你分享最新的知识'
         }
 
     }

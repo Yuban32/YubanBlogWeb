@@ -159,6 +159,7 @@
         },
         created() {
             this.getArticleData(1)
+            document.title = '后台 - 鱼板的博客 - 跟你分享最新的知识'
         }
     }
 </script>
