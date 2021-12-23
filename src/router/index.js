@@ -9,6 +9,7 @@ const About = () => import('../views/about.vue')
 const Login = () => import('../views/login.vue')
 const BlogEdit = () => import('../views/articleEdit.vue')
 const ConsoleView = () => import('../views/console.vue')
+const AboutEdit = () => import('../views/aboutEdit.vue')
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [{
@@ -50,6 +51,13 @@ const router = createRouter({
             meta: {
                 requireAuth: true
             }
+        },
+        {
+            path:'/about/edit',
+            component:AboutEdit,
+            meta:{
+                requireAuth:true
+            }
         }
 
     ],
@@ -74,6 +82,10 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
+    // if(from.matched[0].path == )
+    // if(from.matched[0].path == '/article/:articleId/edit'){
+    //     console.log(2312);
+    // }
 })
 
 export default router

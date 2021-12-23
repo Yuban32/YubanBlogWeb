@@ -34,7 +34,6 @@ const app = createApp(App)
 // 将Highlight挂载到app上
 app.use(VueMarkdownEditor)
 app.use(VueHighlightJS)
-// app.use(Dialog)
 // 将Vue-router挂载到app上
 app.use(router)
 app.use(store)

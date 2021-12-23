@@ -7,47 +7,58 @@
                 <div class="add">
                     <router-link to="/console/add">发布文章</router-link>
                 </div>
+                <div class="about-edit">
+                    <router-link to="/about/edit">编辑关于</router-link>
+                </div>
                 <div class="logout">
 
                     <a href="javascript:void(0)" @click="logout">退出登录</a>
                 </div>
             </div>
-            <div class="content-wrap">
-                <ul class="article-list-wrap">
-                    <li class="article-list" v-for="item in articleData" :key="item.id">
-                        <div class="title">
-                            <h2>{{item.title}}</h2>
+            <div class="content-wrap" >
+            {{isEmpty}}
+                <div class="warp" v-if="isEmptyShow">
+                    <ul class="article-list-wrap">
+
+                        <transition-group name="articleList">
+                            <li class="article-list" v-for="item in articleData" :key="item.id">
+                                <div class="wrap">
+                                    <div class="title">
+                                        <h2>{{item.title}}</h2>
+                                    </div>
+                                    <div class="content">
+                                        <div class="img">
+                                            <img :src="item.image==null?'https://picsum.photos/330/330':item.image">
+                                        </div>
+                                        <div class="ct">{{item.content}}</div>
+                                    </div>
+                                    <div class="btn">
+                                        <router-link :to="{name:'ArticleEdit',params:{articleId:item.id}}">
+                                            <button class="primary">编辑</button>
+                                        </router-link>
+                                        <button class="warning" @click="del(item.id)">删除</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </transition-group>
+                    </ul>
+                    <div class="page-btn">
+                        <div class="prev" @click="subNum">
+                            <svg t="1640175737779" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="4285" width="200" height="200">
+                                <path
+                                    d="M268.240896 506.35712C251.91968 528.79872 251.91968 559.20128 268.240896 581.64288L524.240896 933.64288C545.030528 962.22848 585.057216 968.54848 613.643008 947.75936 642.228736 926.9696 648.548736 886.94272 627.759104 858.35712L399.25472 543.8368 627.759104 229.64288C648.548736 201.05728 642.228736 161.0304 613.643008 140.24064 585.057216 119.45152 545.030528 125.77152 524.240896 154.35712L268.240896 506.35712Z"
+                                    fill="#ffffff" p-id="4286"></path>
+                            </svg>
                         </div>
-                        <div class="content">
-                            <div class="img">
-                                <img :src="item.image==null?'https://picsum.photos/330/330':item.image">
-                            </div>
-                            <div class="ct">{{item.content}}</div>
-                        </div>
-                        <div class="btn">
-                            <router-link :to="{name:'ArticleEdit',params:{articleId:item.id}}">
-                                <button class="primary">编辑</button>
-                            </router-link>
-                                <button class="warning" @click="del(item.id)">删除</button>
-                        </div>
-                    </li>
-                </ul>
-                <div class="page-btn">
-                    <div class="prev" @click="subNum">
-                        <svg t="1640175737779" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                            xmlns="http://www.w3.org/2000/svg" p-id="4285" width="200" height="200">
-                            <path
-                                d="M268.240896 506.35712C251.91968 528.79872 251.91968 559.20128 268.240896 581.64288L524.240896 933.64288C545.030528 962.22848 585.057216 968.54848 613.643008 947.75936 642.228736 926.9696 648.548736 886.94272 627.759104 858.35712L399.25472 543.8368 627.759104 229.64288C648.548736 201.05728 642.228736 161.0304 613.643008 140.24064 585.057216 119.45152 545.030528 125.77152 524.240896 154.35712L268.240896 506.35712Z"
-                                fill="#ffffff" p-id="4286"></path>
-                        </svg>
+                        <div class="num-btn">{{currentPage}}</div>
+                        <div class="forward" @click="addNum"><svg t="1640175772722" class="icon" viewBox="0 0 1024 1024"
+                                version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5229" width="200" height="200">
+                                <path
+                                    d="M624.827008 544.0512 396.240896 858.35712C375.451264 886.94272 381.771264 926.9696 410.356992 947.75936 438.942784 968.54848 478.969472 962.22848 499.759104 933.64288L755.759104 581.64288C772.08032 559.20128 772.08032 528.79872 755.759104 506.35712L499.759104 154.35712C478.969472 125.77152 438.942784 119.45152 410.356992 140.24064 381.771264 161.0304 375.451264 201.05728 396.240896 229.64288L624.827008 544.0512Z"
+                                    fill="#ffffff" p-id="5230"></path>
+                            </svg></div>
                     </div>
-                    <div class="num-btn">{{currentPage}}</div>
-                    <div class="forward" @click="addNum"><svg t="1640175772722" class="icon" viewBox="0 0 1024 1024"
-                            version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5229" width="200" height="200">
-                            <path
-                                d="M624.827008 544.0512 396.240896 858.35712C375.451264 886.94272 381.771264 926.9696 410.356992 947.75936 438.942784 968.54848 478.969472 962.22848 499.759104 933.64288L755.759104 581.64288C772.08032 559.20128 772.08032 528.79872 755.759104 506.35712L499.759104 154.35712C478.969472 125.77152 438.942784 119.45152 410.356992 140.24064 381.771264 161.0304 375.451264 201.05728 396.240896 229.64288L624.827008 544.0512Z"
-                                fill="#ffffff" p-id="5230"></path>
-                        </svg></div>
                 </div>
             </div>
         </div>
@@ -67,7 +78,9 @@
                 currentPage: 1,
                 pages: 0,
                 pageSize: 5,
-                deletedId:null
+                deletedId: null,
+                isEmpty: null,
+                isEmptyShow: true
             };
         },
         methods: {
@@ -82,10 +95,19 @@
                     }).catch(err => err);
                 } else if (val == 1) {
                     return;
-                }else if(val == 2){
-                    this.$axios.post(`/blog/delete/${this.deletedId}`).then(res=>{
+                } else if (val == 2) {
+                    this.$axios.post(apiList.BLOG_DELETE, {
+                        id: this.deletedId
+                    }).then(res => {
                         console.log(res);
-                    }).catch(err=>{
+
+                        for (let key in this.articleData) {
+                            if (this.articleData[key].id == this.deletedId) {
+                                this.articleData.splice(key, 1)
+                            }
+                        }
+
+                    }).catch(err => {
                         console.dir(err);
                     })
                 }
@@ -118,16 +140,23 @@
                 this.addPageNum()
 
             },
-            del(id){
+            del(id) {
                 this.deletedId = id;
-                this.$refs.comfirm.showToast('确认要删除文章吗？',true,'submit')
+                this.$refs.comfirm.showToast('确认要删除文章吗？', true, 'submit')
 
-                
+
             }
         },
         watch: {
             currentPage(val) {
                 this.getArticleData(val)
+            },
+            articleData(val) {
+                console.log(val.length);
+                if (val.length == 0) {
+                    this.isEmpty = '已经没有数据啦~';
+                    this.isEmptyShow = false;
+                }
             }
         },
         created() {
@@ -136,6 +165,20 @@
     }
 </script>
 <style scoped>
+    .articleList-fade-enter-active {
+        transition: all 0.3s ease-out;
+    }
+
+    .articleList-fade-leave-active {
+        transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+    }
+
+    .articleList-fade-enter-from,
+    .articleList-fade-leave-to {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+
     .page-btn {
         display: flex;
         justify-content: center;
@@ -172,6 +215,9 @@
         width: 100%;
         position: relative;
         padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     a {
@@ -239,6 +285,7 @@
     }
 
     .content .ct {
+        flex: 1;
         padding-left: 10px;
     }
 

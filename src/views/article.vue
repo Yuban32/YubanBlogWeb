@@ -135,7 +135,6 @@
         },
         watch: {
             getThemeState(newVal) {
-                console.log(newVal);
                 this.getThemeStateFn(newVal)
             }
         }

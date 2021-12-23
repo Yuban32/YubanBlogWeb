@@ -42,7 +42,7 @@ const store = createStore({
             return state.error;
         },
         getThemeState:state=>{
-            return localStorage.getItem('sliderBarState');
+            return state.themeState ==''?localStorage.getItem('sliderBarState') : state.themeState;
         }
     },
     actions:{

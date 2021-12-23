@@ -20,10 +20,21 @@
                         </ul>
                     </div>
                     <div class="profile-desc">
-                        
-                        <div id="markdown-by" :class="themeClass" v-html="aboutData.content">
-
-                        </div>
+                        <div class="title-2"><h2>关于我</h2></div>
+                        <p>我是樊家威，目前就读于广西科技师范学院-软件工程专业，是一个卑微的前端切图仔...</p>
+                        <div class="title-2"><h2>关于本站</h2></div>
+                        <p>个人技术所限，目前只有前端，后端正在学，理想的后端技术栈应该是Spring Boot。</p>
+                        <p><strong>建站的原因：</strong>其实我一直都在想独立完成自己的一个博客，但学业繁忙一直没有时间去写。
+                            下定决心抽空来完成这个博客的一个最重要的原因应该是21年11月中旬，学校举办了一个网页设计大赛，
+                            心想着又能参加比赛，又能通过项目来提升自身的编程能力，又能完成自己的小目标，可谓是一举三得。</p>
+                        <p>本站基于是<strong>Vue3、Vue-Router、Vite</strong>技术栈，100%纯手工打造。</p>
+                        <p>本站已开源 项目地址 <a target="_blank" href="https://github.com/mashiro10032/my_blog/">https://github.com/mashiro10032/my_blog/</a></p>
+                        <div class="title-2"><h2>关于版权</h2></div>
+                        <p>部分文章和素材来自于网络整理再创作，并附有原文链接，若无特殊说明则为原创文章。
+                            一些图片来自于<a href="https://picsum.photos/">https://picsum.photos/</a> 等正版免授权图像素材库。
+                        </p>
+                        <p>本站所有内容均遵循“署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)”协议，分享或者二次创作请标记出处和署名</p>
+                        <p>关于此协议的详细内容请点击下发的链接：<br/><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh</a></p>
                         
                     </div>
                 </div>
@@ -33,22 +44,11 @@
 </template>
 
 <script>
-import 'github-markdown-css'
-import MarkdownIt from 'markdown-it'
-import hljs from 'highlight.js'
-import apiList from '../api/apiList';
-import { mapGetters } from 'vuex';
     export default {
         data() {
             return {
                 opacity: 0,
-                tags: ['双子男', '90后', '中国-广西', '工科男', '逗比', '幽默', '独立'],
-                themeClass: '',
-                aboutData:{
-                    id:'',
-                    content:'',
-                    created:''
-                }
+                tags: ['双子男', '90后', '中国-广西', '工科男', '逗比', '幽默', '独立']
             }
         },
         methods: {
@@ -59,62 +59,13 @@ import { mapGetters } from 'vuex';
                 }
                 this.opacity = opacityValue;
 
-            },
-            init(id,content,created){
-                this.aboutData.id = id;
-                this.aboutData.content = content;
-                this.aboutData.created = created;
-            },
-            getAboutData(){
-                this.$axios.get(apiList.ABOUT).then(res=>{
-                    // console.log(res);
-                    let data = res.data.data[0]
-                    var md = new MarkdownIt({
-                        html: true,
-                        linkify: true,
-                        typographer: true,
-                        highlight: function (str, lang) {
-                            if (lang && hljs.getLanguage(lang)) {
-                                try {
-                                    return '<pre class="hljs"><code>' +
-                                        hljs.highlight(lang, str, true).value +
-                                        '</code></pre>';
-                                } catch (__) {}
-                            }
-
-                            return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) +
-                                '</code></pre>';
-                        }
-                    });
-                    var result = md.render(data.content)
-                    this.init(data.id,result,data.created);
-
-                })
-            },
-            getThemeStateFn(state) {
-                if (state == 'dark') {
-                    // 未完成的主题切换方案
-                    this.themeClass = 'markdown-body'
-                } else if (state == 'white') {
-                    this.themeClass = 'vuepress-markdown-body';
-                }
             }
         },
         mounted() {
             window.addEventListener('scroll', this.handlerPageOpacity)
             window.addEventListener('resize', this.handlerPageOpacity)
-            document.title = '关于 - 鱼板的博客 - 跟你分享最新的知识';
-            this.getAboutData();
-            this.getThemeStateFn(localStorage.getItem('sliderBarState'));
+            document.title = '关于 - 鱼板的博客 - 跟你分享最新的知识'
 
-        },
-        computed: {
-            ...mapGetters(['getThemeState'])
-        },
-        watch: {
-            getThemeState(newVal) {
-                this.getThemeStateFn(newVal)
-            }
         },
         beforeUnmount() {
             window.removeEventListener('scroll', this.handlerPageOpacity)
@@ -125,9 +76,6 @@ import { mapGetters } from 'vuex';
 
 <style scoped>
     /* about-content */
-    .markdown-body{
-        padding: 2rem;
-    }
     .profile-desc{
         width: 100%;
         margin-top: var(--global_margin_top);
