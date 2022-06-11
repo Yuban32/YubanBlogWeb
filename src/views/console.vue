@@ -10,6 +10,9 @@
                 <div class="about-edit">
                     <router-link to="/about/edit">编辑关于</router-link>
                 </div>
+                <div class="about-账号管理">
+                    <router-link to="/console/userManager">用户管理</router-link>
+                </div>
                 <div class="logout">
 
                     <a href="javascript:void(0)" @click="logout">退出登录</a>

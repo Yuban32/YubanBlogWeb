@@ -204,7 +204,6 @@ import { mapGetters } from 'vuex';
         color: var(--nav_text_color);
     }
 
-    .profile-tags {}
 
     .profile-tags ul {
         width: 100%;

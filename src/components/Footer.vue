@@ -2,7 +2,7 @@
     <footer>
         <div class="footer-wrap">
             <div class="copyright-wrap">
-                <span>Copyright © {{dateTime}} 鱼板（樊家威）</span><span>Power by Vue.js Vue-Router Vite</span>
+                <span>Copyright © {{dateTime}} 鱼板</span><span>Power by Vue.js Vue-Router Vite</span>
             </div>
             <hr>
             <div class="license-wrap">
@@ -51,7 +51,6 @@
     }
 
     .copyright-wrap span {
-        padding-left: 20px;
         padding-top: 5px;
     }
 

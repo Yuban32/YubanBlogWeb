@@ -2,6 +2,9 @@ import {
     createRouter,
     createWebHashHistory
 } from 'vue-router'
+import axios from 'axios'
+import apiList from '../api/apiList'
+import store from '../store/store'
 // new 转换成工厂函数
 const Home = () => import('../views/home.vue')
 const Article = () => import('../views/article.vue')
@@ -10,6 +13,8 @@ const Login = () => import('../views/login.vue')
 const BlogEdit = () => import('../views/articleEdit.vue')
 const ConsoleView = () => import('../views/console.vue')
 const AboutEdit = () => import('../views/aboutEdit.vue')
+const UserSetting = () =>import('../views/userSetting.vue')
+const UserManager = () =>import('../views/userManager.vue')
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [{
@@ -29,7 +34,7 @@ const router = createRouter({
             path: '/console/add',
             component: BlogEdit,
             meta: {
-                requireAuth: true
+                requireLogin: true
             }
         },
         {
@@ -42,21 +47,37 @@ const router = createRouter({
             component: BlogEdit,
             name: 'ArticleEdit',
             meta: {
-                requireAuth: true
+                requireLogin: true
             }
         },
         {
             path: '/console',
             component: ConsoleView,
             meta: {
-                requireAuth: true
+                requireLogin: true,
+                requireAuthor: true
             }
         },
         {
-            path:'/about/edit',
-            component:AboutEdit,
+            path: '/about/edit',
+            component: AboutEdit,
+            meta: {
+                requireLogin: true
+            }
+        },
+        {
+            path: '/setting',
+            component:UserSetting,
             meta:{
-                requireAuth:true
+                requireLogin:true
+            }
+        },
+        {
+            path:'/console/userManager',
+            component:UserManager,
+            meta:{
+                requireLogin: true,
+                requireAuthor: true
             }
         }
 
@@ -67,18 +88,35 @@ router.beforeEach((to, from, next) => {
     document.documentElement.scrollTop = 0;
 
     // 路由权限配置
-    // 判断目标路由是否有requireAuth 有的话就进行权限判断
-    if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
-        const token = sessionStorage.getItem("token")
-        if (token) { // 判断当前的token是否存在 ； 登录存入的token
-            if (to.path === '/login') {} else {
-                next()
-            }
-        } else {
+    // 判断目标路由是否有requireLogin 有的话就进行权限判断
+
+    if (to.matched.some(record => record.meta.requireLogin)) { // 判断该路由是否需要登录权限
+        const token = sessionStorage.getItem("token");
+        const uid = JSON.parse(sessionStorage.getItem("userInfo"));
+        if (!token) { // 判断当前的token是否存在 ； 登录存入的token
             next({
                 path: '/login'
             })
+        }else{
+            if (to.matched.some(record => record.meta.requireAuthor)) {
+                axios.get('http://localhost:8081'+apiList.REQUESTAUTHOR+'1').then(res=>{
+                    if(res.data.data.roles == 'admin' && res.data.data.uid == uid.id){
+                        next();
+                    }else{
+                        next({
+                            path:'/setting'
+                        })
+                    }
+    
+                }).catch(err=>{
+                    console.dir(err);
+                })
+            }else{
+                next();
+            }
         }
+        //
+
     } else {
         next()
     }

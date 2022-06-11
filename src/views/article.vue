@@ -6,8 +6,8 @@
             <Tag v-if="articleData.tag!=null?true:false" :tagText="articleData.tag" />
             <div class="edit-btn" v-if="onwArticle">
 
-                <router-link :to="{name:'ArticleEdit',params:{id:articleData.id}}"><button
-                        class="primary">编辑</button></router-link>
+                <router-link :to="{name:'ArticleEdit',params:{id:articleData.id}}"><button class="primary">编辑</button>
+                </router-link>
             </div>
         </div>
         <div class="banner"></div>
@@ -56,15 +56,12 @@
                 },
                 themeClass: '',
                 onwArticle: false,
-                ativeId:null
+                ativeId: null
             }
         },
         methods: {
             toNewArticle(articleId) {
                 this.$router.push(`/article/${articleId}`)
-            },
-            getStatic(val) {
-                return new URL('../../node_modules/markdown-it/')
             },
             getData() {
                 const articleId = this.$route.params.articleId;
@@ -112,11 +109,10 @@
             getArticleList() {
                 this.$axios.get(apiList.BLOGS).then(res => {
                     this.articleList = res.data.data.records;
-                }).catch(err=>err)
+                }).catch(err => err)
             },
             getThemeStateFn(state) {
                 if (state == 'dark') {
-                    // 未完成的主题切换方案
                     this.themeClass = 'markdown-body'
                 } else if (state == 'white') {
                     this.themeClass = 'vuepress-markdown-body';
@@ -144,9 +140,10 @@
 </script>
 
 <style scoped>
-    .V-title :deep(h1){
+    .V-title :deep(h1) {
         color: #fff;
     }
+
     .markdown-body {
         padding: 2rem 2.5rem;
     }
@@ -194,8 +191,9 @@
     .container-wrap {
         width: 100%;
         display: flex;
-        margin-top: 30px;
+        margin-top: 0px;
         border-radius: var(--global_border_radius);
+        position: relative;
     }
 
     .article-title {

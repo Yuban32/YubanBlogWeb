@@ -13,9 +13,9 @@
         <div class="menu">
             <div class="nav-left">
                 <div class="pic-wrap">
-                    <img src="../assets/images/nav/pic.jpg">
+                    <img :src="userInfo.avatar == ''?userInfo.avatar = getImageUrl('pic.jpg'):userInfo.avatar">
                 </div>
-                <span class="pic-name">鱼板</span>
+                <span class="pic-name">{{userInfo.userName}}</span>
             </div>
             <div class="nav-right">
                 <ul>
@@ -23,10 +23,10 @@
                         <router-link to="/">首页</router-link>
                     </li>
                     <li>
-                        <router-link to="/about">关于我</router-link>
+                        <router-link to="/about">关于站长</router-link>
                     </li>
                     <li>
-                        <router-link to="/console">后台</router-link>
+                        <router-link to="/console">Setting</router-link>
                     </li>
                     <li>
                         <ThemeToggle />
@@ -39,24 +39,55 @@
 
 <script setup>
     import {
-        mapGetters, mapState
+        mapGetters,
+        mapState
     } from 'vuex';
     import apiList from '../api/apiList';
     import ThemeToggle from '../components/ThemeToggle.vue';
     import Comfirm from './Comfirm.vue';
     import Toast from './Toast.vue';
+    const getImageUrl = (name) => {
+        return new URL(`../../src/assets/images/nav/${name}`,
+            import.meta.url).href
+    }
 </script>
 <script>
-
     export default {
         name: 'navigator',
         data() {
             return {
+                userInfo: {
+                    userName: '',
+                    email: '',
+                    avatar: '',
+                    id: ''
+                }
             }
         },
         methods: {
-            
-            
+            init() {
+                const uid = JSON.parse(sessionStorage.getItem("userInfo"));
+                if (uid == ''||uid == null) {
+                    this.userInfo.userName = "请登录";
+                } else {
+                    this.userInfo.id = uid.id;
+                    this.userInfo.userName = uid.username;
+                    this.userInfo.email = uid.email;
+                    this.userInfo.avatar = uid.avatar;
+                }
+            }
+
+        },
+        mounted() {
+            this.init();
+        },
+        computed: {
+            ...mapGetters(['getUser'])
+        },
+        watch: {
+            getUser(newVal) {
+                this.init();
+            }
         }
     }
 </script>

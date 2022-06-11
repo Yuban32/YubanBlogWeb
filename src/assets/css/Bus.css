@@ -50,11 +50,11 @@
 }
 
 .warning {
-    background: #e6a23c;
+    background: #e6a23c !important;
 }
 
 .warning:hover {
-    background: #dd8603;
+    background: #dd8603 !important;
 
 }
 

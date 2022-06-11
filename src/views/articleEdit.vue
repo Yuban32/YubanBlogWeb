@@ -117,7 +117,6 @@ import { mapGetters } from 'vuex';
             },
             getThemeStateFn(state) {
                 if (state == 'dark') {
-                    // 未完成的主题切换方案
                     this.themeClass = 'markdown-body'
                 } else if (state == 'white') {
                     this.themeClass = 'vuepress-markdown-body';

@@ -2,7 +2,9 @@ import axios from 'axios';
 import apiList from '../api/apiList';
 const instance = axios.create({
     timeout: 60 * 1000,
-        baseURL:'http://localhost:8081/'
+    // baseURL:'http://api.blog.yuban32.com:8081/'
+    baseURL: 'http://localhost:8081/'
+
 
 });
 
@@ -17,20 +19,28 @@ instance.interceptors.request.use(
             case apiList.LOGIN:
                 request.headers['Content-Type'] = 'application/json';
                 break;
-            case apiList.BLOG_EDIT:
-                addHeaders(request)
-                break;
-            case apiList.LOGOUT:
-                addHeaders(request)
-                break;
-            case apiList.BLOG_DELETE:
-                
-                addHeaders(request)
-                break;
-            case apiList.ABOUT_EDIT:
-                
-                addHeaders(request)
-                break;
+        }
+
+        if (request.url.match(apiList.BLOG_EDIT) != null) {
+            addHeaders(request)
+        }
+        if (request.url.match(apiList.LOGOUT) != null) {
+            addHeaders(request)
+        }
+        if (request.url.match(apiList.ABOUT_EDIT) != null) {
+            addHeaders(request)
+        }
+        if (request.url.match(apiList.ADMIN.BLOG_LIST) != null) {
+            addHeaders(request)
+        }
+        if (request.url.match(apiList.ADMIN.USER_DELETE) != null) {
+            addHeaders(request)
+        }
+        if (request.url.match(apiList.ADMIN.USER_EDIT) != null) {
+            addHeaders(request)
+        }
+        if (request.url.match(apiList.ADMIN.USER_LIST) != null) {
+            addHeaders(request)
         }
         return request;
     },
