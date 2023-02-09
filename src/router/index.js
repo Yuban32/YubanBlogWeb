@@ -99,7 +99,7 @@ router.beforeEach((to, from, next) => {
             })
         }else{
             if (to.matched.some(record => record.meta.requireAuthor)) {
-                axios.get('http://localhost:8081'+apiList.REQUESTAUTHOR+'1').then(res=>{
+                axios.get('http://api.blog.yuban32.com:8081'+apiList.REQUESTAUTHOR+'1').then(res=>{
                     if(res.data.data.roles == 'admin' && res.data.data.uid == uid.id){
                         next();
                     }else{

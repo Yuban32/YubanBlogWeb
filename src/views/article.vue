@@ -32,7 +32,6 @@
 <script setup>
     import ArticleTitle from '../components/ArticleTitle.vue';
     import Tag from '../components/Tag.vue';
-    import articleDataBus from '../utils/articleDataBus';
     import hljs from 'highlight.js'
     import {
         mapGetters
@@ -73,7 +72,6 @@
                     let data = res.data.data;
                     let tag = data.tag;
                     if (tag == null) {
-
                     } else {
                         this.articleData.tag = tag.split(',');
                     }

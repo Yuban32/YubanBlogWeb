@@ -1,5 +1,5 @@
 <template>
-    <div id="user-list-wrap">
+    <div id="user-list-wrap" class="markdown-by">
         <Comfirm @comfirm-btn="comfirmBtns" ref="comfirm" />
         <Toast ref="toast" />
         <div class="container bg">
@@ -29,22 +29,17 @@
     </div>
 </template>
 
-<script setup>
-    import Toast from '../components/Toast.vue';
-    import Comfirm from '../components/Comfirm.vue';
-    import apiList from '../api/apiList';
-</script>
 <script>
-    export default {
-
-        name: "userManager",
-        data() {
+export default {
+name: "userManager",
+data() {
             return {
                 userList: Array,
                 deletedId:null,
+                themeClass:''
             }
         },
-        methods: {
+methods: {
             del(id){
                 this.deletedId = id;
                 this.$refs.comfirm.showToast("确定删除用户吗?",true,'submit')
@@ -70,13 +65,43 @@
                     })
                 }
             },
+            getThemeStateFn(state) {
+                if (state == 'dark') {
+                    this.themeClass = 'markdown-body'
+                } else if (state == 'white') {
+                    this.themeClass = 'vuepress-markdown-body';
+                }
+            }
 
         },
-        mounted() {
+mounted() {
             this.getUserList()
-        }
-    }
+        },
+crated(){
+            this.getThemeStateFn(localStorage.getItem('sliderBarState'));
+
+        },
+computed: {
+            ...mapGetters(['getThemeState'])
+        },
+watch: {
+            getThemeState(newVal) {
+                this.getThemeStateFn(newVal)
+            }
+        },
+};
 </script>
+
+<script setup>
+import 'github-markdown-css'
+import Toast from '../components/Toast.vue';
+import Comfirm from '../components/Comfirm.vue';
+import apiList from '../api/apiList';
+import {
+        mapGetters
+    } from 'vuex';
+</script>
+
 
 <style scoped>
     #user-list-wrap {

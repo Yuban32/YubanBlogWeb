@@ -54,7 +54,6 @@
             },
             submit() {
                 // 判断中文  /[\u4e00-\u9fa5]/g; 不知道为什么VSOCDE把这串自动转义了
-
                 var path = /[\u4e00-\u9fa5]/g;
                 var emailPath = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
                 if (this.username == '') {
@@ -110,9 +109,6 @@
                         this.$refs.toast.showToast(err, 3);
                     })
                 }
-
-            },
-            regitserBtn() {
 
             }
         },

@@ -52,6 +52,7 @@ import { mapGetters } from 'vuex';
             }
         },
         methods: {
+            //用作导航条半透明特效
             handlerPageOpacity() {
                 let opacityValue = document.documentElement.scrollTop / this.$refs.aboutContent.scrollHeight;
                 if (opacityValue > 1) {
@@ -87,7 +88,6 @@ import { mapGetters } from 'vuex';
                     });
                     var result = md.render(data.content)
                     this.init(data.id,result,data.created);
-
                 })
             },
             getThemeStateFn(state) {

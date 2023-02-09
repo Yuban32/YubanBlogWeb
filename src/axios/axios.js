@@ -2,8 +2,8 @@ import axios from 'axios';
 import apiList from '../api/apiList';
 const instance = axios.create({
     timeout: 60 * 1000,
-    // baseURL:'http://api.blog.yuban32.com:8081/'
-    baseURL: 'http://localhost:8081/'
+    // baseURL: 'http://localhost:8081/'
+    baseURL: 'http://api.blog.yuban32.com'
 
 
 });
@@ -20,7 +20,6 @@ instance.interceptors.request.use(
                 request.headers['Content-Type'] = 'application/json';
                 break;
         }
-
         if (request.url.match(apiList.BLOG_EDIT) != null) {
             addHeaders(request)
         }
